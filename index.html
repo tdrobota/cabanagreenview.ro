@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=18">
+  <link rel="stylesheet" href="styles.css?v=19">
 </head>
 <body>
 
@@ -35,13 +35,6 @@
       <button class="lang-toggle" id="langToggle">EN</button>
     </div>
   </nav>
-
-  <!-- STICKY BAR -->
-  <div class="sticky-bar" id="stickyBar">
-    <span data-i18n="bar_tagline">Cabana A-Frame - Rarau, Bucovina</span>
-    <button class="btn-amber mag" onclick="openModal()" data-i18n="bar_cta">Rezerva acum</button>
-  </div>
-
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-media">
@@ -199,13 +192,31 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="contact-section" id="contact">
-    <div class="container contact-inner">
-      <div class="contact-text">
-        <span class="section-label" data-i18n="lab_contact">07 - Rezervare</span>
-        <h2 data-i18n="contact_title">Planifica escapada ta</h2>
-        <p data-i18n="contact_p">Scrie-ne sau apasa butonul pentru a verifica disponibilitatea. Raspundem in maximum 2 ore.</p>
+  <!-- FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="container footer-inner">
+
+      <div class="footer-brand-col">
+        <p class="footer-brand">Green View<span>Rarau</span></p>
+        <p class="footer-tagline" data-i18n="bar_tagline">Cabana A-Frame - Rarau, Bucovina</p>
+        <p class="footer-copy" data-i18n="footer_copy">2025 - Cabana A-Frame, Rarau, Bucovina</p>
+      </div>
+
+      <div class="footer-nav-col">
+        <p class="footer-col-label" data-i18n="footer_nav_label">Sectiuni</p>
+        <nav class="footer-links">
+          <a href="#about"      data-i18n="nav_about">Cabana</a>
+          <a href="#facilities" data-i18n="nav_facilities">Facilitati</a>
+          <a href="#gallery"    data-i18n="nav_gallery">Galerie</a>
+          <a href="#anotimpuri" data-i18n="nav_seasons">Anotimpuri</a>
+          <a href="#map"        data-i18n="nav_map">Imprejurimi</a>
+          <a href="#reviews"    data-i18n="nav_reviews">Recenzii</a>
+        </nav>
+      </div>
+
+      <div class="footer-contact-col">
+        <p class="footer-col-label" data-i18n="lab_contact">07 - Rezervare</p>
+        <p class="footer-contact-desc" data-i18n="contact_p">Scrie-ne sau apasa butonul pentru a verifica disponibilitatea. Raspundem in maximum 2 ore.</p>
         <div class="contact-links">
           <a href="https://wa.me/40756651582" target="_blank" class="contact-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.117 1.535 5.845L.057 23.57a.5.5 0 00.614.601l5.898-1.545A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.028-1.384l-.36-.214-3.733.979.997-3.645-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
@@ -218,22 +229,7 @@
         </div>
         <button class="btn-amber mag" onclick="openModal()" data-i18n="contact_cta">Verifica disponibilitatea</button>
       </div>
-      <div class="contact-img">
-        <img src="images/p39.jpg" alt="Cafea la fereastra cu vedere spre munte">
-      </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <p class="footer-brand">Green View Rarau</p>
-      <p class="footer-copy" data-i18n="footer_copy">2025 - Cabana A-Frame, Rarau, Bucovina</p>
-      <div class="footer-links">
-        <a href="#about"   data-i18n="nav_about">Cabana</a>
-        <a href="#gallery" data-i18n="nav_gallery">Galerie</a>
-        <a href="#contact" data-i18n="nav_contact">Rezervare</a>
-      </div>
     </div>
   </footer>
 
@@ -278,7 +274,7 @@
     </div>
   </div>
 
-  <script src="image-slot.js?v=18"></script>
-  <script src="app.js?v=18"></script>
+  <script src="image-slot.js?v=19"></script>
+  <script src="app.js?v=19"></script>
 </body>
 </html>
