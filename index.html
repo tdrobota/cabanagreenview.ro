@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
 
@@ -160,16 +160,17 @@
 
   <!-- MAP -->
   <section class="map-section" id="map">
-    <div class="container map-layout">
-      <div class="map-copy">
-        <div class="section-header">
-          <span class="section-label" data-i18n="lab_map">05 - Imprejurimi</span>
-          <h2 data-i18n="map_title">Ce te asteapta in jur</h2>
-          <p data-i18n="map_sub">Atractii naturale si culturale la cativa kilometri distanta</p>
-        </div>
-        <div class="poi-list" id="poiList"></div>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-i18n="lab_map">05 - Imprejurimi</span>
+        <h2 data-i18n="map_title">Ce te asteapta in jur</h2>
+        <p data-i18n="map_sub">Atractii naturale si culturale la cativa kilometri distanta</p>
       </div>
-      <div class="poi-explorer" id="mapStage">
+      <div class="map-layout">
+        <div class="map-wrap">
+          <div class="map-canvas" id="mapCanvas"></div>
+          <div class="map-legend"><span data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</span></div>
+        </div>
         <article class="poi-feature">
           <div class="pimg" id="pImg"></div>
           <div class="poi-feature-body">
@@ -180,11 +181,8 @@
             <p class="phint" data-i18n="map_phint">Distantele sunt aproximative, pe sosea, din zona Pojorata / Campulung Moldovenesc.</p>
           </div>
         </article>
-        <div class="map-wrap">
-          <div class="map-canvas" id="mapCanvas"></div>
-          <div class="map-legend"><span data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</span></div>
-        </div>
       </div>
+      <div class="poi-list" id="poiList"></div>
     </div>
   </section>
 
@@ -280,7 +278,7 @@
     </div>
   </div>
 
-  <script src="image-slot.js?v=17"></script>
-  <script src="app.js?v=17"></script>
+  <script src="image-slot.js?v=18"></script>
+  <script src="app.js?v=18"></script>
 </body>
 </html>

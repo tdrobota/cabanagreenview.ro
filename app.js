@@ -129,6 +129,12 @@
   function applyLang() {
     document.querySelectorAll("[data-i18n]").forEach(function(el) {
       var k = el.getAttribute("data-i18n");
+      // If this element has touch-specific overrides, use those instead
+      var touchKey = LANG === 'en' ? 'data-i18n-en' : 'data-i18n-ro';
+      if (el.hasAttribute(touchKey)) {
+        el.textContent = el.getAttribute(touchKey);
+        return;
+      }
       var val = t(k);
       if (k === "hero_title") { el.innerHTML = val; }
       else { el.textContent = val; }
@@ -268,6 +274,17 @@
     { src: "images/p36.jpg", l: "Intrarea in domeniu",   wide: false }
   ];
 
+  /* Update gallery hint for touch devices */
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  var galHintEl = document.querySelector('.gal-hint');
+  if (isTouchDevice && galHintEl) {
+    if (LANG === 'ro') galHintEl.textContent = 'Gliseaza pentru a rasfoi - Apasa pentru a mari';
+    else galHintEl.textContent = 'Swipe to browse - Tap to enlarge';
+    // Re-read the i18n key override on lang switch by storing new values
+    galHintEl.setAttribute('data-i18n-ro', 'Gliseaza pentru a rasfoi - Apasa pentru a mari');
+    galHintEl.setAttribute('data-i18n-en', 'Swipe to browse - Tap to enlarge');
+  }
+
   var gStrip = document.getElementById("gStrip");
   GALLERY.concat(GALLERY).forEach(function(g, i) {
     var shot = document.createElement("div");
@@ -279,6 +296,17 @@
     shot.addEventListener("click", function() { openLightbox(realIndex); });
     gStrip.appendChild(shot);
   });
+
+  /* Touch pause for gallery */
+  var gStripWrap = document.querySelector('.g-strip-wrap');
+  if (gStripWrap) {
+    gStripWrap.addEventListener('touchstart', function() {
+      gStrip.style.animationPlayState = 'paused';
+    }, { passive: true });
+    gStripWrap.addEventListener('touchend', function() {
+      setTimeout(function() { gStrip.style.animationPlayState = 'running'; }, 1200);
+    }, { passive: true });
+  }
 
   /* â”€â”€ Seasons tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   document.querySelectorAll(".stab").forEach(function(tab) {

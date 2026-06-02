@@ -870,8 +870,7 @@ em { font-style: italic; color: var(--amber); }
     margin: 1rem 0 0.25rem;
   }
   .story-text { padding-left: 0; padding-top: 0; }
-  .seasons-layout,
-  .map-layout {
+  .seasons-layout {
     grid-template-columns: 1fr;
   }
   .seasons-stage {
@@ -910,6 +909,52 @@ em { font-style: italic; color: var(--amber); }
   .seasons-tabs { gap: 0.35rem; }
   .stab { padding: 0.5rem 1rem; font-size: 0.8rem; }
   .fac-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Sticky bar: hide tagline, center button */
+  .sticky-bar span { display: none; }
+  .sticky-bar { justify-content: center; }
+
+  /* FAB: raise higher to clear the centered sticky bar */
+  .fab { bottom: 5.5rem; }
+
+  /* Gallery: reduce card widths so next card is visible */
+  .g-shot.wide { width: clamp(260px, 78vw, 360px); }
+  .g-shot.tall { width: clamp(160px, 50vw, 260px); }
+  .g-shot { height: clamp(220px, 58vw, 340px); }
+
+  /* Strip mask: smaller fade so cards aren't clipped too early */
+  .g-strip-wrap {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  }
+
+  /* Modal: bottom-sheet style on small screens */
+  .scrim { align-items: flex-end; }
+  .modal {
+    width: 100vw;
+    max-height: 92vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 1.25rem);
+  }
+
+  /* POI feature: reduce min-height */
+  .poi-feature { min-height: unset; }
+  .poi-feature .pimg { min-height: 200px; }
+
+  /* Hero title: slightly tighter on very small screens */
+  h1 { font-size: clamp(2rem, 10vw, 2.45rem); }
+
+  /* Footer: tighten */
+  .footer-links { flex-wrap: wrap; gap: 1rem; }
+}
+
+/* Touch-friendly active states for POI list */
+@media (hover: none) {
+  .poi-item:active {
+    background: var(--linen);
+    border-color: rgba(176,120,40,0.55);
+  }
+  .fac-card:hover { transform: none; box-shadow: none; }
 }
 /* Custom cursor removed */
 body { cursor: auto; }
@@ -928,123 +973,24 @@ a,
 .cal-day {
   cursor: pointer;
 }
-/* Branded SVG map */
+/* MAP SECTION */
 .map-section {
   padding: var(--section-pad) 0;
 }
+
+/* Top row: map left, POI feature right */
 .map-layout {
   display: grid;
-  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
-  gap: clamp(1.6rem, 4vw, 3rem);
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+  align-items: stretch;
+  margin-bottom: 1.25rem;
 }
-.map-copy .section-header {
-  margin-bottom: 0;
-}
-.poi-list {
-  display: grid;
-  gap: 0.65rem;
-  margin-top: clamp(1.4rem, 3vw, 2rem);
-}
-.poi-item {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.2rem 0.75rem;
-  width: 100%;
-  padding: 0.9rem 1rem;
-  border: 1px solid rgba(20,30,10,0.12);
-  border-radius: 8px;
-  background: rgba(255,255,255,0.5);
-  color: var(--text);
-  text-align: left;
-  transition: background .22s, border-color .22s, transform .22s;
-}
-.poi-item:hover,
-.poi-item.active {
-  background: var(--linen);
-  border-color: rgba(176,120,40,0.55);
-  transform: translateX(4px);
-}
-.poi-item-cat {
-  grid-column: 1 / -1;
-  color: var(--amber);
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-.poi-item strong {
-  font-size: .96rem;
-}
-.poi-item span:last-child {
-  color: var(--text-3);
-  font-size: .82rem;
-  white-space: nowrap;
-}
-.poi-explorer {
-  display: grid;
-  gap: 1rem;
-  min-width: 0;
-}
-.poi-feature {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.95fr) minmax(260px, 1.05fr);
-  min-height: 360px;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: #111a0a;
-  border: 1px solid rgba(20,30,10,0.1);
-  box-shadow: 0 18px 50px rgba(20,30,10,0.16);
-}
-.poi-feature .pimg {
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
-  background-image: linear-gradient(135deg,#243415,#141E0A);
-}
-.poi-feature-body {
-  display: flex;
-  flex-direction: column;
-  padding: clamp(1.35rem, 3vw, 2rem);
-}
-.poi-feature .pcat {
-  color: var(--amber-soft);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-.poi-feature h3 {
-  color: #fff;
-  font-size: clamp(1.85rem, 3.2vw, 3rem);
-  margin: .65rem 0 0;
-}
-.poi-feature .pdist {
-  align-self: flex-start;
-  margin-top: 1rem;
-  color: var(--linen-3);
-  border: 1px solid rgba(245,240,232,0.14);
-  border-radius: 999px;
-  padding: .42rem .75rem;
-  font-size: .82rem;
-}
-.poi-feature .pdesc {
-  margin-top: 1.15rem;
-  color: var(--linen-3);
-  font-size: .98rem;
-  line-height: 1.65;
-}
-.poi-feature .phint {
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(245,240,232,0.14);
-  color: rgba(245,240,232,0.55);
-  font-size: .78rem;
-}
+
+/* Left: SVG map */
 .map-wrap {
-  margin-top: 0;
   position: relative;
-  height: 220px;
+  height: 420px;
   overflow: hidden;
   background: #10170a;
   border-radius: var(--radius-lg);
@@ -1064,6 +1010,130 @@ a,
   z-index: 0;
   pointer-events: none;
 }
+.map-legend {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 4;
+  font-size: 0.75rem;
+  color: var(--linen-3);
+  background: rgba(20,30,10,0.75);
+  border: 1px solid rgba(245,240,232,0.14);
+  padding: 0.7rem 0.9rem;
+  max-width: 250px;
+  line-height: 1.5;
+}
+
+/* Right: POI feature card */
+.poi-feature {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.9fr) minmax(200px, 1.1fr);
+  height: 420px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #111a0a;
+  border: 1px solid rgba(20,30,10,0.1);
+  box-shadow: 0 18px 50px rgba(20,30,10,0.16);
+}
+.poi-feature .pimg {
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: linear-gradient(135deg,#243415,#141E0A);
+}
+.poi-feature-body {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  overflow: hidden;
+}
+.poi-feature .pcat {
+  color: var(--amber-soft);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.poi-feature h3 {
+  color: #fff;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  margin: .65rem 0 0;
+}
+.poi-feature .pdist {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  color: var(--linen-3);
+  border: 1px solid rgba(245,240,232,0.14);
+  border-radius: 999px;
+  padding: .38rem .7rem;
+  font-size: .82rem;
+}
+.poi-feature .pdesc {
+  margin-top: 0.9rem;
+  color: var(--linen-3);
+  font-size: .92rem;
+  line-height: 1.6;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+.poi-feature .phint {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(245,240,232,0.14);
+  color: rgba(245,240,232,0.55);
+  font-size: .75rem;
+}
+
+/* Bottom: POI list as horizontal grid, 5 per row */
+.poi-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.65rem;
+  margin-top: 0;
+}
+.poi-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.15rem 0.5rem;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(20,30,10,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.5);
+  color: var(--text);
+  text-align: left;
+  transition: background .22s, border-color .22s, transform .22s;
+  cursor: pointer;
+}
+.poi-item:hover,
+.poi-item.active {
+  background: var(--linen);
+  border-color: rgba(176,120,40,0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(20,30,10,0.09);
+}
+.poi-item-cat {
+  grid-column: 1 / -1;
+  color: var(--amber);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+}
+.poi-item strong {
+  font-size: .88rem;
+}
+.poi-item span:last-child {
+  color: var(--text-3);
+  font-size: .75rem;
+  white-space: nowrap;
+  align-self: end;
+}
+
+/* Map pin styles */
 .poi {
   position: absolute;
   transform: translate(-50%,-50%);
@@ -1077,6 +1147,7 @@ a,
   padding: 0;
   color: var(--linen);
   pointer-events: auto;
+  cursor: pointer;
 }
 .poi .pin {
   width: 28px;
@@ -1100,15 +1171,8 @@ a,
   background: #fff;
   border-radius: 50%;
 }
-.poi.home .pin {
-  background: #fff;
-  border-color: var(--amber);
-}
-.poi.home .pin::after {
-  background: var(--amber);
-  width: 9px;
-  height: 9px;
-}
+.poi.home .pin { background: #fff; border-color: var(--amber); }
+.poi.home .pin::after { background: var(--amber); width: 9px; height: 9px; }
 .poi .plabel {
   font-size: 11px;
   font-weight: 600;
@@ -1122,13 +1186,15 @@ a,
   pointer-events: none;
 }
 .poi:hover .pin,
+.poi.active .pin { transform: rotate(45deg) scale(1.18); }
 .poi.active .pin {
-  transform: rotate(45deg) scale(1.18);
+  box-shadow:
+    0 0 0 3px rgba(245,240,232,0.95),
+    0 0 0 6px rgba(176,120,40,0.55),
+    0 4px 18px rgba(0,0,0,.48);
 }
 .poi:hover .plabel,
-.poi.active .plabel {
-  opacity: 1;
-}
+.poi.active .plabel { opacity: 1; }
 .poi .pulse {
   position: absolute;
   top: 14px;
@@ -1141,42 +1207,22 @@ a,
   opacity: 0;
   z-index: -1;
 }
-.poi.home .pulse {
-  animation: mapPulse 2.8s var(--ease-out-expo) infinite;
-}
+.poi.home .pulse { animation: mapPulse 2.8s var(--ease-out-expo) infinite; }
 @keyframes mapPulse {
   0% { transform: translate(-50%,-50%) scale(1); opacity:.45; }
   100% { transform: translate(-50%,-50%) scale(3.4); opacity:0; }
 }
-.map-legend {
-  position: absolute;
-  left: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 4;
-  font-size: 0.75rem;
-  color: var(--linen-3);
-  background: rgba(20,30,10,0.75);
-  border: 1px solid rgba(245,240,232,0.14);
-  padding: 0.7rem 0.9rem;
-  max-width: 250px;
-  line-height: 1.5;
+
+/* Map responsive */
+@media (max-width: 900px) {
+  .map-layout { grid-template-columns: 1fr; }
+  .map-wrap { height: 300px; }
+  .poi-feature { height: auto; grid-template-columns: 1fr; }
+  .poi-feature .pimg { height: 220px; }
+  .poi-list { grid-template-columns: repeat(3, 1fr); }
 }
-@media (max-width: 860px) {
-  .map-layout {
-    grid-template-columns: 1fr;
-  }
-  .poi-feature {
-    grid-template-columns: 1fr;
-  }
-  .poi-feature .pimg {
-    min-height: 260px;
-  }
-  .map-wrap {
-    height: 240px;
-  }
-  .map-canvas {
-    position: absolute;
-    inset: 0;
-  }
+@media (max-width: 480px) {
+  .poi-list { grid-template-columns: repeat(2, 1fr); }
+  .map-wrap { height: 240px; }
 }
 
