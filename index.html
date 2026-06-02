@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green View Rarau - Cabana A-Frame la munte</title>
+  <meta name="description" content="Cabana A-Frame de lux langa muntele Rarau, Bucovina. Rezerva o escapada autentica in natura cu privelisti spectaculoase.">
+  <meta property="og:title" content="Green View Rarau - Cabana A-Frame la munte">
+  <meta property="og:description" content="Cabana A-Frame de lux langa muntele Rarau, Bucovina. Rezerva acum.">
+  <meta property="og:image" content="images/p24.jpg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=17">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="#hero">Green View<span>Rarau</span></a>
+    <button class="nav-burger" id="navBurger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about"      data-i18n="nav_about">Cabana</a>
+      <a href="#facilities" data-i18n="nav_facilities">Facilitati</a>
+      <a href="#gallery"    data-i18n="nav_gallery">Galerie</a>
+      <a href="#anotimpuri" data-i18n="nav_seasons">Anotimpuri</a>
+      <a href="#map"        data-i18n="nav_map">Imprejurimi</a>
+      <a href="#reviews"    data-i18n="nav_reviews">Recenzii</a>
+      <a href="#contact"    data-i18n="nav_contact">Rezervare</a>
+      <button class="lang-toggle" id="langToggle">EN</button>
+    </div>
+  </nav>
+
+  <!-- STICKY BAR -->
+  <div class="sticky-bar" id="stickyBar">
+    <span data-i18n="bar_tagline">Cabana A-Frame - Rarau, Bucovina</span>
+    <button class="btn-amber mag" onclick="openModal()" data-i18n="bar_cta">Rezerva acum</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-media">
+      <img src="images/p24.jpg" alt="Green View Rarau" class="hero-img" id="heroImg">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow" data-i18n="hero_eyebrow">Rarau - Bucovina</p>
+      <h1 class="hero-title" data-i18n="hero_title">Unde padurea<br><em>te imbratiSeaza</em></h1>
+      <p class="hero-sub" data-i18n="hero_sub">O cabana A-Frame ascunsa intre brazi, la poalele muntelui Rarau</p>
+      <button class="btn-amber mag" onclick="openModal()" data-i18n="hero_cta">Verifica disponibilitatea</button>
+    </div>
+    <div class="hero-scroll-hint"><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="story-wrap">
+      <div class="story-media">
+        <div class="story-img-wrap">
+          <image-slot src="images/p55.jpg" alt="Interior cabana"></image-slot>
+        </div>
+      </div>
+      <div class="story-text">
+        <div class="story-block">
+          <span class="section-label" data-i18n="lab_about">01 - Cabana</span>
+          <h2 data-i18n="about_title">O casa in inima padurii</h2>
+          <p data-i18n="about_p1">Green View Rarau este o cabana A-Frame moderna, construita cu materiale naturale si gandita pentru cei care vor sa se deconecteze cu adevarat.</p>
+        </div>
+        <div class="story-block">
+          <h3 data-i18n="about_h2">Design intentionat</h3>
+          <p data-i18n="about_p2">Forma triunghiulara iconica, fereastra panoramica de la mansarda si lemnul cald din interior creeaza o atmosfera unica.</p>
+        </div>
+        <div class="story-block">
+          <h3 data-i18n="about_h3">Liniste garantata</h3>
+          <p data-i18n="about_p3">Fara vecini in camp vizual, fara zgomot de fond urban. Doar vantul prin brazi, focul din semineu si cerul instelat deasupra ta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section class="facilities-section" id="facilities">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-i18n="lab_facilities">02 - Facilitati</span>
+        <h2 data-i18n="fac_title">Tot ce ai nevoie</h2>
+        <p data-i18n="fac_sub">Confort modern in mijlocul naturii salbatice</p>
+      </div>
+      <div class="fac-grid" id="facGrid"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-i18n="lab_gallery">03 - Galerie</span>
+        <h2 data-i18n="gal_title">Priveste, exploreaza</h2>
+        <p class="gal-hint" data-i18n="gal_hint">Trage pentru a rasfoi - Apasa pentru a mari</p>
+      </div>
+    </div>
+    <div class="g-strip-wrap">
+      <div class="g-strip" id="gStrip"></div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section class="seasons-section" id="anotimpuri">
+    <div class="container seasons-layout">
+      <div class="seasons-copy">
+        <div class="section-header section-header--light">
+          <span class="section-label" data-i18n="lab_seasons">04 - Anotimpuri</span>
+          <h2 data-i18n="seasons_title">Frumos in orice anotimp</h2>
+          <p data-i18n="seasons_sub">Raraul se transforma odata cu anotimpurile</p>
+        </div>
+        <div class="seasons-tabs" role="tablist">
+          <button class="stab active" data-season="spring" data-i18n="season_spring" role="tab" aria-selected="true">Primavara</button>
+          <button class="stab" data-season="summer" data-i18n="season_summer" role="tab">Vara</button>
+          <button class="stab" data-season="autumn" data-i18n="season_autumn" role="tab">Toamna</button>
+          <button class="stab" data-season="winter" data-i18n="season_winter" role="tab">Iarna</button>
+        </div>
+      </div>
+      <div class="seasons-stage">
+        <div class="spanel active" id="sp-spring">
+          <div class="spanel-bg" style="background-image:url('https://images.unsplash.com/photo-1644594359850-7175820bdf8a?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="spanel-content">
+            <h3 data-i18n="season_spring">Primavara</h3>
+            <p data-i18n="season_spring_desc">Zapezile se topesc, brandusele apar printre pini, iar aerul miroase a rasina proaspata.</p>
+          </div>
+        </div>
+        <div class="spanel" id="sp-summer">
+          <div class="spanel-bg" style="background-image:url('https://images.unsplash.com/photo-1600120616210-f0af010134e0?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="spanel-content">
+            <h3 data-i18n="season_summer">Vara</h3>
+            <p data-i18n="season_summer_desc">Zilele lungi si verdeata exploziva fac din Rarau un paradis verde.</p>
+          </div>
+        </div>
+        <div class="spanel" id="sp-autumn">
+          <div class="spanel-bg" style="background-image:url('https://images.unsplash.com/photo-1630258578657-238d82761404?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="spanel-content">
+            <h3 data-i18n="season_autumn">Toamna</h3>
+            <p data-i18n="season_autumn_desc">Padurile se aprind in rosu si auriu. Serile la semineu capata un farmec aparte.</p>
+          </div>
+        </div>
+        <div class="spanel" id="sp-winter">
+          <div class="spanel-bg" style="background-image:url('https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg?auto=compress&cs=tinysrgb&w=1600')"></div>
+          <div class="spanel-content">
+            <h3 data-i18n="season_winter">Iarna</h3>
+            <p data-i18n="season_winter_desc">Zapada inmoaie orice zgomot. Cabana straluceste in alb.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-section" id="map">
+    <div class="container map-layout">
+      <div class="map-copy">
+        <div class="section-header">
+          <span class="section-label" data-i18n="lab_map">05 - Imprejurimi</span>
+          <h2 data-i18n="map_title">Ce te asteapta in jur</h2>
+          <p data-i18n="map_sub">Atractii naturale si culturale la cativa kilometri distanta</p>
+        </div>
+        <div class="poi-list" id="poiList"></div>
+      </div>
+      <div class="poi-explorer" id="mapStage">
+        <article class="poi-feature">
+          <div class="pimg" id="pImg"></div>
+          <div class="poi-feature-body">
+            <span class="pcat" id="pCat"></span>
+            <h3 id="pTitle"></h3>
+            <span class="pdist" id="pDist"></span>
+            <p class="pdesc" id="pDesc"></p>
+            <p class="phint" data-i18n="map_phint">Distantele sunt aproximative, pe sosea, din zona Pojorata / Campulung Moldovenesc.</p>
+          </div>
+        </article>
+        <div class="map-wrap">
+          <div class="map-canvas" id="mapCanvas"></div>
+          <div class="map-legend"><span data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-i18n="lab_reviews">06 - Recenzii</span>
+        <h2 data-i18n="rev_title">Ce spun oaspetii</h2>
+      </div>
+    </div>
+    <div class="rev-marquee" id="revMarquee">
+      <div class="rev-track" id="revTrack"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-inner">
+      <div class="contact-text">
+        <span class="section-label" data-i18n="lab_contact">07 - Rezervare</span>
+        <h2 data-i18n="contact_title">Planifica escapada ta</h2>
+        <p data-i18n="contact_p">Scrie-ne sau apasa butonul pentru a verifica disponibilitatea. Raspundem in maximum 2 ore.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/40756651582" target="_blank" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.117 1.535 5.845L.057 23.57a.5.5 0 00.614.601l5.898-1.545A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.028-1.384l-.36-.214-3.733.979.997-3.645-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            +40 756 651 582
+          </a>
+          <a href="mailto:contact@greenviewrarau.ro" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            contact@greenviewrarau.ro
+          </a>
+        </div>
+        <button class="btn-amber mag" onclick="openModal()" data-i18n="contact_cta">Verifica disponibilitatea</button>
+      </div>
+      <div class="contact-img">
+        <img src="images/p39.jpg" alt="Cafea la fereastra cu vedere spre munte">
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-brand">Green View Rarau</p>
+      <p class="footer-copy" data-i18n="footer_copy">2025 - Cabana A-Frame, Rarau, Bucovina</p>
+      <div class="footer-links">
+        <a href="#about"   data-i18n="nav_about">Cabana</a>
+        <a href="#gallery" data-i18n="nav_gallery">Galerie</a>
+        <a href="#contact" data-i18n="nav_contact">Rezervare</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB -->
+  <button class="fab mag" onclick="openModal()" aria-label="Rezervare">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.117 1.535 5.845L.057 23.57a.5.5 0 00.614.601l5.898-1.545A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.028-1.384l-.36-.214-3.733.979.997-3.645-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+  </button>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lb-close" id="lbClose" aria-label="Inchide">x</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Anterior">&#8249;</button>
+    <button class="lb-next" id="lbNext" aria-label="Urmator">&#8250;</button>
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <p class="lb-caption" id="lbCaption"></p>
+  </div>
+
+  <!-- MODAL -->
+  <div class="scrim" id="scrim" role="dialog" aria-modal="true" style="display:none;opacity:0;">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()" aria-label="Inchide">x</button>
+      <h3 data-i18n="modal_title">Verifica disponibilitatea</h3>
+      <p class="modal-sub" data-i18n="modal_sub">Selecteaza datele dorite (minimum 2 nopti)</p>
+      <div class="cal-nav">
+        <button class="cal-arrow" id="calPrev">&#8249;</button>
+        <span class="cal-month-label" id="calMonthLabel"></span>
+        <button class="cal-arrow" id="calNext">&#8250;</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="date-display" id="dateDisplay"></div>
+      <div class="guest-control">
+        <label for="guestCount" data-i18n="guest_label">Numar persoane</label>
+        <div class="guest-stepper">
+          <button type="button" class="guest-btn" id="guestMinus" aria-label="Mai putine persoane">-</button>
+          <input id="guestCount" type="number" min="8" max="16" value="8" inputmode="numeric">
+          <button type="button" class="guest-btn" id="guestPlus" aria-label="Mai multe persoane">+</button>
+        </div>
+        <p data-i18n="guest_hint">Minim 8, maxim 16 persoane</p>
+      </div>
+      <p class="modal-note" data-i18n="modal_note">Minim 2 nopti - Confirmare in max. 2 ore</p>
+      <button class="btn-amber btn-full mag" id="sendBtn" onclick="sendRequest()" data-i18n="modal_send">Trimite cererea</button>
+    </div>
+  </div>
+
+  <script src="image-slot.js?v=17"></script>
+  <script src="app.js?v=17"></script>
+</body>
+</html>
