@@ -1010,19 +1010,7 @@ a,
   z-index: 0;
   pointer-events: none;
 }
-.map-legend {
-  position: absolute;
-  left: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 4;
-  font-size: 0.75rem;
-  color: var(--linen-3);
-  background: rgba(20,30,10,0.75);
-  border: 1px solid rgba(245,240,232,0.14);
-  padding: 0.7rem 0.9rem;
-  max-width: 250px;
-  line-height: 1.5;
-}
+.map-legend { display: none; }
 
 /* Right: POI feature card */
 .poi-feature {
@@ -1222,7 +1210,7 @@ a,
   .poi-list { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 480px) {
-  .poi-list { grid-template-columns: repeat(2, 1fr); }
+  .poi-list { display: none; }
   .map-wrap { height: 240px; }
 }
 
