@@ -1,0 +1,14 @@
+# BMAD working files
+_bmad-output/
+_bmad/
+
+# Build output
+dist/
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

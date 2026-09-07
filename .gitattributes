@@ -1,0 +1,11 @@
+# Normalise line endings — keep LF in the repo regardless of local autocrlf.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

@@ -1,0 +1,4 @@
+# Cloudflare Pages / Netlify redirects. Inert on GitHub Pages.
+
+# Canonical host — force apex, https is handled by the platform.
+https://www.cabanagreenview.ro/*  https://cabanagreenview.ro/:splat  301
