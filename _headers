@@ -1,5 +1,4 @@
-# Cloudflare Pages / Netlify headers. Inert on GitHub Pages (no custom headers
-# there) — this file is ready for the move.
+# Response headers for Cloudflare Workers static assets.
 
 /*
   X-Content-Type-Options: nosniff
