@@ -1,13 +1,14 @@
 /**
- * Production build -> dist/
+ * Optional production bundle -> dist/
  *
- *   npm run build
+ *   npm run bundle
  *
- * The repo root is the source of truth and is directly deployable as-is
- * (that's what GitHub Pages serves). This step is for Cloudflare Pages /
- * Netlify: set the build command to `npm run build` and the output dir to
- * `dist`. It minifies CSS + JS, content-hashes them, rewrites the
- * references in index.html / 404.html, and copies every other asset over.
+ * NOT part of the deploy. The repo root is the source of truth and is
+ * deployed as-is (GitHub Pages serves it directly; Cloudflare Workers via
+ * wrangler.jsonc `assets.directory: "."` + .assetsignore). This script is a
+ * convenience for anyone who wants a minified, content-hashed copy: it
+ * minifies CSS + JS, hashes them, rewrites index.html / 404.html, and
+ * copies the other assets into dist/.
  */
 import { build } from 'esbuild';
 import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';

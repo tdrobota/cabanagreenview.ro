@@ -6,6 +6,13 @@ _bmad/
 dist/
 node_modules/
 
+# wrangler
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
