@@ -1,0 +1,17 @@
+{
+  "name": "Green View Rarău",
+  "short_name": "Green View",
+  "description": "Cabană A-frame de închiriat la poalele muntelui Rarău, Bucovina.",
+  "lang": "ro",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#141E0A",
+  "theme_color": "#141E0A",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any maskable" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}

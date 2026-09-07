@@ -1,0 +1,21 @@
+# BMAD working files
+_bmad-output/
+_bmad/
+
+# Build output
+dist/
+node_modules/
+
+# wrangler
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

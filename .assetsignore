@@ -1,0 +1,20 @@
+# Files not served as static assets (gitignore syntax).
+node_modules
+dist
+tools
+_bmad
+_bmad-output
+.git
+.github
+.wrangler
+.dev.vars*
+.env*
+*.md
+package.json
+package-lock.json
+wrangler.jsonc
+.assetsignore
+.editorconfig
+.gitattributes
+.gitignore
+.nojekyll
