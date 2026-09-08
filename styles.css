@@ -1227,6 +1227,18 @@ a,
   color: rgba(245,240,232,0.55);
   font-size: .75rem;
 }
+.poi-feature .pcredit {
+  margin-top: 0.6rem;
+  font-size: .68rem;
+  color: rgba(245,240,232,0.4);
+}
+.poi-feature .pcredit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.poi-feature .pcredit a:hover { color: rgba(245,240,232,0.7); }
+.poi-feature .pcredit[hidden] { display: none; }
 
 /* Bottom: POI list as horizontal grid, 5 per row */
 .poi-list {
