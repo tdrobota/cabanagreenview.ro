@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Green View Rarău">
   <rect width="64" height="64" rx="14" fill="#141E0A"/>
-  <path d="M32 12 54 50 H10 Z" fill="none" stroke="#B07828" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M32 26 42 44 H22 Z" fill="#B07828"/>
-  <rect x="29" y="37" width="6" height="7" fill="#141E0A"/>
+  <path d="M32 9 L53 51 L11 51 Z" fill="#C49040"/>
+  <path d="M26 51 V37 a6 6 0 0 1 12 0 V51 Z" fill="#141E0A"/>
 </svg>
