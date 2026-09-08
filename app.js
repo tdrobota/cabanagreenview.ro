@@ -475,6 +475,23 @@
     document.getElementById("pTitle").textContent = poiText(item, "poi-item-name");
     document.getElementById("pDist").textContent = poiText(item, "poi-item-dist");
     document.getElementById("pDesc").textContent = poiText(item, "poi-item-desc");
+
+    var credit = document.getElementById("pCredit");
+    if (credit) {
+      var ct = item.getAttribute("data-credit");
+      var cu = item.getAttribute("data-credit-url");
+      credit.hidden = !ct;
+      if (ct) {
+        credit.textContent = "";
+        if (cu) {
+          var a = document.createElement("a");
+          a.href = cu; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = ct;
+          credit.appendChild(a);
+        } else {
+          credit.textContent = ct;
+        }
+      }
+    }
   }
   function contours() {
     var rings = ["m -60 0 a 60 50 0 1 0 120 0 a 60 50 0 1 0 -120 0","m -120 0 a 120 95 0 1 0 240 0 a 120 95 0 1 0 -240 0","m -190 0 a 190 150 0 1 0 380 0 a 190 150 0 1 0 -380 0","m -270 0 a 270 210 0 1 0 540 0 a 270 210 0 1 0 -540 0"];
