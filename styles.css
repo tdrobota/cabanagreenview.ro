@@ -97,7 +97,7 @@ picture { display: contents; }
 
 /* TYPOGRAPHY */
 h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.15; }
-h1 { font-size: clamp(2.45rem, 5.1vw, 4.9rem); font-weight: 600; }
+h1 { font-size: clamp(2.45rem, 5.1vw, 65px); font-weight: 600; }
 h2 { font-size: clamp(1.8rem, 3.3vw, 2.8rem); font-weight: 600; }
 h3 { font-size: clamp(1.25rem, 2.1vw, 1.75rem); font-weight: 400; }
 p  { font-size: clamp(0.92rem, 1.25vw, 1.02rem); line-height: 1.68; color: var(--text-2); }
