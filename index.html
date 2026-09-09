@@ -42,10 +42,10 @@
         imagesrcset="images/p24-640.webp 640w, images/p24.webp 1600w"
         imagesizes="100vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=24">
+  <link rel="stylesheet" href="styles.css?v=25">
 
   <!-- Structured data. TODO owner: add priceRange, exact streetAddress + postalCode,
-       geo coordinates, checkinTime / checkoutTime, petsAllowed, and sameAs links
+       checkinTime / checkoutTime, petsAllowed, and sameAs links
        (Airbnb / Booking / Instagram / Facebook) once available. -->
   <script type="application/ld+json">
   {
@@ -70,6 +70,12 @@
           "addressRegion": "Suceava",
           "addressCountry": "RO"
         },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 47.488536,
+          "longitude": 25.571363
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=47.488536,25.571363",
         "areaServed": "Rarău, Bucovina",
         "amenityFeature": [
           { "@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true },
@@ -182,11 +188,14 @@
           <h3 data-i18n="about_h3">Liniște</h3>
           <p data-i18n="about_p3">De la cabană nu se vede niciun vecin și nu se aude oraș. Seara rămân vântul prin brazi, focul din șemineu și cerul înstelat.</p>
         </div>
-        <!-- TODO owner: confirmă adresa exactă, coordonatele GPS, prețul pe noapte, configurația dormitoarelor și orele de check-in / check-out -->
+        <!-- TODO owner: confirmă adresa exactă, prețul pe noapte, configurația dormitoarelor și orele de check-in / check-out -->
         <dl class="about-spec">
           <div>
             <dt data-i18n-ro="Zonă" data-i18n-en="Area">Zonă</dt>
-            <dd data-i18n-ro="Rarău – Pojorâta, Bucovina (jud. Suceava)" data-i18n-en="Rarău – Pojorâta, Bucovina (Suceava county)">Rarău – Pojorâta, Bucovina (jud. Suceava)</dd>
+            <dd>
+              <span data-i18n-ro="Rarău – Pojorâta, Bucovina (jud. Suceava)" data-i18n-en="Rarău – Pojorâta, Bucovina (Suceava county)">Rarău – Pojorâta, Bucovina (jud. Suceava)</span>
+              <a class="spec-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=47.488536,25.571363" target="_blank" rel="noopener noreferrer" data-i18n-ro="vezi pe hartă" data-i18n-en="see on map">vezi pe hartă</a>
+            </dd>
           </div>
           <div>
             <dt data-i18n-ro="Capacitate" data-i18n-en="Capacity">Capacitate</dt>

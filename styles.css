@@ -365,6 +365,15 @@ em { font-style: italic; color: var(--amber); }
   margin-bottom: 0.15rem;
 }
 .about-spec dd { font-size: 0.9rem; color: var(--text-2); }
+.spec-map-link {
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--amber-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.spec-map-link:hover { color: var(--amber); }
 
 /* FACILITIES */
 .facilities-section {
