@@ -8,6 +8,7 @@
 
 - Type: A-frame holiday cabin (self-catering), rented whole
 - Location: Rarău – Pojorâta area, Bucovina, Suceava county, Romania
+- Coordinates: 47.488536, 25.571363
 - Capacity: groups of 8–16 guests
 - Layout: 2 bedrooms, 1 bathroom with bathtub, fully equipped kitchen
 - Heating: central heating plus a wood-burning stone fireplace (firewood included)
@@ -38,5 +39,5 @@
 
 ## Notes
 
-- Nightly price, exact street address and GPS coordinates are not yet published
-  here — contact the host for these.
+- Nightly price and the exact street address are not yet published here —
+  contact the host for these.
