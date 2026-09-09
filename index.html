@@ -63,7 +63,7 @@
           "https://cabanagreenview.ro/images/p30.jpg",
           "https://cabanagreenview.ro/images/p03.jpg"
         ],
-        "numberOfRooms": 2,
+        "numberOfRooms": 6,
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Pojorâta",
@@ -108,7 +108,7 @@
         "@type": "FAQPage",
         "@id": "https://cabanagreenview.ro/#faq",
         "mainEntity": [
-          { "@type": "Question", "name": "Câte persoane încap în cabană?", "acceptedAnswer": { "@type": "Answer", "text": "Cabana este potrivită pentru grupuri de 8 până la 16 persoane, cu 2 dormitoare și 1 baie." } },
+          { "@type": "Question", "name": "Câte persoane încap în cabană?", "acceptedAnswer": { "@type": "Answer", "text": "Cabana este potrivită pentru grupuri de 8 până la 16 persoane, cu 6 dormitoare și 4 băi." } },
           { "@type": "Question", "name": "Care este sejurul minim?", "acceptedAnswer": { "@type": "Answer", "text": "Rezervările se fac pentru minimum 2 nopți." } },
           { "@type": "Question", "name": "Cum rezerv cabana?", "acceptedAnswer": { "@type": "Answer", "text": "Alege datele în calendarul de pe site și trimite cererea pe WhatsApp. Confirmăm disponibilitatea în cel mult 2 ore." } },
           { "@type": "Question", "name": "Există parcare la cabană?", "acceptedAnswer": { "@type": "Answer", "text": "Da, cabana are parcare privată la fața locului." } },
@@ -188,7 +188,7 @@
           <h3 data-i18n="about_h3">Liniște</h3>
           <p data-i18n="about_p3">De la cabană nu se vede niciun vecin și nu se aude oraș. Seara rămân vântul prin brazi, focul din șemineu și cerul înstelat.</p>
         </div>
-        <!-- TODO owner: confirmă adresa exactă, prețul pe noapte, configurația dormitoarelor și orele de check-in / check-out -->
+        <!-- TODO owner: confirmă adresa exactă, prețul pe noapte și orele de check-in / check-out -->
         <dl class="about-spec">
           <div>
             <dt data-i18n-ro="Zonă" data-i18n-en="Area">Zonă</dt>
@@ -203,7 +203,7 @@
           </div>
           <div>
             <dt data-i18n-ro="Dormitoare" data-i18n-en="Bedrooms">Dormitoare</dt>
-            <dd data-i18n-ro="2 dormitoare · 1 baie" data-i18n-en="2 bedrooms · 1 bathroom">2 dormitoare · 1 baie</dd>
+            <dd data-i18n-ro="6 dormitoare · 4 băi" data-i18n-en="6 bedrooms · 4 bathrooms">6 dormitoare · 4 băi</dd>
           </div>
           <div>
             <dt data-i18n-ro="Sejur minim" data-i18n-en="Minimum stay">Sejur minim</dt>
@@ -225,7 +225,7 @@
       <ul class="fac-grid" id="facGrid">
         <li class="fac-card">
           <span class="fac-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v6"/><path d="M14 8h5a2 2 0 0 1 2 2v8"/><path d="M3 18v-7h18v7"/><path d="M3 21v-3m18 3v-3"/></svg></span>
-          <span class="fac-label" data-i18n-ro="2 dormitoare confortabile" data-i18n-en="2 comfortable bedrooms">2 dormitoare confortabile</span>
+          <span class="fac-label" data-i18n-ro="6 dormitoare" data-i18n-en="6 bedrooms">6 dormitoare</span>
         </li>
         <li class="fac-card">
           <span class="fac-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/></svg></span>
@@ -233,7 +233,7 @@
         </li>
         <li class="fac-card">
           <span class="fac-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M7 12V6a2 2 0 0 1 4 0"/><path d="M9 3v.5"/></svg></span>
-          <span class="fac-label" data-i18n-ro="Baie cu cadă" data-i18n-en="Bathroom with bathtub">Baie cu cadă</span>
+          <span class="fac-label" data-i18n-ro="4 băi" data-i18n-en="4 bathrooms">4 băi</span>
         </li>
         <li class="fac-card">
           <span class="fac-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16l-1.2 9a1 1 0 0 1-1 .9H6.2a1 1 0 0 1-1-.9L4 11Z"/><path d="M12 11V7a3 3 0 0 1 6 0"/></svg></span>
@@ -473,7 +473,7 @@
       <div class="faq-list">
         <details class="faq-item" open>
           <summary data-i18n-ro="Câte persoane încap în cabană?" data-i18n-en="How many guests can the cabin host?">Câte persoane încap în cabană?</summary>
-          <p data-i18n-ro="Cabana este potrivită pentru grupuri de 8 până la 16 persoane, cu 2 dormitoare și 1 baie." data-i18n-en="The cabin suits groups of 8 to 16 guests, with 2 bedrooms and 1 bathroom.">Cabana este potrivită pentru grupuri de 8 până la 16 persoane, cu 2 dormitoare și 1 baie.</p>
+          <p data-i18n-ro="Cabana este potrivită pentru grupuri de 8 până la 16 persoane, cu 6 dormitoare și 4 băi." data-i18n-en="The cabin suits groups of 8 to 16 guests, with 6 bedrooms and 4 bathrooms.">Cabana este potrivită pentru grupuri de 8 până la 16 persoane, cu 6 dormitoare și 4 băi.</p>
         </details>
         <details class="faq-item">
           <summary data-i18n-ro="Care este sejurul minim?" data-i18n-en="What is the minimum stay?">Care este sejurul minim?</summary>
