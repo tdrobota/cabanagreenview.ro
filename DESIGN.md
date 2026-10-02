@@ -86,7 +86,7 @@ components:
 
 The cabin seen at blue hour through mountain haze, framed like the A-frame's own window. The page is a dark slate-teal room; photographs are the windows, held inside rounded inset frames with a pale translucent rim. Type is one light, tightly tracked grotesk at two volumes: white for what is said, mist for what follows it. Warmth comes only from the wood: a single amber, used the way a lit window is used in a dusk photograph.
 
-Density is low and spacious. Sections breathe on large vertical rhythm, and one light "morning fog" passage (reviews and FAQ) breaks the dark run before the page closes on a dark framed footer with the name set as a full-width wordmark. The world comes from the owner's chosen Dribbble cabin reference (misty teal photography, rounded inset frame, big grotesk headline with a muted middle line, dark glass booking card, white buttons, small amber accent).
+Density is low and spacious. Sections breathe on large vertical rhythm, and one light "morning fog" passage (reviews and FAQ) breaks the dark run before the page closes on a compact dark footer: booking line and contact, then the name at a modest size (1.75–3.25rem) above a hairline, beside the year. The owner found a full-width wordmark too big. The world comes from the owner's chosen Dribbble cabin reference (misty teal photography, rounded inset frame, big grotesk headline with a muted middle line, dark glass booking card, white buttons, small amber accent).
 
 **Key Characteristics:**
 - Full-bleed photography inside a rounded inset frame with a translucent rim.

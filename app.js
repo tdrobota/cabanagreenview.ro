@@ -477,6 +477,9 @@
       var el = document.createElement("button");
       el.type = "button";
       el.className = "poi" + (item.hasAttribute("data-home") ? " home" : "");
+      var px = +item.getAttribute("data-x");
+      if (px > 70) el.className += " edge-r";      // labels near the frame edges open inward
+      else if (px < 25) el.className += " edge-l";
       el.style.left = item.getAttribute("data-x") + "%";
       el.style.top = item.getAttribute("data-y") + "%";
       el.setAttribute("data-i", i);
