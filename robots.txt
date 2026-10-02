@@ -1,7 +1,10 @@
-# Green View Rarău — https://cabanagreenview.ro
+# Green View Rarău — https://cabanagreenview.teodro11.workers.dev
 
 User-agent: *
 Allow: /
+# Content signals (contentsignals.org): appear in search and in AI answers; training allowed,
+# matching the explicit AI-crawler allows below.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 # AI / answer-engine crawlers are explicitly welcome (the property benefits
 # from being discoverable in AI answers). Remove a block to disallow one.
@@ -35,4 +38,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://cabanagreenview.ro/sitemap.xml
+Sitemap: https://cabanagreenview.teodro11.workers.dev/sitemap.xml

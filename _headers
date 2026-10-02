@@ -2,6 +2,7 @@
 
 /*
   X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=31536000
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()
   X-Frame-Options: DENY
@@ -14,9 +15,20 @@
   Cache-Control: public, max-age=604800
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
-/*.webp
-  Cache-Control: public, max-age=31536000, immutable
 /*.css
   Cache-Control: public, max-age=3600
 /*.js
   Cache-Control: public, max-age=3600
+
+# Explicit charset: Workers assets send "text/html" with no charset, and requests-based
+# fetchers (some AI crawlers) then decode the Romanian diacritics as Latin-1.
+/
+  Content-Type: text/html; charset=utf-8
+/index.html
+  Content-Type: text/html; charset=utf-8
+/404.html
+  Content-Type: text/html; charset=utf-8
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/robots.txt
+  Content-Type: text/plain; charset=utf-8

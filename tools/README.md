@@ -18,3 +18,14 @@ npm run dev          # serve the site at http://localhost:8080
 
 `fonts` and `icons` need Playwright with a browser installed
 (`npx playwright install chromium`).
+
+## Domain
+
+The site's identity (canonical, Open Graph, JSON-LD, robots.txt, sitemap.xml, llms.txt) currently uses
+`https://cabanagreenview.teodro11.workers.dev` (see `site-origin.txt`). When the domain is bought:
+
+```
+node set-domain.mjs https://your-domain.ro
+```
+
+then add it as a Custom Domain on the Worker, deploy, and submit the sitemap in Google Search Console / Bing Webmaster Tools.

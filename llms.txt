@@ -19,12 +19,12 @@
   availability confirmed within ~2 hours
 - Guest ratings (as of 2026-10-02): 4.9/5 on Google (22 reviews, https://www.google.com/maps/place/GreenViewRarau/@47.488578,25.5687858,17z/data=!3m1!4b1!4m6!3m5!1s0x4735bd71f4dce8dd:0xb381ff0f2d04f9cc!8m2!3d47.4885744!4d25.5713607!16s%2Fg%2F11rn5j_07f); 10/10 on Turistinfo
   (13 reviews, https://www.turistinfo.ro/campulung_moldovenesc/cazare-campulung_moldovenesc/casa_de_vacanta_green_view_rarau/reviews-casa_de_vacanta_green_view_rarau-c119345.html)
-- Languages: Romanian and English
+- Languages: Romanian (default) and English
 
 ## Nearby (by road, from the Pojorâta / Câmpulung Moldovenesc area)
 
 - Pietrele Doamnei rock towers — ~9 km
-- Rarău peak — a few minutes by car
+- Rarău peak — ~9 km
 - Transrarău scenic road — ~12 km
 - Rarău ski slope — ~12 km
 - Moara Dracului Gorge — ~18 km
@@ -35,9 +35,10 @@
 
 ## Contact
 
-- Website: https://cabanagreenview.ro
+- Website: https://cabanagreenview.teodro11.workers.dev
 - WhatsApp / phone: +40 756 651 582
-- Email: contact@greenviewrarau.ro
+- Facebook: https://www.facebook.com/GreenViewRarau/
+- Turistinfo listing: https://www.turistinfo.ro/campulung_moldovenesc/cazare-campulung_moldovenesc/casa_de_vacanta_green_view_rarau-c119345.html
 
 ## Notes
 

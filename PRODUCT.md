@@ -13,7 +13,8 @@ Romania). The website, cabanagreenview.ro, is its only direct booking channel.
 - Nearby: Pietrele Doamnei / Rarău peak ~9 km, Transrarău ~12 km, Pojorâta ~6 km,
   Câmpulung Moldovenesc ~18 km, Slătioara UNESCO forest ~22 km.
 - Booking: pick dates in the on-site calendar, request goes over WhatsApp
-  (+40 756 651 582); the owners confirm within 2 hours. Email contact@greenviewrarau.ro.
+  (+40 756 651 582); the owners confirm within 2 hours. No working email yet (contact@greenviewrarau.ro is on an unregistered domain and was removed 2026-10-02).
+- Public profiles: Google Maps "GreenViewRarau" (4.9/22), Turistinfo (10/10, 13), Facebook facebook.com/GreenViewRarau.
 - Unknown (owner TODO, never invent): nightly price, check-in/out times, exact address,
   pets / winter-access policy, aggregate rating, social links.
 
