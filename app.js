@@ -1,6 +1,6 @@
 /* =====================================================================
-   Green View Rarau - interactions (v17)
-   Alpine Dusk redesign
+   Green View Rarau - interactions (v18)
+   "Mist" redesign
    ===================================================================== */
 (function () {
   "use strict";
@@ -18,7 +18,7 @@
       nav_contact:     "Rezervare",
       bar_tagline:     "Cabană A-Frame · Rarău, Bucovina",
       hero_eyebrow:    "Rarău · Bucovina",
-      hero_title:      "O cabană A-Frame<br><em>la poalele Rarăului</em>",
+      hero_title:      "O cabană <span class=\"nw\">A-Frame</span><br><em>la poalele</em><br>Rarăului",
       hero_sub:        "Între brazi, în Bucovina. Liniște, șemineu și pădurea la câțiva pași.",
       hero_cta:        "Verifică disponibilitatea",
       lab_about:       "01 · Cabana",
@@ -66,7 +66,7 @@
       nav_contact:     "Book",
       bar_tagline:     "A-Frame cabin · Rarău, Bucovina",
       hero_eyebrow:    "Rarău · Bucovina",
-      hero_title:      "An A-Frame cabin<br><em>at the foot of Rarău</em>",
+      hero_title:      "An <span class=\"nw\">A-Frame</span> cabin<br><em>at the foot</em><br>of Rarău",
       hero_sub:        "Among the firs, in Bucovina. Quiet, a fireplace, and the forest a few steps away.",
       hero_cta:        "Check availability",
       lab_about:       "01 · Cabin",
@@ -165,21 +165,15 @@
   var PREFERS_REDUCED = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* -- Scroll effects (one rAF-throttled handler for all three) ----------------------- */
-  var progressBar = document.getElementById("scrollProgress");
+  /* -- Nav state: transparent inside the hero frame, solid glass once scrolled -------- */
   var nav = document.getElementById("nav");
-  var heroImg = document.getElementById("heroImg");
   var scrollTicking = false;
 
   function onScrollFrame() {
     scrollTicking = false;
-    var y = window.scrollY;
-    var docH = document.documentElement.scrollHeight - window.innerHeight;
-    progressBar.style.width = (docH > 0 ? (y / docH) * 100 : 0) + "%";
-    nav.classList.toggle("scrolled", y > 60);
-    if (!PREFERS_REDUCED && heroImg && y < window.innerHeight * 1.5) {
-      heroImg.style.transform = "translateY(" + (y * 0.3) + "px)";
-    }
+    nav.classList.toggle("scrolled", window.scrollY > 40);
+    // The WhatsApp FAB only appears once the hero's booking card has scrolled away.
+    document.documentElement.classList.toggle("past-hero", window.scrollY > window.innerHeight * 0.8);
   }
   window.addEventListener("scroll", function () {
     if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScrollFrame); }
@@ -191,6 +185,7 @@
   var navLinks = document.getElementById("navLinks");
   function setMenu(open) {
     navLinks.classList.toggle("open", open);
+    nav.classList.toggle("menu-open", open);
     burger.setAttribute("aria-expanded", open ? "true" : "false");
   }
   burger.addEventListener("click", function() {
@@ -205,23 +200,6 @@
       burger.focus();
     }
   });
-
-  /* -- Magnetic buttons ---------------------------------------------------------------------- */
-  function initMagnetic() {
-    if (PREFERS_REDUCED) return;
-    document.querySelectorAll(".mag").forEach(function(btn) {
-      btn.addEventListener("mousemove", function(e) {
-        var r = btn.getBoundingClientRect();
-        var dx = e.clientX - (r.left + r.width  / 2);
-        var dy = e.clientY - (r.top  + r.height / 2);
-        btn.style.transform = "translate(" + dx * 0.25 + "px, " + dy * 0.25 + "px)";
-      });
-      btn.addEventListener("mouseleave", function() {
-        btn.style.transform = "";
-      });
-    });
-  }
-  initMagnetic();
 
   /* -- Facilities ---------------------------------------------------------------------- */
   /* Facility cards are static HTML now (crawlable in both languages); applyLang()
@@ -384,14 +362,16 @@
       moved = false;
       startX = e.clientX;
       startScroll = pos;
-      try { gStripWrap.setPointerCapture(pointerId); } catch (err) {}
+      // Capture only once the gesture becomes a drag: capturing on pointerdown
+      // retargets the click to the strip, and the photo never opens.
     });
     gStripWrap.addEventListener('pointermove', function (e) {
       if (!dragging || e.pointerId !== pointerId) return;
       var dx = e.clientX - startX;
-      if (Math.abs(dx) > 5) {
+      if (Math.abs(dx) > 5 && !moved) {
         moved = true;
         gStripWrap.classList.add('is-dragging');
+        try { gStripWrap.setPointerCapture(pointerId); } catch (err) {}
       }
       pos = startScroll - dx;
       writingScroll = true;
@@ -495,18 +475,18 @@
   }
   function contours() {
     var rings = ["m -60 0 a 60 50 0 1 0 120 0 a 60 50 0 1 0 -120 0","m -120 0 a 120 95 0 1 0 240 0 a 120 95 0 1 0 -240 0","m -190 0 a 190 150 0 1 0 380 0 a 190 150 0 1 0 -380 0","m -270 0 a 270 210 0 1 0 540 0 a 270 210 0 1 0 -540 0"];
-    return rings.map(function(d,i){ return '<path d="M500 392 '+d+'" fill="none" stroke="#6d5f3f" stroke-width="1" opacity="'+(0.45-i*0.07)+'"/>'; }).join("");
+    return rings.map(function(d,i){ return '<path d="M500 392 '+d+'" fill="none" stroke="#8fb0b7" stroke-width="1" opacity="'+(0.34-i*0.06)+'"/>'; }).join("");
   }
   function trees() {
     var s="", seed=7;
     function rnd(){ seed=(seed*9301+49297)%233280; return seed/233280; }
-    for(var i=0;i<92;i++){ var x=rnd()*1000,y=rnd()*700; if(Math.hypot(x-500,y-392)<92) continue; var op=(0.10+rnd()*0.16).toFixed(2); s+='<path d="M'+x.toFixed(0)+' '+y.toFixed(0)+' l-3 6 h6 z" fill="#5A6A4A" opacity="'+op+'"/>'; }
+    for(var i=0;i<92;i++){ var x=rnd()*1000,y=rnd()*700; if(Math.hypot(x-500,y-392)<92) continue; var op=(0.10+rnd()*0.16).toFixed(2); s+='<path d="M'+x.toFixed(0)+' '+y.toFixed(0)+' l-3 6 h6 z" fill="#8fb0b7" opacity="'+op+'"/>'; }
     return s;
   }
   function buildMap() {
     var c = document.getElementById("mapCanvas");
     if (!c || !poiItems.length) return;
-    c.innerHTML = '<svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="mg" cx="50%" cy="46%" r="72%"><stop offset="0%" stop-color="#243415"/><stop offset="62%" stop-color="#141E0A"/><stop offset="100%" stop-color="#0d1307"/></radialGradient></defs><rect width="1000" height="700" fill="url(#mg)"/>' + contours() + '<path d="M-20 470 C 180 430, 300 520, 460 470 S 760 400, 1020 450" fill="none" stroke="#4a6741" stroke-width="5" opacity="0.42"/><path d="M120 700 C 260 560, 360 560, 500 392 S 760 240, 900 90" fill="none" stroke="#B07828" stroke-width="2.2" stroke-dasharray="2 7" opacity="0.62" stroke-linecap="round"/><path d="M0 560 C 250 540, 420 470, 500 392" fill="none" stroke="#B07828" stroke-width="1.8" stroke-dasharray="2 7" opacity="0.36" stroke-linecap="round"/>' + trees() + '</svg>';
+    c.innerHTML = '<svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="mg" cx="50%" cy="46%" r="72%"><stop offset="0%" stop-color="#2a434a"/><stop offset="62%" stop-color="#172a30"/><stop offset="100%" stop-color="#0d1a1e"/></radialGradient></defs><rect width="1000" height="700" fill="url(#mg)"/>' + contours() + '<path d="M-20 470 C 180 430, 300 520, 460 470 S 760 400, 1020 450" fill="none" stroke="#5f838c" stroke-width="5" opacity="0.4"/><path d="M120 700 C 260 560, 360 560, 500 392 S 760 240, 900 90" fill="none" stroke="#e9a23b" stroke-width="2.2" stroke-dasharray="2 7" opacity="0.62" stroke-linecap="round"/><path d="M0 560 C 250 540, 420 470, 500 392" fill="none" stroke="#e9a23b" stroke-width="1.8" stroke-dasharray="2 7" opacity="0.36" stroke-linecap="round"/>' + trees() + '</svg>';
     poiItems.forEach(function (item, i) {
       var el = document.createElement("button");
       el.type = "button";
@@ -745,7 +725,16 @@
     renderCal();
   }
 
+  function syncCardField(id, date) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = date ? fmt(date) : (el.getAttribute(LANG === "en" ? "data-i18n-en" : "data-i18n-ro") || "");
+    el.classList.toggle("is-set", !!date);
+  }
+
   function updateDateDisplay() {
+    syncCardField("cardIn", checkIn);
+    syncCardField("cardOut", checkOut);
     var el = document.getElementById("dateDisplay");
     if (!el) return;
     if (checkIn && checkOut) {

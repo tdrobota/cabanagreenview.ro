@@ -2,6 +2,11 @@
 
 Cabin photos (`images/p*.jpg` / `.webp`, `images/og.jpg`) are the property owner's own.
 
+`images/hero/cabin-mist*` is the owner's photo `p37` (2048px original from the first
+commit, `da8ac85:images/p37.jpg`) colour-graded to a dusk/mist look by `tools/mist.mjs`
+(cool slate-teal split-tone that keeps the wood warm, plus height-weighted haze). No
+elements added or removed; regenerate with the command in that file's header.
+
 ## Surroundings section (`images/poi/`)
 
 All from Wikimedia Commons, resized and re-encoded to WebP for the site. Each is
@@ -27,6 +32,10 @@ All CC BY-SA images here were resized and converted to WebP; no other modificati
 |------|--------|---------|
 | `spring.webp` `summer.webp` `autumn.webp` | Unsplash | Unsplash Licence (free use) |
 | `winter.webp` | Pexels | Pexels Licence (free use) |
+
+All four were colour-graded with the lighter `season` preset of `tools/mist.mjs`
+(cooler, quieter, same subject); the ungraded files are in git history before the
+`redesign/mist` branch.
 
 ## Notes for the owner
 
