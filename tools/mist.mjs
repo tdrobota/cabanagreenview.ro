@@ -66,7 +66,7 @@ const GLASS = {
     shapes: '<polygon points="1024,120 740,705 1225,705"/><rect x="944" y="600" width="112" height="144"/>' },
 };
 
-export async function lamps(img, glass = GLASS.p37, { strength = 0.92, color = [255, 152, 62], spill = 0.12 } = {}) {
+export async function lamps(img, glass = GLASS.p37, { strength = 0.7, color = [255, 152, 62], spill = 0.08 } = {}) {
   const { data, info } = await img.raw().toBuffer({ resolveWithObject: true });
   const { width: W, height: H } = info;
   const s = W / glass.w;

@@ -223,7 +223,7 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
   position: absolute; inset: 0; width: 100%; height: 100%;
 }
 .hero-photo { z-index: -1; border-radius: inherit; overflow: hidden; }
-.hero-photo img { object-fit: cover; object-position: 50% 62%; }
+.hero-photo img { object-fit: cover; object-position: 50% 45%; }
 .hero-photo::after {   /* soft fall-off so the frame's lower half always reads */
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(180deg, rgba(8, 18, 21, 0) 55%, rgba(8, 18, 21, 0.4) 100%);
@@ -842,23 +842,6 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   .book-card .btn { padding-inline: 1rem; font-size: 0.95rem; }
   .book-card .btn svg { display: none; }
 }
-
-/* Preview-only hero photo picker (hero-options branch) */
-.hero-pick {
-  position: fixed; z-index: 120; left: 50%; bottom: 14px; transform: translateX(-50%);
-  display: flex; gap: 4px; padding: 5px; border-radius: 14px;
-  background: rgba(11, 22, 26, 0.86); box-shadow: 0 0 0 1px rgba(242, 246, 246, 0.1), 0 12px 30px -10px rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-}
-.hero-pick span { align-self: center; padding: 0 8px 0 6px; font-size: 0.8rem; color: var(--mist-2); }
-.hero-pick button { min-height: 40px; padding: 0 12px; border-radius: 10px; font-size: 0.9rem; color: var(--mist-3); }
-.hero-pick button:hover { background: var(--ink-3); color: var(--snow); }
-.hero-pick button[aria-pressed="true"] { background: var(--snow); color: var(--ink-1); }
-.hero-pick .hero-pick-next { white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; margin-left: 6px; padding: 0 14px; background: var(--amber); color: var(--ink-0); font-weight: 500; }
-.hero-pick .hero-pick-next:hover { background: #f0b45c; color: var(--ink-0); }
-.hero-pick-next svg { width: 16px; height: 16px; }
-.hero-pick-count { margin-left: 4px; padding: 0; font-size: 0.85rem; color: inherit; font-variant-numeric: tabular-nums; }
-@media (max-width: 640px) { .hero-pick > span, .hero-pick button[data-id] { display: none; } }
 
 /* MOTION — respect the user's preference */
 @media (prefers-reduced-motion: reduce) {
