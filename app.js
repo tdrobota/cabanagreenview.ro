@@ -515,7 +515,11 @@
     if (reduceMotion) return; // static, scrollable list is enough
     var originals = Array.prototype.slice.call(revTrack.children);
     originals.forEach(function (card) {
-      revTrack.appendChild(card.cloneNode(true));
+      // The copy only makes the loop seamless: hide it from screen readers.
+      var copy = card.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      copy.querySelectorAll("a, button").forEach(function (el) { el.tabIndex = -1; });
+      revTrack.appendChild(copy);
     });
     revTrack.classList.add("is-looping");
   })();

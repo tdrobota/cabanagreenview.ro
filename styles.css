@@ -246,7 +246,8 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
   color: rgba(242, 246, 246, 0.92);
   text-wrap: pretty;
 }
-.hero-figure { display: grid; gap: 0.35rem; padding-bottom: 0.25rem; }
+.hero-figure { display: grid; gap: 0.35rem; padding-bottom: 0.25rem; border-radius: 12px; transition: opacity 0.2s; }
+.hero-figure:hover .hero-figure-l { text-decoration: underline; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
 .hero-figure-n {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-size: clamp(2rem, 2.9vw, 2.75rem); line-height: 1; letter-spacing: -0.035em;
@@ -268,7 +269,8 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .book-card-title { display: grid; gap: 2px; margin-bottom: 6px; font-weight: 400; }
 .book-card-title > span:first-child { font-size: clamp(1.45rem, 1.8vw, 1.85rem); line-height: 1.08; letter-spacing: -0.03em; }
 .book-card-kind { font-size: 0.92rem; color: var(--mist-2); }
-.book-rating { display: none; align-items: center; gap: 6px; margin: -4px 0 4px; font-size: 0.92rem; color: var(--mist-3); }
+.book-rating { display: none; align-items: center; gap: 6px; margin: -4px 0 4px; font-size: 0.92rem; color: var(--mist-3); justify-self: start; }
+.book-rating:hover { color: var(--snow); text-decoration: underline; text-underline-offset: 0.22em; }
 .book-rating svg { width: 16px; height: 16px; color: var(--amber); }
 .book-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .field {
@@ -593,7 +595,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 .reviews :focus-visible, .faq :focus-visible { outline-color: var(--ink-1); }
 .reviews ::selection, .faq ::selection { background: var(--ink-1); color: var(--fog); }
 .reviews .h2 { max-width: 22ch; }
-.rev-more { margin: 18px 0 clamp(36px, 4.5vw, 64px); }
+.rev-more { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 18px 0 clamp(36px, 4.5vw, 64px); }
 .reviews .text-link { color: var(--ink-1); text-decoration-color: var(--slate); }
 .reviews .text-link:hover { text-decoration-color: var(--ink-1); }
 .rev-marquee { overflow-x: auto; scrollbar-width: none; }
