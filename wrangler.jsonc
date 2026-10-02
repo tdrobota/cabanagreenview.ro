@@ -5,7 +5,9 @@
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    // unknown paths get the designed 404 page (with a 404 status), not an empty body
+    "not_found_handling": "404-page"
   },
   // One public link only: the production workers.dev URL.
   "workers_dev": true,

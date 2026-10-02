@@ -23,7 +23,7 @@
       hero_cta:        "Verifică disponibilitatea",
       lab_about:       "01 · Cabana",
       about_title:     "O casă în pădure",
-      about_p1:        "Green View Rarău este o cabană A-Frame modernă, construită cu materiale naturale. Pădurea e la câțiva pași, iar vârful Rarău la câteva minute.",
+      about_p1:        "Green View Rarău este o cabană A-Frame modernă, construită cu materiale naturale. Pădurea e la câțiva pași, iar vârful Rarău la circa 9 km.",
       about_h2:        "Interiorul",
       about_p2:        "Forma triunghiulară, fereastra panoramică de la mansardă, mult lemn la interior. Stilul e între minimalism scandinav și rustic montan românesc.",
       about_h3:        "Liniște",
@@ -65,7 +65,7 @@
       hero_cta:        "Check availability",
       lab_about:       "01 · Cabin",
       about_title:     "A house in the forest",
-      about_p1:        "Green View Rarău is a modern A-Frame cabin, built with natural materials. The forest is a few steps away; Rarău peak is a few minutes off.",
+      about_p1:        "Green View Rarău is a modern A-Frame cabin, built with natural materials. The forest is a few steps away; Rarău peak is about 9 km away.",
       about_h2:        "Inside",
       about_p2:        "The triangular shape, the panoramic skylight, a lot of wood inside. The style sits between Scandinavian minimalism and Romanian mountain rustic.",
       about_h3:        "Quiet",
@@ -192,24 +192,10 @@
      swaps the label via data-i18n-ro / data-i18n-en. Nothing to build here. */
 
   /* -- Gallery ---------------------------------------------------------------------- */
-  var GALLERY = [
-    { src: "images/p14.jpg", l: "Cabana iarna",          wide: true  },
-    { src: "images/p34.jpg", l: "Seară de furtună",      wide: false },
-    { src: "images/p49.jpg", l: "Noaptea în zăpadă",     wide: true  },
-    { src: "images/p30.jpg", l: "Fațadă A-Frame",        wide: true  },
-    { src: "images/p03.jpg", l: "Living A-Frame",        wide: true  },
-    { src: "images/p47.jpg", l: "Vedere de sus",         wide: true  },
-    { src: "images/p55.jpg", l: "Dormitor cu vedere",    wide: false },
-    { src: "images/p05.jpg", l: "Fereastră triunghi",    wide: false },
-    { src: "images/p12.jpg", l: "Zăpadă prin geam",      wide: false },
-    { src: "images/p19.jpg", l: "Hamac cu panoramă",     wide: false },
-    { src: "images/p39.jpg", l: "Cafea la munte",        wide: true  },
-    { src: "images/p04.jpg", l: "Vederi prin luminator", wide: false },
-    { src: "images/p23.jpg", l: "Bucătăria",             wide: true  },
-    { src: "images/p44.jpg", l: "Foc în curte",          wide: false },
-    { src: "images/p46.jpg", l: "Șemineu",               wide: false },
-    { src: "images/p36.jpg", l: "Intrarea în domeniu",   wide: false }
-  ];
+  // The photos are in the HTML (crawlable); read them back for the lightbox and the loop.
+  var GALLERY = Array.prototype.map.call(document.querySelectorAll("#gStrip .g-shot img"), function (img) {
+    return { src: img.getAttribute("src"), l: img.getAttribute("alt") };
+  });
 
   /* On touch devices the hint says "swipe" rather than "drag". */
   var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -219,35 +205,18 @@
     galHintEl.setAttribute('data-i18n-en', 'Swipe to browse · tap to enlarge');
   }
 
-  function stem(src) { return src.replace(/\.jpg$/, ""); }
 
   var gStrip = document.getElementById("gStrip");
-  GALLERY.concat(GALLERY).forEach(function(g, i) {
-    var shot = document.createElement("div");
-    shot.className = "g-shot " + (g.wide ? "wide" : "tall");
-    var realIndex = i % GALLERY.length;
-    shot.setAttribute("data-index", realIndex);
-
-    var pic = document.createElement("picture");
-    var source = document.createElement("source");
-    source.type = "image/webp";
-    source.srcset = stem(g.src) + "-640.webp 640w, " + stem(g.src) + ".webp 1100w";
-    source.sizes = g.wide ? "(max-width: 480px) 78vw, 50vw" : "(max-width: 480px) 50vw, 28vw";
-    var img = document.createElement("img");
-    img.src = g.src;
-    img.alt = g.l;
-    img.loading = "lazy";
-    img.decoding = "async";
-    pic.appendChild(source);
-    pic.appendChild(img);
-
-    var cap = document.createElement("div");
-    cap.className = "g-shot-caption";
-    cap.textContent = g.l;
-    shot.appendChild(pic);
-    shot.appendChild(cap);
-    shot.addEventListener("click", function() { openLightbox(realIndex); });
-    gStrip.appendChild(shot);
+  var originals = Array.prototype.slice.call(gStrip.children);
+  originals.forEach(function (shot, i) {
+    shot.addEventListener("click", function () { openLightbox(i); });
+  });
+  // A second copy makes the auto-scroll loop seamless; it is visual only.
+  originals.forEach(function (shot, i) {
+    var copy = shot.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true");
+    copy.addEventListener("click", function () { openLightbox(i); });
+    gStrip.appendChild(copy);
   });
 
   /* Gallery motion: gentle auto-scroll that any interaction pauses, plus
