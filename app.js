@@ -121,11 +121,11 @@
     updateMapLang();
   }
 
-  // First visit: honour a stored choice, else the browser's language.
+  // Romanian is the default for everyone (owner decision); English only after the
+  // visitor picks it with the toggle, which is remembered.
   try {
     var stored = localStorage.getItem(LANG_KEY);
     if (stored === "ro" || stored === "en") LANG = stored;
-    else if ((navigator.language || "").toLowerCase().indexOf("ro") !== 0) LANG = "en";
   } catch (e) {}
 
   document.getElementById("langToggle").addEventListener("click", function() {
