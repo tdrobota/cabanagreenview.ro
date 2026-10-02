@@ -26,13 +26,13 @@ for (const [name, s] of Object.entries(sizes)) {
   console.log('  ' + name + '  ' + s + 'px');
 }
 
-// Maskable: full-bleed forest-green square, glyph at ~62% in the safe zone.
+// Maskable: full-bleed dusk-slate square, glyph at ~62% in the safe zone.
 const glyph = (await readFile(join(ROOT, 'favicon.svg'), 'utf8'))
   .replace(/<rect[^>]*\/>/, ''); // drop the rounded background
 const g = await sharp(Buffer.from(glyph), { density: 400 })
   .resize(320, 320, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
   .png().toBuffer();
-await sharp({ create: { width: 512, height: 512, channels: 4, background: { r: 20, g: 30, b: 10, alpha: 1 } } })
+await sharp({ create: { width: 512, height: 512, channels: 4, background: { r: 13, g: 26, b: 30, alpha: 1 } } })
   .composite([{ input: g, gravity: 'center' }]).png().toFile(join(ROOT, 'icon-maskable.png'));
 console.log('  icon-maskable.png  512px (padded)');
 

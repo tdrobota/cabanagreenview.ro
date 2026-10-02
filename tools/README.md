@@ -10,7 +10,7 @@ cd tools
 npm install          # esbuild + sharp (both optional — skip if a step isn't needed)
 
 npm run images       # re-encode images/ -> resized jpg + webp + -640.webp + og.jpg
-npm run fonts        # refresh the self-hosted Playfair + Inter woff2 (needs Playwright)
+npm run fonts        # refresh the self-hosted Host Grotesk woff2 (plain fetch, no Playwright)
 npm run icons        # regenerate favicon PNGs from favicon.svg (needs Playwright)
 npm run bundle       # optional: minified + content-hashed copy in ../dist
 npm run dev          # serve the site at http://localhost:8080
