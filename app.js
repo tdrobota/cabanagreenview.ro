@@ -584,7 +584,7 @@
       );
     }
     function onKey(e) {
-      if (e.key === "Escape") { e.preventDefault(); release(); if (opts.onEscape) opts.onEscape(); return; }
+      if (e.key === "Escape") { e.preventDefault(); var cb = opts.onEscape; release(); if (cb) cb(); return; }
       if (e.key !== "Tab") return;
       var items = visibleFocusable();
       if (!items.length) return;
@@ -597,7 +597,10 @@
     var initial = opts.initialFocus || visibleFocusable()[0];
     if (initial) requestAnimationFrame(function () { initial.focus(); });
 
+    var released = false;
     function release() {
+      if (released) return;
+      released = true;
       document.removeEventListener("keydown", onKey, true);
       if (restoreTo && restoreTo.focus) restoreTo.focus();
     }
@@ -617,6 +620,7 @@
   var MS = 86400000, MIN_NIGHTS = 2, MIN_GUESTS = 8, MAX_GUESTS = 16;
   var checkIn = null, checkOut = null, guests = MIN_GUESTS;
   var calYear, calMonth, calOpen = false, calReturnFocus = null;
+  var inModal = false;   // the card is shown inside the booking modal (calendar always open)
 
   var MONTHS_RO = ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -737,7 +741,8 @@
     if (checkOut) {
       track("dates_selected", { nights: nightsBetween(checkIn, checkOut) });
       // Let the range paint for a beat, then hand over to the summary and the button.
-      setTimeout(function () { closeCal(false); sendBtn.focus(); }, PREFERS_REDUCED ? 0 : 320);
+      if (inModal) sendBtn.focus();
+      else setTimeout(function () { closeCal(false); sendBtn.focus(); }, PREFERS_REDUCED ? 0 : 320);
     } else {
       focusRover();
     }
@@ -813,6 +818,7 @@
   // Triggers, month navigation, day picks, keyboard
   calTriggers.forEach(function (b) {
     b.addEventListener("click", function () {
+      if (inModal) { focusRover(); return; }
       if (calOpen) closeCal(false);
       else openCal(b.getAttribute("data-cal-open"));
     });
@@ -848,27 +854,78 @@
     previewTo(target.getTime());
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && calOpen) { e.preventDefault(); closeCal(true); }
+    if (e.key === "Escape" && calOpen && !inModal) { e.preventDefault(); closeCal(true); }
   });
   document.addEventListener("pointerdown", function (e) {
-    if (calOpen && !calPop.contains(e.target) && !e.target.closest("[data-cal-open]")) closeCal(false);
+    if (calOpen && !inModal && !calPop.contains(e.target) && !e.target.closest("[data-cal-open]")) closeCal(false);
   });
   calPop.addEventListener("focusout", function (e) {
     var to = e.relatedTarget;
-    if (calOpen && to && !calPop.contains(to) && !to.closest("[data-cal-open]")) closeCal(false);
+    if (calOpen && !inModal && to && !calPop.contains(to) && !to.closest("[data-cal-open]")) closeCal(false);
   });
   window.addEventListener("resize", function () {
-    if (calOpen) document.documentElement.classList.toggle("cal-sheet-open", isSheet());
+    if (calOpen && !inModal) document.documentElement.classList.toggle("cal-sheet-open", isSheet());
   }, { passive: true });
 
   document.getElementById("guestMinus").addEventListener("click", function () { setGuests(guests - 1); });
   document.getElementById("guestPlus").addEventListener("click", function () { setGuests(guests + 1); });
   document.getElementById("guestCount").addEventListener("change", function (e) { setGuests(e.target.value); });
 
-  // The other "book" buttons (nav, footer) bring the card into view and open the picker
-  var bookCard = document.getElementById("booking");
+  /* Booking modal: once the visitor is past the hero, the "book" buttons (nav, footer)
+     open the same card in a dialog, calendar shown inline. The card is moved, not copied,
+     so dates, guests and every handler stay the one booking state. */
+  var bookCard  = document.getElementById("booking");
+  var bookModal = document.getElementById("bookModal");
+  var bookBody  = document.getElementById("bookModalBody");
+  var cardHome  = document.createComment("booking card home");
+  var modalRelease = null;
+
+  function pastHero() {
+    return document.getElementById("hero").getBoundingClientRect().bottom < 120;
+  }
+
+  function openBookingModal() {
+    if (inModal) return;
+    if (calOpen) closeCal(false);
+    bookCard.parentNode.insertBefore(cardHome, bookCard);
+    bookBody.appendChild(bookCard);
+    bookCard.classList.add("is-modal");
+    inModal = true;
+    showMonthOf(checkIn || today0());
+    calPop.hidden = false;
+    calPop.classList.add("open");
+    calOpen = true;
+    renderCal();
+    bookModal.hidden = false;
+    document.documentElement.classList.add("modal-open");
+    requestAnimationFrame(function () { bookModal.classList.add("open"); });
+    modalRelease = trapFocus(bookModal, { initialFocus: calGrid.querySelector('button.cal-day[tabindex="0"]') || sendBtn, onEscape: closeBookingModal });
+    track("booking_modal_open");
+  }
+
+  function closeBookingModal() {
+    if (!inModal) return;
+    bookModal.classList.remove("open");
+    bookModal.hidden = true;
+    document.documentElement.classList.remove("modal-open");
+    calPop.classList.remove("open");
+    calPop.hidden = true;
+    calOpen = false;
+    inModal = false;
+    bookCard.classList.remove("is-modal");
+    cardHome.parentNode.insertBefore(bookCard, cardHome);
+    cardHome.parentNode.removeChild(cardHome);
+    previewTo(null);
+    if (modalRelease) { var r = modalRelease; modalRelease = null; r(); }
+  }
+
+  document.getElementById("bookModalClose").addEventListener("click", closeBookingModal);
+  bookModal.addEventListener("click", function (e) { if (e.target === bookModal) closeBookingModal(); });
+
   document.querySelectorAll("[data-book]").forEach(function (btn) {
     btn.addEventListener("click", function () {
+      if (pastHero()) { openBookingModal(); return; }
+      // hero still on screen: bring the card fully into view and open its picker
       var r = bookCard.getBoundingClientRect();
       var inView = r.top >= 0 && r.bottom <= window.innerHeight;
       if (!inView) bookCard.scrollIntoView({ behavior: PREFERS_REDUCED ? "auto" : "smooth", block: "center" });
@@ -881,7 +938,7 @@
 
   function sendRequest() {
     if (!checkIn || !checkOut) {   // no dates yet: the button leads into the picker
-      openCal(checkIn ? "out" : "in");
+      if (inModal) focusRover(); else openCal(checkIn ? "out" : "in");
       return;
     }
     var n = nightsBetween(checkIn, checkOut);
