@@ -41,7 +41,7 @@
         imagesrcset="images/hero/cabin-mist-1000.webp 1000w, images/hero/cabin-mist.webp 2000w"
         imagesizes="100vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=28">
+  <link rel="stylesheet" href="styles.css?v=30">
 
   <!-- Structured data. TODO owner: add priceRange, exact streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed, and sameAs links
@@ -175,8 +175,8 @@
         <p class="hero-sub" data-i18n="hero_sub">Între brazi, în Bucovina. Liniște, șemineu și pădurea la câțiva pași.</p>
 
         <p class="hero-figure">
-          <span class="hero-figure-n"><svg aria-hidden="true"><use href="#i-pin"/></svg>~9 km</span>
-          <span class="hero-figure-l" data-i18n-ro="până la Pietrele Doamnei și vârful Rarău" data-i18n-en="to Pietrele Doamnei and Rarău peak">până la Pietrele Doamnei și vârful Rarău</span>
+          <span class="hero-figure-n"><svg aria-hidden="true"><use href="#i-star"/></svg><span data-i18n-ro="4,9" data-i18n-en="4.9">4,9</span></span>
+          <span class="hero-figure-l" data-i18n-ro="din 22 de recenzii pe Google" data-i18n-en="from 22 Google reviews">din 22 de recenzii pe Google</span>
         </p>
 
         <aside class="book-card" id="booking" aria-labelledby="bookCardTitle">
@@ -184,6 +184,7 @@
             <span>Green View Rarău</span>
             <span class="book-card-kind" data-i18n-ro="Cabană A-Frame · Rarău, Bucovina" data-i18n-en="A-Frame cabin · Rarău, Bucovina">Cabană A-Frame · Rarău, Bucovina</span>
           </h2>
+          <p class="book-rating"><svg aria-hidden="true"><use href="#i-star"/></svg><span data-i18n-ro="4,9 · 22 de recenzii pe Google" data-i18n-en="4.9 · 22 Google reviews">4,9 · 22 de recenzii pe Google</span></p>
 
           <div class="book-dates">
             <button type="button" class="field" id="fieldIn" data-cal-open="in" aria-haspopup="dialog" aria-expanded="false" aria-controls="calPop">
@@ -511,10 +512,74 @@
   <!-- REVIEWS -->
   <section class="reviews" id="reviews" aria-labelledby="revTitle">
     <div class="wrap">
-      <h2 class="h2" id="revTitle" data-i18n="rev_title">Ce spun oaspeții</h2>
+      <h2 class="h2" id="revTitle">
+        <span data-i18n="rev_title">Ce spun oaspeții</span>.
+        <span class="mute" data-i18n-ro="4,9 din 5 pe Google (22 de recenzii) și 10 din 10 pe Turistinfo (13 recenzii)." data-i18n-en="4.9 out of 5 on Google (22 reviews) and 10 out of 10 on Turistinfo (13 reviews).">4,9 din 5 pe Google (22 de recenzii) și 10 din 10 pe Turistinfo (13 recenzii).</span>
+      </h2>
+      <p class="rev-more"><a class="text-link" href="https://www.turistinfo.ro/campulung_moldovenesc/cazare-campulung_moldovenesc/casa_de_vacanta_green_view_rarau/reviews-casa_de_vacanta_green_view_rarau-c119345.html" target="_blank" rel="noopener noreferrer" data-i18n-ro="Toate recenziile pe Turistinfo" data-i18n-en="All reviews on Turistinfo">Toate recenziile pe Turistinfo</a></p>
     </div>
     <div class="rev-marquee" id="revMarquee">
       <div class="rev-track" id="revTrack">
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Conditii excelente, locatie frumoasa, camere confortabile și spațioase. Zona liniștita. Zona de agrement ideala pentru familie cu sau fără copii. Living mare, spațios, facilități complete." data-i18n-en="Excellent conditions, a beautiful location, comfortable and spacious rooms. A quiet area. The outdoor leisure area is ideal for families with or without children. A large, spacious living room, full facilities.">Conditii excelente, locatie frumoasa, camere confortabile și spațioase. Zona liniștita. Zona de agrement ideala pentru familie cu sau fără copii. Living mare, spațios, facilități complete.</blockquote>
+          <figcaption><span class="rev-author">Violeta</span><span class="rev-date" data-i18n-ro="Roman · grup · sept. 2025" data-i18n-en="Roman · group · Sep 2025">Roman · grup · sept. 2025</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Cabană A-frame superbă, amplasată într-un cadru natural deosebit, aproape de partia ski Rarau, multă liniște și aer curat. […] Totul este exact ca in fotografii. […] Gazdele sunt foarte amabile, atente la detalii." data-i18n-en="A superb A-frame cabin in a remarkable natural setting, close to the Rarău ski slope, lots of quiet and clean air. […] Everything is exactly as in the photos. […] The hosts are very kind and attentive to detail.">Cabană A-frame superbă, amplasată într-un cadru natural deosebit, aproape de partia ski Rarau, multă liniște și aer curat. […] Totul este exact ca in fotografii. […] Gazdele sunt foarte amabile, atente la detalii.</blockquote>
+          <figcaption><span class="rev-author">Andrei</span><span class="rev-date" data-i18n-ro="Suceava · familie cu adolescenți · mai 2025" data-i18n-en="Suceava · family with teenagers · May 2025">Suceava · familie cu adolescenți · mai 2025</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="O locație excelenta! Curatenie, loc de joaca pentru copii. Camere frumoase. Gazde primitoare și foarte amabile. Totul a fost conform asteptarilor. Se poate comanda mâncare de la restaurantele din zona. Sigur vom mai reveni și alta data cand vom avea ocazia. Recomand!" data-i18n-en="An excellent location! Clean, a playground for the children. Nice rooms. Welcoming, very friendly hosts. Everything was as expected. You can order food from restaurants in the area. We will definitely come back another time when we get the chance. Recommended!">O locație excelenta! Curatenie, loc de joaca pentru copii. Camere frumoase. Gazde primitoare și foarte amabile. Totul a fost conform asteptarilor. Se poate comanda mâncare de la restaurantele din zona. Sigur vom mai reveni și alta data cand vom avea ocazia. Recomand!</blockquote>
+          <figcaption><span class="rev-author">Daniel</span><span class="rev-date" data-i18n-ro="Suceava · familie cu copii mici · ian. 2025" data-i18n-en="Suceava · family with young children · Jan 2025">Suceava · familie cu copii mici · ian. 2025</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Alături de prietenii noștri am petrecuta o vacanta extrem de reușită la aceasta cabana. […] Cu siguranță vom dori sa revenim și cu alta ocazie. Recomandam cu mare drag cabana Green View Rarau!" data-i18n-en="Together with our friends we had an extremely successful holiday at this cabin. […] We will certainly want to come back another time. We warmly recommend the Green View Rarău cabin!">Alături de prietenii noștri am petrecuta o vacanta extrem de reușită la aceasta cabana. […] Cu siguranță vom dori sa revenim și cu alta ocazie. Recomandam cu mare drag cabana Green View Rarau!</blockquote>
+          <figcaption><span class="rev-author">Vlăduț</span><span class="rev-date" data-i18n-ro="Iași · cuplu tânăr · nov. 2024" data-i18n-en="Iași · young couple · Nov 2024">Iași · cuplu tânăr · nov. 2024</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Cabana este asezata intr-o zona pitoreasca, linistita, departe de agitatia urbana si are ferestre mari cu vedere catre maretia muntilor, crescand senzația de a fi în contact cu natura." data-i18n-en="The cabin sits in a picturesque, quiet area, far from the bustle of the city, and has large windows looking out at the majestic mountains, which heightens the feeling of being in touch with nature.">Cabana este asezata intr-o zona pitoreasca, linistita, departe de agitatia urbana si are ferestre mari cu vedere catre maretia muntilor, crescand senzația de a fi în contact cu natura.</blockquote>
+          <figcaption><span class="rev-author">Liviu</span><span class="rev-date" data-i18n-ro="Suceava · cuplu tânăr · oct. 2024" data-i18n-en="Suceava · young couple · Oct 2024">Suceava · cuplu tânăr · oct. 2024</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>9/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Recomand, personal amabil, drum accesibil pentru locația în sine. Camere călduroase, paturi confortabile. Curățenie exemplară. Recomand familiilor cu copii, spațiu de joacă și activități specifice pentru a nu se plictisi. Foișor amenajat rustic, lemne la discreție, pârtie de schi și obiective turistice in apropiere. Prețuri accesibile." data-i18n-en="Recommended: friendly staff, and the road up to the place is accessible. Warm rooms, comfortable beds. Exemplary cleanliness. I recommend it to families with children: there is a play area and activities so they do not get bored. A rustic gazebo, as much firewood as you need, a ski slope and sights nearby. Affordable prices.">Recomand, personal amabil, drum accesibil pentru locația în sine. Camere călduroase, paturi confortabile. Curățenie exemplară. Recomand familiilor cu copii, spațiu de joacă și activități specifice pentru a nu se plictisi. Foișor amenajat rustic, lemne la discreție, pârtie de schi și obiective turistice in apropiere. Prețuri accesibile.</blockquote>
+          <figcaption><span class="rev-author">Dan</span><span class="rev-date" data-i18n-ro="Suceava · cuplu tânăr · oct. 2024" data-i18n-en="Suceava · young couple · Oct 2024">Suceava · cuplu tânăr · oct. 2024</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="O locație superbă, foarte curată în inima Rarăului, bine dotată și amenajată cu foisor si un living generos. Spațiul a fost suficient pentru 6 cupluri cu copii. Gazdele sunt foarte primitoare si prietenoase. Am fost cazati aici de 2 ori si, cu siguranță, vom reveni." data-i18n-en="A superb, very clean place in the heart of Rarău, well equipped and fitted out, with a gazebo and a generous living room. There was enough room for 6 couples with children. The hosts are very welcoming and friendly. We have stayed here twice and we will definitely be back.">O locație superbă, foarte curată în inima Rarăului, bine dotată și amenajată cu foisor si un living generos. Spațiul a fost suficient pentru 6 cupluri cu copii. Gazdele sunt foarte primitoare si prietenoase. Am fost cazati aici de 2 ori si, cu siguranță, vom reveni.</blockquote>
+          <figcaption><span class="rev-author">Alexandru</span><span class="rev-date" data-i18n-ro="Iași · grup · oct. 2024" data-i18n-en="Iași · group · Oct 2024">Iași · grup · oct. 2024</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Excepțional! Totul la superlativ, incepand de la peisaj, curățenie impecabila, terminând cu gazdele care sunt foarte primitoare și calde. Adultii s-au relaxat, iar copiii s-au jucat in aer liber, bucurandu-se de razele de soare. Recomand cu drag! Raportul calitate-pret este de neratat." data-i18n-en="Exceptional! Everything was top-notch, from the scenery and the spotless cleanliness to the hosts, who are very welcoming and warm. The adults relaxed while the children played outdoors in the sunshine. Warmly recommended! The value for money is unbeatable.">Excepțional! Totul la superlativ, incepand de la peisaj, curățenie impecabila, terminând cu gazdele care sunt foarte primitoare și calde. Adultii s-au relaxat, iar copiii s-au jucat in aer liber, bucurandu-se de razele de soare. Recomand cu drag! Raportul calitate-pret este de neratat.</blockquote>
+          <figcaption><span class="rev-author">Alina</span><span class="rev-date" data-i18n-ro="Suceava · familie cu copii mici · ian. 2024" data-i18n-en="Suceava · family with young children · Jan 2024">Suceava · familie cu copii mici · ian. 2024</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="O cabana super faina și un loc frumos! Foarte curat peste tot, aranjat, cu bun gust și util, cu liniște, natură, doar sunetul păsărilor, aerul curat și priveliștea extraordinara. Copiii s-au simțit și ei foarte bine, găsind acolo cu ce să-și ocupe timpul. Ne-am simțit foarte bine și cu siguranta vom reveni!" data-i18n-en="A really lovely cabin and a beautiful place! Very clean everywhere, arranged tastefully and practically, with quiet, nature, just birdsong, fresh air and an extraordinary view. The children had a great time too and found plenty to keep them busy. We had a wonderful time and will definitely be back!">O cabana super faina și un loc frumos! Foarte curat peste tot, aranjat, cu bun gust și util, cu liniște, natură, doar sunetul păsărilor, aerul curat și priveliștea extraordinara. Copiii s-au simțit și ei foarte bine, găsind acolo cu ce să-și ocupe timpul. Ne-am simțit foarte bine și cu siguranta vom reveni!</blockquote>
+          <figcaption><span class="rev-author">Diana</span><span class="rev-date" data-i18n-ro="Suceava · cuplu tânăr · iun. 2023" data-i18n-en="Suceava · young couple · Jun 2023">Suceava · cuplu tânăr · iun. 2023</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Recomand, cu încredere! Locatie superbă, gazdele foarte ospitaliere, curățenie nota 10 plus, iar ca și peisaje, așa ca in Bucovina! Raiul pe pământ, o oază de liniște de care avem nevoie fiecare, atât pentru trup, cât și pentru suflet! Totul la superlativ!" data-i18n-en="Recommended with confidence! A superb location, very hospitable hosts, cleanliness 10 plus, and the scenery is pure Bucovina! Heaven on earth, an oasis of quiet that all of us need, for body and soul alike! Everything top-notch!">Recomand, cu încredere! Locatie superbă, gazdele foarte ospitaliere, curățenie nota 10 plus, iar ca și peisaje, așa ca in Bucovina! Raiul pe pământ, o oază de liniște de care avem nevoie fiecare, atât pentru trup, cât și pentru suflet! Totul la superlativ!</blockquote>
+          <figcaption><span class="rev-author">Ionuț</span><span class="rev-date" data-i18n-ro="Suceava · cuplu matur · apr. 2023" data-i18n-en="Suceava · mature couple · Apr 2023">Suceava · cuplu matur · apr. 2023</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Recomand, locație foarte bună, preturi foarte ok, totul este foarte ok, personal super de treaba, super view." data-i18n-en="Recommended: a very good location, very fair prices, everything is very OK, super nice staff, great view.">Recomand, locație foarte bună, preturi foarte ok, totul este foarte ok, personal super de treaba, super view.</blockquote>
+          <figcaption><span class="rev-author">Ionuț</span><span class="rev-date" data-i18n-ro="Suceava · cuplu tânăr · apr. 2023" data-i18n-en="Suceava · young couple · Apr 2023">Suceava · cuplu tânăr · apr. 2023</span></figcaption>
+        </figure>
+        <figure class="rev-card">
+          <p class="rev-score"><svg aria-hidden="true"><use href="#i-star"/></svg><span>10/10</span><span class="rev-src">Turistinfo</span></p>
+          <blockquote class="rev-text" data-i18n-ro="Casa este amplasata la poalele muntelui, intr-un loc pitoresc, linistit, cu privelisti superbe. […] Bucătăria super dotata. […] Loc de parcare pentru masini. Jucarii pentru copii. Recomand, cu foarte mare căldură!" data-i18n-en="The house sits at the foot of the mountain, in a picturesque, quiet spot with superb views. […] The kitchen is super well equipped. […] Parking for cars. Toys for the children. I recommend it most warmly!">Casa este amplasata la poalele muntelui, intr-un loc pitoresc, linistit, cu privelisti superbe. […] Bucătăria super dotata. […] Loc de parcare pentru masini. Jucarii pentru copii. Recomand, cu foarte mare căldură!</blockquote>
+          <figcaption><span class="rev-author">Eva Gabriela</span><span class="rev-date" data-i18n-ro="Iași · grup · feb. 2023" data-i18n-en="Iași · group · Feb 2023">Iași · grup · feb. 2023</span></figcaption>
+        </figure>
         <figure class="rev-card">
           <p class="rev-stars" role="img" aria-label="5 din 5 stele"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></p>
           <blockquote class="rev-text" data-i18n-ro="Cabana arată exact ca în poze, poate chiar mai bine. Liniște, priveliște și un interior foarte cald." data-i18n-en="The cabin looks exactly like the photos, maybe even better. Quiet, views, and a very warm interior.">Cabana arată exact ca în poze, poate chiar mai bine. Liniște, priveliște și un interior foarte cald.</blockquote>
