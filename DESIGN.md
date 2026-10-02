@@ -182,6 +182,9 @@ Generous, soft rectangles in four sizes: frames (24–52px) for photographic sta
 ### Booking Card (signature)
 The whole booking flow lives in the hero card. From top to bottom: arrival and departure fields; a summary well that shows the rules (minimum 2 nights, 8–16 guests) before dates are picked and the stay itself after ("3 nopți · 8 persoane", the weekday range, and a "Schimbă" pill); a guest stepper with 44px buttons; and the white WhatsApp button with a one-line note under it. With no dates, the button opens the picker instead of sending. Other booking buttons on the page scroll to this card and open the picker.
 
+### Booking Modal
+Once the visitor is past the hero, the booking buttons (in the nav and the footer) open a dialog holding the same booking card, moved into it rather than copied, so dates and guests stay in sync. On desktop the calendar is always open on the left and the stay sits on the right; under 720px the panel rises from the bottom with the calendar first. Escape, the close button or a click on the backdrop return the card to the hero. On phones the nav shows "Rezervare" only after the hero.
+
 ### Date Picker
 A glass panel, 340px wide on desktop, that opens to the left of the booking card. On phones (≤900px) it is a bottom sheet over a dimmed page. One month per view. Past days and departure days under the 2-night minimum are disabled. The chosen range is a snow-filled pill from arrival to departure, with a lighter band in between that previews the range on hover. A small mist dot marks today. Arrow keys, Home and End move between days, and Escape closes the picker. It closes on its own once the departure date is picked and hands focus to the WhatsApp button.
 

@@ -41,7 +41,7 @@
         imagesrcset="images/hero/p24-1000.webp 1000w, images/hero/p24.webp 2000w"
         imagesizes="90vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=37">
+  <link rel="stylesheet" href="styles.css?v=39">
 
   <!-- Structured data. TODO owner: add priceRange, exact streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed, and sameAs links
@@ -152,8 +152,8 @@
       <a href="#about"      data-i18n="nav_about">Cabana</a>
       <a href="#facilities" data-i18n="nav_facilities">Facilități</a>
       <a href="#gallery"    data-i18n="nav_gallery">Galerie</a>
-      <a href="#anotimpuri" data-i18n="nav_seasons">Anotimpuri</a>
       <a href="#map"        data-i18n="nav_map">Împrejurimi</a>
+      <a href="#anotimpuri" data-i18n="nav_seasons">Anotimpuri</a>
       <a href="#reviews"    data-i18n="nav_reviews">Recenzii</a>
       <button class="lang-toggle" id="langToggle" type="button" aria-label="Schimbă limba / Switch language">EN</button>
     </div>
@@ -392,41 +392,6 @@
     </div>
   </section>
 
-  <!-- SEASONS -->
-  <section class="seasons" id="anotimpuri" aria-labelledby="seasonsTitle">
-    <div class="season-stage">
-      <div class="spanel active" id="sp-spring" role="tabpanel" aria-labelledby="stab-spring" tabindex="0">
-        <div class="spanel-bg" style="background-image:url('images/seasons/spring.webp')"></div>
-        <p class="spanel-text" data-i18n-ro="Zăpada se topește, apar brândușele printre pini, aerul miroase a rășină. E cel mai bun sezon pentru drumeții lungi." data-i18n-en="The snow melts, crocuses come up between the pines, the air smells of resin. It's the best season for long hikes.">Zăpada se topește, apar brândușele printre pini, aerul miroase a rășină. E cel mai bun sezon pentru drumeții lungi.</p>
-      </div>
-      <div class="spanel" id="sp-summer" role="tabpanel" aria-labelledby="stab-summer" tabindex="0" hidden>
-        <div class="spanel-bg" style="background-image:url('images/seasons/summer.webp')"></div>
-        <p class="spanel-text" data-i18n-ro="Zile lungi și verde peste tot. Hamacul din grădină, o cafea, liniște." data-i18n-en="Long days and green everywhere. The garden hammock, a coffee, quiet.">Zile lungi și verde peste tot. Hamacul din grădină, o cafea, liniște.</p>
-      </div>
-      <div class="spanel" id="sp-autumn" role="tabpanel" aria-labelledby="stab-autumn" tabindex="0" hidden>
-        <div class="spanel-bg" style="background-image:url('images/seasons/autumn.webp')"></div>
-        <p class="spanel-text" data-i18n-ro="Pădurea se face roșie și aurie. Dimineața, ceața stă între vârfuri. Seara, focul în șemineu." data-i18n-en="The forest turns red and gold. In the morning the fog sits between the peaks. In the evening, the fire in the stove.">Pădurea se face roșie și aurie. Dimineața, ceața stă între vârfuri. Seara, focul în șemineu.</p>
-      </div>
-      <div class="spanel" id="sp-winter" role="tabpanel" aria-labelledby="stab-winter" tabindex="0" hidden>
-        <div class="spanel-bg" style="background-image:url('images/seasons/winter.webp')"></div>
-        <p class="spanel-text" data-i18n-ro="Zăpada înmoaie orice zgomot. Afară e alb, înăuntru arde focul." data-i18n-en="Snow softens every sound. Outside it's white, inside the fire is going.">Zăpada înmoaie orice zgomot. Afară e alb, înăuntru arde focul.</p>
-      </div>
-
-      <div class="season-frame">
-        <h2 class="season-title" id="seasonsTitle">
-          <span data-i18n="seasons_title">Cele patru anotimpuri</span>.
-          <span class="mute" data-i18n="seasons_sub">Arată altfel în fiecare anotimp.</span>
-        </h2>
-        <div class="seasons-tabs" role="tablist" aria-label="Anotimpuri">
-          <button class="stab active" id="stab-spring" data-season="spring" role="tab" aria-selected="true" aria-controls="sp-spring" data-i18n-ro="Primăvara" data-i18n-en="Spring">Primăvara</button>
-          <button class="stab" id="stab-summer" data-season="summer" role="tab" aria-selected="false" aria-controls="sp-summer" tabindex="-1" data-i18n-ro="Vara" data-i18n-en="Summer">Vara</button>
-          <button class="stab" id="stab-autumn" data-season="autumn" role="tab" aria-selected="false" aria-controls="sp-autumn" tabindex="-1" data-i18n-ro="Toamna" data-i18n-en="Autumn">Toamna</button>
-          <button class="stab" id="stab-winter" data-season="winter" role="tab" aria-selected="false" aria-controls="sp-winter" tabindex="-1" data-i18n-ro="Iarna" data-i18n-en="Winter">Iarna</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- MAP / SURROUNDINGS -->
   <section class="surroundings" id="map" aria-labelledby="mapTitle">
     <div class="wrap">
@@ -438,7 +403,8 @@
         <div class="map-wrap framed">
           <div class="map-canvas" id="mapCanvas" role="img" aria-label="Hartă stilizată a zonei Rarău cu reperele din jurul cabanei"></div>
           <p class="map-legend" data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</p>
-          <article class="poi-feature glass" aria-live="polite">
+          <article class="poi-feature glass" id="poiFeature" aria-live="polite">
+            <button class="icon-btn poi-close" type="button" id="poiClose" aria-label="Închide detaliile locului"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
             <div class="pimg has" id="pImg" style="background-image:url('images/p24.webp')"></div>
             <div class="poi-feature-body">
               <h3 id="pTitle">Green View Rarău</h3>
@@ -448,6 +414,7 @@
             </div>
           </article>
         </div>
+        <p class="phint" data-i18n="map_phint">Distanțele sunt aproximative, pe șosea, din zona Pojorâta / Câmpulung Moldovenesc.</p>
         <div class="poi-side">
           <ul class="poi-list" id="poiList">
         <li><button type="button" class="poi-item active" data-i="0" data-home data-x="50" data-y="56" data-img="images/p24.webp">
@@ -505,7 +472,41 @@
           <span class="poi-item-desc" data-i18n-ro="Tren turistic cu ecartament îngust, o ieșire bună de jumătate de zi prin peisaje bucovinene." data-i18n-en="A narrow-gauge tourist train, ideal for a half-day outing through Bucovina scenery.">Tren turistic cu ecartament îngust, o ieșire bună de jumătate de zi prin peisaje bucovinene.</span>
         </button></li>
           </ul>
-          <p class="phint" data-i18n="map_phint">Distanțele sunt aproximative, pe șosea, din zona Pojorâta / Câmpulung Moldovenesc.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section class="seasons" id="anotimpuri" aria-labelledby="seasonsTitle">
+    <div class="season-stage">
+      <div class="spanel active" id="sp-spring" role="tabpanel" aria-labelledby="stab-spring" tabindex="0">
+        <div class="spanel-bg" style="background-image:url('images/seasons/spring.webp')"></div>
+        <p class="spanel-text" data-i18n-ro="Zăpada se topește, apar brândușele printre pini, aerul miroase a rășină. E cel mai bun sezon pentru drumeții lungi." data-i18n-en="The snow melts, crocuses come up between the pines, the air smells of resin. It's the best season for long hikes.">Zăpada se topește, apar brândușele printre pini, aerul miroase a rășină. E cel mai bun sezon pentru drumeții lungi.</p>
+      </div>
+      <div class="spanel" id="sp-summer" role="tabpanel" aria-labelledby="stab-summer" tabindex="0" hidden>
+        <div class="spanel-bg" style="background-image:url('images/seasons/summer.webp')"></div>
+        <p class="spanel-text" data-i18n-ro="Zile lungi și verde peste tot. Hamacul din grădină, o cafea, liniște." data-i18n-en="Long days and green everywhere. The garden hammock, a coffee, quiet.">Zile lungi și verde peste tot. Hamacul din grădină, o cafea, liniște.</p>
+      </div>
+      <div class="spanel" id="sp-autumn" role="tabpanel" aria-labelledby="stab-autumn" tabindex="0" hidden>
+        <div class="spanel-bg" style="background-image:url('images/seasons/autumn.webp')"></div>
+        <p class="spanel-text" data-i18n-ro="Pădurea se face roșie și aurie. Dimineața, ceața stă între vârfuri. Seara, focul în șemineu." data-i18n-en="The forest turns red and gold. In the morning the fog sits between the peaks. In the evening, the fire in the stove.">Pădurea se face roșie și aurie. Dimineața, ceața stă între vârfuri. Seara, focul în șemineu.</p>
+      </div>
+      <div class="spanel" id="sp-winter" role="tabpanel" aria-labelledby="stab-winter" tabindex="0" hidden>
+        <div class="spanel-bg" style="background-image:url('images/seasons/winter.webp')"></div>
+        <p class="spanel-text" data-i18n-ro="Zăpada înmoaie orice zgomot. Afară e alb, înăuntru arde focul." data-i18n-en="Snow softens every sound. Outside it's white, inside the fire is going.">Zăpada înmoaie orice zgomot. Afară e alb, înăuntru arde focul.</p>
+      </div>
+
+      <div class="season-frame">
+        <h2 class="season-title" id="seasonsTitle">
+          <span data-i18n="seasons_title">Cele patru anotimpuri</span>.
+          <span class="mute" data-i18n="seasons_sub">Arată altfel în fiecare anotimp.</span>
+        </h2>
+        <div class="seasons-tabs" role="tablist" aria-label="Anotimpuri">
+          <button class="stab active" id="stab-spring" data-season="spring" role="tab" aria-selected="true" aria-controls="sp-spring" data-i18n-ro="Primăvara" data-i18n-en="Spring">Primăvara</button>
+          <button class="stab" id="stab-summer" data-season="summer" role="tab" aria-selected="false" aria-controls="sp-summer" tabindex="-1" data-i18n-ro="Vara" data-i18n-en="Summer">Vara</button>
+          <button class="stab" id="stab-autumn" data-season="autumn" role="tab" aria-selected="false" aria-controls="sp-autumn" tabindex="-1" data-i18n-ro="Toamna" data-i18n-en="Autumn">Toamna</button>
+          <button class="stab" id="stab-winter" data-season="winter" role="tab" aria-selected="false" aria-controls="sp-winter" tabindex="-1" data-i18n-ro="Iarna" data-i18n-en="Winter">Iarna</button>
         </div>
       </div>
     </div>
@@ -671,8 +672,8 @@
               <li><a href="#about"      data-i18n="nav_about">Cabana</a></li>
               <li><a href="#facilities" data-i18n="nav_facilities">Facilități</a></li>
               <li><a href="#gallery"    data-i18n="nav_gallery">Galerie</a></li>
-              <li><a href="#anotimpuri" data-i18n="nav_seasons">Anotimpuri</a></li>
               <li><a href="#map"        data-i18n="nav_map">Împrejurimi</a></li>
+              <li><a href="#anotimpuri" data-i18n="nav_seasons">Anotimpuri</a></li>
               <li><a href="#reviews"    data-i18n="nav_reviews">Recenzii</a></li>
               <li><a href="#faq"        data-i18n-ro="Întrebări frecvente" data-i18n-en="FAQ">Întrebări frecvente</a></li>
             </ul>
@@ -686,6 +687,17 @@
     </div>
   </footer>
 
+
+  <!-- BOOKING MODAL: past the hero, "Rezervare" opens the booking card here -->
+  <div class="book-modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle" hidden>
+    <div class="book-modal-panel">
+      <div class="book-modal-head">
+        <h2 id="bookModalTitle" data-i18n-ro="Rezervă cabana" data-i18n-en="Book the cabin">Rezervă cabana</h2>
+        <button class="icon-btn" type="button" id="bookModalClose" aria-label="Închide"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+      <div class="book-modal-body" id="bookModalBody"></div>
+    </div>
+  </div>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotografie mărită">
@@ -703,6 +715,6 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="cabanagreenview.ro" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="app.js?v=32" defer></script>
+  <script src="app.js?v=34" defer></script>
 </body>
 </html>

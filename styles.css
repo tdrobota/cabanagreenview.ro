@@ -240,7 +240,7 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
   padding: clamp(92px, 13vh, 132px) clamp(20px, 3vw, 52px) clamp(20px, 3vw, 44px);
   display: grid; gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
   grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;   /* row 1: the headline, centred; row 2: copy + figure */
   /* exactly one screen: the whole photo is visible without scrolling */
   min-height: max(560px, calc(100svh - 2 * var(--hero-y)));
 }
@@ -260,7 +260,8 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 /* The foot dissolves into the frame grid: copy bottom-left, card bottom-right
    (rising into the row beside the headline's last line, as in the reference). */
 .hero-foot { display: contents; }
-.hero-sub, .hero-figure { grid-row: 3; grid-column: 1; align-self: end; }
+.hero-title { grid-row: 1; align-self: center; }
+.hero-sub, .hero-figure { grid-row: 2; grid-column: 1; align-self: end; }
 .hero-figure { justify-self: end; margin-right: clamp(0px, 4vw, 72px); }
 .book-card { grid-column: 2; grid-row: 1 / -1; align-self: end; }
 .hero-sub {
@@ -541,9 +542,10 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
    SURROUNDINGS
    ===================================================================== */
 .surroundings { padding-block: 0 var(--section); }
-.surroundings .h2 { max-width: 20ch; margin-bottom: clamp(36px, 4.5vw, 64px); }
+.surroundings .h2 { max-width: 24ch; margin-bottom: clamp(24px, 3vw, 40px); }
 .map-layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(20px, 2.4vw, 36px); align-items: start; }
-.map-wrap { min-height: clamp(520px, 52vw, 720px); background: var(--ink-2); }
+/* map and list share one screen: both are capped by the viewport height */
+.map-wrap { height: clamp(380px, calc(100svh - 300px), 560px); background: var(--ink-2); }
 .map-canvas { position: absolute; inset: 0; }
 .map-canvas svg { width: 100%; height: 100%; display: block; }
 .map-legend {
@@ -585,33 +587,41 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   display: grid; grid-template-columns: 112px minmax(0, 1fr);
   border-radius: 20px; overflow: hidden;
 }
+.poi-feature[hidden] { display: none; }
+.poi-close {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  width: 36px; height: 36px;
+  background: rgba(8, 18, 21, 0.55);
+}
+.poi-close svg { width: 18px; height: 18px; }
 .pimg { background-size: cover; background-position: center; min-height: 100%; }
-.poi-feature-body { padding: 16px 18px; display: grid; gap: 4px; align-content: start; }
+.poi-feature-body { padding: 16px 48px 16px 18px; display: grid; gap: 4px; align-content: start; }
 .poi-meta { font-size: 0.8rem; color: var(--mist-2); }
 .poi-feature h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
 .pdesc { font-size: 0.92rem; line-height: 1.45; color: var(--mist-3); }
 .pcredit { font-size: 0.72rem; color: var(--mist-2); }
 .pcredit a { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-color: var(--mist-1); }
 
-.poi-side { display: grid; gap: 16px; }
+.poi-side { display: grid; gap: 12px; grid-column: 2; grid-row: 1 / span 2; }   /* the list beside the map + its note */
 .poi-list { display: grid; border-top: 1px solid var(--line); }
 .poi-item {
+  min-height: 44px;
   width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; row-gap: 2px;
   align-items: baseline; text-align: left;
-  padding: 14px 12px 14px 14px; margin-inline: -14px; width: calc(100% + 28px);
+  padding: 7px 12px 7px 14px; margin-inline: -14px; width: calc(100% + 28px);
   border-bottom: 1px solid var(--line); border-radius: 12px;
   transition: background-color 0.2s;
 }
 .poi-list li + li .poi-item { border-top-left-radius: 0; border-top-right-radius: 0; }
 .poi-item:hover { background: var(--ink-2); }
 .poi-item.active { background: var(--ink-3); }
-.poi-item-cat { grid-row: 2; grid-column: 1 / -1; font-size: 0.82rem; color: var(--mist-2); }
+.poi-item-cat { grid-row: 2; grid-column: 1 / -1; line-height: 1.3; font-size: 0.8rem; color: var(--mist-2); }
 .poi-list li:first-child { display: none; }   /* the cabin itself: already shown in the feature card */
 .poi-list li:nth-child(2) .poi-item { border-top-left-radius: 12px; border-top-right-radius: 12px; }
-.poi-item-name { grid-row: 1; font-size: 1.08rem; font-weight: 400; letter-spacing: -0.01em; }
+.poi-item-name { grid-row: 1; line-height: 1.3; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.01em; }
 .poi-item-dist { grid-row: 1; grid-column: 2; font-size: 0.9rem; color: var(--mist-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .poi-item-desc { display: none; }
-.phint { font-size: 0.85rem; color: var(--mist-2); }
+.phint { grid-column: 1; margin-top: -8px; font-size: 0.85rem; color: var(--mist-2); }
 
 /* =====================================================================
    REVIEWS + FAQ — the one light passage: morning fog
@@ -772,7 +782,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 
 @media (max-width: 900px) {
   .hero-frame { padding-top: 112px; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; }
-  .hero-title { font-size: clamp(2.6rem, 9vw, 5rem); }
+  .hero-title { font-size: clamp(2.6rem, 9vw, 5rem); grid-row: 1; align-self: start; }
   .hero-sub { grid-row: 3; }
   .book-card { grid-column: 1; grid-row: 4; }
   /* the picker becomes a bottom sheet over a dimmed page */
@@ -799,7 +809,10 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   .spanel-text { left: clamp(20px, 3vw, 52px); right: clamp(20px, 3vw, 52px); width: auto; bottom: calc(clamp(24px, 3.4vw, 56px) + 72px); }
   .poi-feature { position: relative; left: auto; bottom: auto; width: auto; }
   .map-layout .map-wrap { display: flex; flex-direction: column; }
-  .map-canvas { position: relative; height: 460px; }
+  .map-wrap { height: auto; }
+  .poi-side { grid-column: auto; grid-row: auto; }
+  .phint { margin-top: 0; }
+  .map-canvas { position: relative; height: clamp(280px, 48vw, 380px); }
   .map-legend { position: absolute; }
   .poi-feature { margin: 10px; }
 }
@@ -809,6 +822,8 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   .nav { --nav-x: calc(var(--hero-x) + 12px); top: calc(var(--hero-y) + 10px); }
   .brand span { font-size: 1rem; }
   .nav-cta { display: none; }
+  /* past the hero the card is out of sight: the bar offers booking again */
+  .nav.scrolled .nav-cta { display: inline-flex; min-height: 40px; padding: 0 14px; font-size: 0.92rem; }
   .hero-frame { padding: 84px 16px 16px; gap: 14px; min-height: calc(100svh - 2 * var(--hero-y)); }
   .book-card-title { display: none; }
   .book-card { gap: 8px; }
@@ -825,7 +840,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   .season-frame { padding: 20px; }
   .stab { padding: 0 0.4rem; font-size: 0.9rem; }
   .spanel-text { left: 20px; right: 20px; bottom: 92px; font-size: 1rem; }
-  .map-canvas { height: 400px; }
+  .map-canvas { height: 300px; }
   .book-card-kind { display: none; }
   .poi-feature { grid-template-columns: 96px minmax(0, 1fr); }
   .faq-item p { padding-right: 0; }
@@ -837,10 +852,67 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 }
 
 @media (max-width: 360px) {
+  .nav.scrolled .brand span { display: none; }
   .guest-hint { display: none; }
   .sum-rules dd { font-size: 0.92rem; }
   .book-card .btn { padding-inline: 1rem; font-size: 0.95rem; }
   .book-card .btn svg { display: none; }
+}
+
+/* =====================================================================
+   BOOKING MODAL — the hero card, moved into a dialog with the calendar inline
+   ===================================================================== */
+.book-modal {
+  position: fixed; inset: 0; z-index: 280;
+  display: grid; place-items: center; padding: 16px;
+  background: rgba(8, 18, 21, 0.62);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity 0.25s;
+}
+.book-modal[hidden] { display: none; }
+.book-modal.open { opacity: 1; }
+html.modal-open, html.modal-open body { overflow: hidden; }
+.book-modal-panel {
+  width: min(820px, 100%); max-height: calc(100svh - 32px); overflow-y: auto;
+  padding: clamp(18px, 2.4vw, 28px);
+  border-radius: var(--r-card);
+  background: var(--ink-1);
+  box-shadow: 0 0 0 1px rgba(242, 246, 246, 0.08), 0 40px 90px -30px rgba(0, 0, 0, 0.8);
+  transform: translateY(12px); transition: transform 0.4s var(--ease-out);
+  scrollbar-width: thin;
+}
+.book-modal.open .book-modal-panel { transform: none; }
+.book-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.book-modal-head h2 { font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 400; letter-spacing: -0.03em; line-height: 1.1; }
+
+/* the card inside the modal: calendar left, the stay on the right */
+.book-card.is-modal {
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: start;
+  column-gap: clamp(18px, 2.4vw, 28px); row-gap: 10px;
+  padding: 0; background: none; box-shadow: none;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.book-card.is-modal > * { grid-column: 2; }
+.book-card.is-modal > .book-card-title, .book-card.is-modal > .book-rating { display: none; }
+.book-card.is-modal > .cal-pop {
+  grid-column: 1; grid-row: 1 / span 8;
+  position: static; width: auto; max-height: none; margin: 0;
+  opacity: 1; transform: none;
+  padding: 16px; border-radius: 18px;
+  background: var(--ink-2); box-shadow: inset 0 0 0 1px var(--line);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.book-card.is-modal .cal-close { display: none; }
+.book-card.is-modal .cal-pop-head { min-height: 40px; }
+.book-card.is-modal > .book-note { text-align: left; }
+
+/* phones: one column, calendar first, the panel rises from the bottom (after the base rules) */
+@media (max-width: 720px) {
+  .book-card.is-modal { grid-template-columns: minmax(0, 1fr); }
+  .book-card.is-modal > *, .book-card.is-modal > .cal-pop { grid-column: 1; grid-row: auto; }
+  .book-card.is-modal > .cal-pop { order: -1; }
+  .book-modal { padding: 0; place-items: end center; }
+  .book-modal-panel { max-height: 94svh; border-radius: 24px 24px 0 0; padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
 }
 
 /* MOTION — respect the user's preference */
