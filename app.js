@@ -160,8 +160,6 @@
   function onScrollFrame() {
     scrollTicking = false;
     nav.classList.toggle("scrolled", window.scrollY > 40);
-    // The WhatsApp FAB only appears once the hero's booking card has scrolled away.
-    document.documentElement.classList.toggle("past-hero", window.scrollY > window.innerHeight * 0.8);
   }
   window.addEventListener("scroll", function () {
     if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScrollFrame); }

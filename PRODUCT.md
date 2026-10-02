@@ -43,4 +43,7 @@ beautiful and right for their group, then open the calendar and send a WhatsApp 
   photo, big light grotesk headline with a muted middle line, dark glass booking card,
   white buttons, a small amber accent.
 - Photography is the owner's own cabin. A colour grade is fine; staging that misrepresents the
-  property is not.
+  property is not. The owner approved (2026-10-02) warm interior lamplight in the hero's
+  glass gable for an evening look; no objects are added or removed.
+- Brand mark: a line-drawn A-frame with crossed rafters and one amber lit window
+  (replaced a filled amber triangle that read as a warning sign).

@@ -93,14 +93,14 @@ Density is low and spacious. Sections breathe on large vertical rhythm, and one 
 - Two-tone headings: statement in snow, continuation clause in mist at the same size.
 - Dark glass panels with darker inner "well" fields, never nested cards.
 - Solid white buttons with near-black text; no coloured buttons.
-- Amber appears on the mark, map pins, review stars and focus rings, and nowhere else.
+- Amber appears on the mark's lit window, map pins, review stars and focus rings, and nowhere else.
 
 ## Colors
 
 A cool, low-chroma slate-teal ramp with one warm wood accent.
 
 ### Primary
-- **Lamplit Wood Amber** (amber): the brand mark, map points of interest, the location pin, focus outlines and text selection. A darker step (`#b97512`) colours stars on the fog ground for contrast.
+- **Lamplit Wood Amber** (amber): the lit window in the brand mark, map points of interest, the location pin, focus outlines and text selection. A darker step (`#b97512`) colours stars on the fog ground for contrast.
 
 ### Neutral
 - **Night Gable** (ink-0): deepest well, lightbox backdrop.
@@ -143,7 +143,7 @@ Content sits in a 1360px wrap with a fluid gutter (16–56px). Photographic stag
 
 ## Elevation & Depth
 
-Depth is atmospheric rather than stacked: backdrop blur over photography, tonal steps of the slate ramp, and long soft drop shadows only under floating glass (booking card, nav bar, modal, FAB).
+Depth is atmospheric rather than stacked: backdrop blur over photography, tonal steps of the slate ramp, and long soft drop shadows only under floating glass (booking card, nav bar, date picker).
 
 ### Shadow Vocabulary
 - **Frame drop** (`0 30px 80px -40px rgba(0,0,0,0.45)`): under the hero frame.
@@ -155,7 +155,7 @@ Depth is atmospheric rather than stacked: backdrop blur over photography, tonal 
 
 ## Shapes
 
-Generous, soft rectangles in four sizes: frames (24–52px) for photographic stages, cards (20–28px) for glass panels and photos, tiles (14px) for spec items, fields and buttons (12px). Pills (999px) for chips and the language toggle; circles for icon buttons and the FAB. Lists are separated by 1px hairlines, never boxed.
+Generous, soft rectangles in four sizes: frames (24–52px) for photographic stages, cards (20–28px) for glass panels and photos, tiles (14px) for spec items, fields and buttons (12px). Pills (999px) for chips and the language toggle; circles for icon buttons. Lists are separated by 1px hairlines, never boxed.
 
 ## Components
 
@@ -166,7 +166,7 @@ Generous, soft rectangles in four sizes: frames (24–52px) for photographic sta
 - **Chip:** pill outline in hairline, Pale Mist text; hover fills Field Slate.
 
 ### Cards / Containers
-- **Glass panel:** rgba(11,22,26,0.56–0.6) with 18–22px backdrop blur, 1px 7–8% snow hairline, card radius, 20–30px padding. Used for the booking card, season text, POI feature, modal.
+- **Glass panel:** rgba(11,22,26,0.56–0.6) with 18–22px backdrop blur, 1px 7–8% snow hairline, card radius, 20–30px padding. Used for the booking card, date picker, season text, POI feature.
 - **Spec tile:** Raised Slate fill with a hairline, 14px radius, 16–18px padding.
 
 ### Inputs / Fields
@@ -174,7 +174,7 @@ Generous, soft rectangles in four sizes: frames (24–52px) for photographic sta
 - **Focus:** 2px amber outline, 3px offset everywhere (dark ink outline on the fog ground).
 
 ### Navigation
-- Brand mark + name left, text links centre-right with an underline that draws in from the left on hover, pill language toggle, white "Rezervare" button. Over the hero it floats inside the frame with no fill; after 40px of scroll it becomes a glass bar pinned 10px from the top. Below 1024px the links move into a glass sheet behind a two-line burger.
+- Brand mark (line-drawn A-frame, crossed rafters, one amber lit window; snow strokes) + name left, text links centre-right with an underline that draws in from the left on hover, pill language toggle, white "Rezervare" button. Over the hero it floats inside the frame with no fill; after 40px of scroll it becomes a glass bar pinned 10px from the top. Below 1024px the links move into a glass sheet behind a two-line burger.
 
 ### Inset Photo Frame (signature)
 A full-bleed photograph with a rounded frame inset by `edge`, carrying the translucent rim. The hero and the seasons stage use it; the footer repeats the shape on the dark ground.
@@ -195,6 +195,7 @@ Glass track (16px radius, 5px padding) holding 44px tabs; the active tab is Snow
 - **Do** leave the gallery's documentary photos of the cabin (rooms, kitchen, exterior) in true colour; guests judge the property from them.
 - **Do** write headings as statements and use the mist continuation clause for the supporting line.
 - **Do** keep every interactive control at least 44px tall.
+- **Do** keep the booking entry points to the menu button and the hero card; no floating action buttons.
 - **Do** keep icons from the one 1.6px round-joined stroke family in the sprite.
 
 ### Don't:

@@ -47,6 +47,62 @@ export async function mist(src, { haze = 0.5, warmKeep = 0.92, exposure = 0.6, m
   return sharp(out, { raw: { width: W, height: H, channels: 3 } });
 }
 
+/* Warm interior light behind the hero's glass gable (owner request, 2026-10-02): evening
+   lamps inside the cabin. Shapes are in p37's 2048x1536 source frame: the upper glazing
+   triangle, the lower window row and the glass door. Only the dark glass inside them is lit,
+   so the wood mullions stay as they are. A soft bloom spills onto the frames and the ground. */
+const P37_GLASS = {
+  w: 2048, h: 1536,
+  shapes: '<polygon points="1178,618 888,1076 1498,1076"/>' +
+          '<rect x="858" y="1098" width="680" height="106"/>' +
+          '<rect x="1106" y="1098" width="162" height="185"/>',
+};
+
+export async function lamps(img, glass = P37_GLASS, { strength = 0.92, color = [255, 152, 62], spill = 0.12 } = {}) {
+  const { data, info } = await img.raw().toBuffer({ resolveWithObject: true });
+  const { width: W, height: H } = info;
+  const s = W / glass.w;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${glass.w} ${glass.h}" preserveAspectRatio="none">` +
+              `<rect width="100%" height="100%" fill="#000"/><g fill="#fff">${glass.shapes}</g></svg>`;
+  const mask = await sharp(Buffer.from(svg)).resize(W, H).greyscale().blur(3).raw().toBuffer();
+
+  // Light map: how much of each pixel is lit glass (dark, cool) rather than warm wood.
+  const light = Buffer.alloc(W * H);
+  const top = 618 * s, span = 460 * s;
+  for (let p = 0, i = 0; p < W * H; p++, i += 3) {
+    if (!mask[p]) continue;
+    const r = data[i] / 255, g = data[i + 1] / 255, b = data[i + 2] / 255;
+    const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    const wood = Math.min(1, Math.max(0, (r - b - 0.08) / 0.12));
+    const glassness = Math.min(1, Math.max(0, (0.5 - lum) / 0.35)) * (1 - wood);
+    // lamps hang low and central: the glow pools around the living room and falls off
+    // toward the attic apex and the outer panes
+    const y = Math.floor(p / W), x = p - y * W;
+    const depth = 0.45 + 0.55 * Math.min(1, Math.max(0, (y - top) / span));
+    const dx = (x - 1180 * s) / (420 * s), dy = (y - 1010 * s) / (330 * s);
+    const pool = Math.max(0.35, 1 - 0.65 * Math.min(1, Math.sqrt(dx * dx + dy * dy)));
+    light[p] = Math.round(255 * (mask[p] / 255) * glassness * depth * pool);
+  }
+  const raw1 = { raw: { width: W, height: H, channels: 1 } };
+  const bloom = await sharp(light, raw1).blur(Math.max(1, 26 * s)).raw().toBuffer();
+  const halo  = await sharp(light, raw1).blur(Math.max(1, 95 * s)).raw().toBuffer();
+
+  const out = Buffer.alloc(W * H * 3);
+  const c = color.map(v => v / 255);
+  for (let p = 0, i = 0; p < W * H; p++, i += 3) {
+    const r = data[i] / 255, g = data[i + 1] / 255, b = data[i + 2] / 255;
+    const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    // detail-preserving: brighter interior surfaces catch more of the light
+    const a = Math.min(1, strength * (light[p] / 255) * Math.min(1.3, 0.18 + 3.4 * lum)
+                         + spill * (bloom[p] / 255) + spill * 0.9 * (halo[p] / 255));
+    // screen blend toward lamplight
+    out[i]     = 255 * (1 - (1 - r) * (1 - c[0] * a));
+    out[i + 1] = 255 * (1 - (1 - g) * (1 - c[1] * a));
+    out[i + 2] = 255 * (1 - (1 - b) * (1 - c[2] * a));
+  }
+  return sharp(out, { raw: { width: W, height: H, channels: 3 } });
+}
+
 /* CLI: node mist.mjs <source.jpg> <out-stem>
    Writes <out-stem>.webp (2000w), <out-stem>-1000.webp, <out-stem>.jpg (fallback).
    node mist.mjs <source> <out.webp> season   -> single graded webp at source size (season photos).
@@ -58,7 +114,8 @@ const PRESETS = {
   season: { haze: 0.28, warmKeep: 0.85, exposure: 0.8, midHaze: 0.1, warmLift: 1.05, coolMix: 0.45 },
 };
 if (process.argv[2] && process.argv[3]) {
-  const img = await mist(process.argv[2], PRESETS[process.argv[4] || 'hero']);
+  let img = await mist(process.argv[2], PRESETS[process.argv[4] || 'hero']);
+  if (!process.argv[4]) img = await lamps(img);   // the hero gets its evening lamps
   const buf = await img.png().toBuffer();
   const stem = process.argv[3];
   if (process.argv[4] === 'season') { await sharp(buf).webp({ quality: 80 }).toFile(stem); process.exit(0); }
