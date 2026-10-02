@@ -424,10 +424,22 @@
     var el = item.querySelector("." + cls);
     return el ? el.textContent.trim() : "";
   }
-  function openPanel(i) {
+  var poiFeature = document.getElementById("poiFeature");
+  var featureClosed = false;
+  // Closing the preview frees the lower part of the map; picking any place reopens it.
+  function closeFeature() {
+    featureClosed = true;
+    poiFeature.hidden = true;
+    var pin = document.querySelector('.map-canvas .poi[data-i="' + activePoi + '"]');
+    if (pin) pin.focus();
+  }
+  document.getElementById("poiClose").addEventListener("click", closeFeature);
+
+  function openPanel(i, quiet) {
     var item = poiItems[i];
     if (!item) return;
     activePoi = i;
+    if (!quiet) { featureClosed = false; poiFeature.hidden = false; }
     poiItems.forEach(function (el, idx) { el.classList.toggle("active", idx === i); });
     document.querySelectorAll(".map-canvas .poi").forEach(function (el) {
       el.classList.toggle("active", +el.getAttribute("data-i") === i);
@@ -500,7 +512,7 @@
       var label = el.querySelector(".plabel");
       if (label) label.textContent = name;
     });
-    openPanel(activePoi);
+    openPanel(activePoi, featureClosed);
   }
 
   poiItems.forEach(function (item, i) {

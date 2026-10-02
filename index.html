@@ -41,7 +41,7 @@
         imagesrcset="images/hero/p24-1000.webp 1000w, images/hero/p24.webp 2000w"
         imagesizes="90vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=38">
+  <link rel="stylesheet" href="styles.css?v=39">
 
   <!-- Structured data. TODO owner: add priceRange, exact streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed, and sameAs links
@@ -403,7 +403,8 @@
         <div class="map-wrap framed">
           <div class="map-canvas" id="mapCanvas" role="img" aria-label="Hartă stilizată a zonei Rarău cu reperele din jurul cabanei"></div>
           <p class="map-legend" data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</p>
-          <article class="poi-feature glass" aria-live="polite">
+          <article class="poi-feature glass" id="poiFeature" aria-live="polite">
+            <button class="icon-btn poi-close" type="button" id="poiClose" aria-label="Închide detaliile locului"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
             <div class="pimg has" id="pImg" style="background-image:url('images/p24.webp')"></div>
             <div class="poi-feature-body">
               <h3 id="pTitle">Green View Rarău</h3>
@@ -714,6 +715,6 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="cabanagreenview.ro" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="app.js?v=33" defer></script>
+  <script src="app.js?v=34" defer></script>
 </body>
 </html>

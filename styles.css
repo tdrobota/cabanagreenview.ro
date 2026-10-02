@@ -240,7 +240,7 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
   padding: clamp(92px, 13vh, 132px) clamp(20px, 3vw, 52px) clamp(20px, 3vw, 44px);
   display: grid; gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
   grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;   /* row 1: the headline, centred; row 2: copy + figure */
   /* exactly one screen: the whole photo is visible without scrolling */
   min-height: max(560px, calc(100svh - 2 * var(--hero-y)));
 }
@@ -260,7 +260,8 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 /* The foot dissolves into the frame grid: copy bottom-left, card bottom-right
    (rising into the row beside the headline's last line, as in the reference). */
 .hero-foot { display: contents; }
-.hero-sub, .hero-figure { grid-row: 3; grid-column: 1; align-self: end; }
+.hero-title { grid-row: 1; align-self: center; }
+.hero-sub, .hero-figure { grid-row: 2; grid-column: 1; align-self: end; }
 .hero-figure { justify-self: end; margin-right: clamp(0px, 4vw, 72px); }
 .book-card { grid-column: 2; grid-row: 1 / -1; align-self: end; }
 .hero-sub {
@@ -586,8 +587,15 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   display: grid; grid-template-columns: 112px minmax(0, 1fr);
   border-radius: 20px; overflow: hidden;
 }
+.poi-feature[hidden] { display: none; }
+.poi-close {
+  position: absolute; top: 8px; right: 8px; z-index: 1;
+  width: 36px; height: 36px;
+  background: rgba(8, 18, 21, 0.55);
+}
+.poi-close svg { width: 18px; height: 18px; }
 .pimg { background-size: cover; background-position: center; min-height: 100%; }
-.poi-feature-body { padding: 16px 18px; display: grid; gap: 4px; align-content: start; }
+.poi-feature-body { padding: 16px 48px 16px 18px; display: grid; gap: 4px; align-content: start; }
 .poi-meta { font-size: 0.8rem; color: var(--mist-2); }
 .poi-feature h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
 .pdesc { font-size: 0.92rem; line-height: 1.45; color: var(--mist-3); }
@@ -774,7 +782,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 
 @media (max-width: 900px) {
   .hero-frame { padding-top: 112px; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; }
-  .hero-title { font-size: clamp(2.6rem, 9vw, 5rem); }
+  .hero-title { font-size: clamp(2.6rem, 9vw, 5rem); grid-row: 1; align-self: start; }
   .hero-sub { grid-row: 3; }
   .book-card { grid-column: 1; grid-row: 4; }
   /* the picker becomes a bottom sheet over a dimmed page */
