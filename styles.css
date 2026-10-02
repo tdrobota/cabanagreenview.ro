@@ -31,6 +31,8 @@
 
   --gutter:   clamp(16px, 4vw, 56px);
   --edge:     clamp(10px, 2.2vw, 36px);      /* photo-to-frame inset */
+  --hero-x:   clamp(10px, 6.5vw, 128px);      /* hero: misty margin beside the frame */
+  --hero-y:   clamp(10px, 6vh, 72px);      /* hero: misty margin above / below */
   --r-frame:  clamp(24px, 3.2vw, 52px);
   --r-card:   clamp(20px, 2vw, 28px);
   --r-field:  12px;
@@ -151,9 +153,9 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
    NAV — sits inside the hero frame, becomes a glass bar once scrolled
    ===================================================================== */
 .nav {
-  --nav-x: calc(var(--edge) + clamp(16px, 3vw, 52px));
+  --nav-x: calc(var(--hero-x) + clamp(16px, 3vw, 52px));
   position: fixed; z-index: 100;
-  top: calc(var(--edge) + clamp(14px, 2.2vw, 36px));
+  top: calc(var(--hero-y) + clamp(14px, 2.2vw, 32px));
   left: var(--nav-x); right: var(--nav-x);
   display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2.5rem);
   padding: 8px 8px 8px 0;
@@ -199,34 +201,55 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .hero {
   position: relative; isolation: isolate;
   min-height: 100svh;
-  padding: var(--edge);
+  padding: var(--hero-y) var(--hero-x);
+  background: #7d959b;
+  overflow: clip;   /* the scaled mist layer must not widen the page */
   display: grid;
 }
-.hero-photo, .hero-photo img {
-  position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1;
+/* Misty surround: the same photo, tiny and blurred, lifted toward fog; the sharp photo
+   lives only inside the frame, which floats above it like a pane of glass */
+.hero-haze {
+  position: absolute; inset: 0; z-index: -2;
+  background-size: cover; background-position: center;
+  transform: scale(1.08);
 }
-.hero-photo img { object-fit: cover; object-position: 50% 62%; }
-.hero::after {   /* soft fall-off so the frame's lower half always reads */
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(8, 18, 21, 0) 55%, rgba(8, 18, 21, 0.38) 100%);
+.hero-haze::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 45%, rgba(170, 192, 197, 0.18), rgba(170, 192, 197, 0) 60%),
+    linear-gradient(180deg, rgba(196, 212, 215, 0.34), rgba(120, 146, 152, 0.22) 55%, rgba(40, 60, 66, 0.4));
+}
+.hero-photo, .hero-photo img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.hero-photo { z-index: -1; border-radius: inherit; overflow: hidden; }
+.hero-photo img { object-fit: cover; object-position: 50% 45%; }
+.hero-photo::after {   /* soft fall-off so the frame's lower half always reads */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(8, 18, 21, 0) 55%, rgba(8, 18, 21, 0.4) 100%);
+}
+.hero-frame::after {   /* the translucent rim sits above the photo */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0;
+  box-shadow: inset 0 0 0 var(--rim-w) var(--rim);
 }
 .hero-frame {
-  position: relative;
+  position: relative; isolation: isolate;
   border-radius: var(--r-frame);
-  box-shadow: inset 0 0 0 var(--rim-w) var(--rim), 0 30px 80px -40px rgba(0, 0, 0, 0.45);
+  /* lifted off the mist: a near contact shadow plus a long soft one */
+  box-shadow: 0 2px 6px rgba(20, 36, 41, 0.18), 0 28px 60px -18px rgba(14, 28, 32, 0.5), 0 70px 120px -40px rgba(14, 28, 32, 0.45);
   padding: clamp(92px, 13vh, 132px) clamp(20px, 3vw, 52px) clamp(20px, 3vw, 44px);
   display: grid; gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
   grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
   grid-template-rows: auto 1fr auto;
   /* exactly one screen: the whole photo is visible without scrolling */
-  min-height: max(560px, calc(100svh - 2 * var(--edge)));
+  min-height: max(560px, calc(100svh - 2 * var(--hero-y)));
 }
 .hero-title {
   font-weight: 400;
   grid-column: 1;
   /* bounded by width, by screen height, and by the column left of the card
      ("O cabană A-Frame" sets at ~8.3em) */
-  font-size: clamp(3rem, min(7.4vw, 11.5vh, calc((100vw - 600px) / 8.3)), 8.4rem);
+  font-size: clamp(3rem, min(7.4vw, 11vh, calc((100vw - 2 * var(--hero-x) - 560px) / 8.3)), 8.4rem);
   line-height: 0.93;
   letter-spacing: -0.045em;
   color: #fff;
@@ -782,11 +805,11 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 }
 
 @media (max-width: 640px) {
-  :root { --edge: 8px; }
-  .nav { --nav-x: 20px; top: 20px; }
+  :root { --edge: 8px; --hero-x: 10px; --hero-y: 10px; }   /* phones: the photo needs the width more than the mist */
+  .nav { --nav-x: calc(var(--hero-x) + 12px); top: calc(var(--hero-y) + 10px); }
   .brand span { font-size: 1rem; }
   .nav-cta { display: none; }
-  .hero-frame { padding: 84px 16px 16px; gap: 14px; min-height: calc(100svh - 16px); }
+  .hero-frame { padding: 84px 16px 16px; gap: 14px; min-height: calc(100svh - 2 * var(--hero-y)); }
   .book-card-title { display: none; }
   .book-card { gap: 8px; }
   .hero-sub { font-size: 1rem; }
