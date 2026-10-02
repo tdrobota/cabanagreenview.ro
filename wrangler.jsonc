@@ -6,5 +6,10 @@
   "observability": { "enabled": true },
   "assets": {
     "directory": "."
-  }
+  },
+  // One public link only: the production workers.dev URL.
+  "workers_dev": true,
+  // Version / branch preview links (e.g. <branch>-cabanagreenview.<account>.workers.dev) are
+  // disabled at the owner's request (2026-10-02). Set to true to get branch previews back.
+  "preview_urls": false
 }
