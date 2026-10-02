@@ -47,18 +47,26 @@ export async function mist(src, { haze = 0.5, warmKeep = 0.92, exposure = 0.6, m
   return sharp(out, { raw: { width: W, height: H, channels: 3 } });
 }
 
-/* Warm interior light behind the hero's glass gable (owner request, 2026-10-02): evening
-   lamps inside the cabin. Shapes are in p37's 2048x1536 source frame: the upper glazing
-   triangle, the lower window row and the glass door. Only the dark glass inside them is lit,
-   so the wood mullions stay as they are. A soft bloom spills onto the frames and the ground. */
-const P37_GLASS = {
-  w: 2048, h: 1536,
-  shapes: '<polygon points="1178,618 888,1076 1498,1076"/>' +
-          '<rect x="858" y="1098" width="680" height="106"/>' +
-          '<rect x="1106" y="1098" width="162" height="185"/>',
+/* Warm interior light behind the glass gable (owner request, 2026-10-02): evening lamps
+   inside the cabin. Per photo, in its own source frame: the glazing shapes, where the lamps
+   pool (centre + radii) and the glazing's top and height (the apex glows less). Only the dark
+   glass inside the shapes is lit, so the wood mullions stay as they are; a soft bloom spills
+   onto the frames and the ground. */
+const GLASS = {
+  p37: { w: 2048, h: 1536, top: 618, span: 460, pool: [1180, 1010, 420, 330],
+    shapes: '<polygon points="1178,618 888,1076 1498,1076"/><rect x="858" y="1098" width="680" height="106"/>' +
+            '<rect x="1106" y="1098" width="162" height="185"/>' },
+  p24: { w: 2048, h: 1365, top: 200, span: 620, pool: [1080, 760, 380, 300],
+    shapes: '<polygon points="1055,200 812,738 1435,738"/><rect x="812" y="748" width="652" height="158"/>' +
+            '<rect x="985" y="800" width="150" height="222"/>' },
+  p20: { w: 2048, h: 2048, top: 340, span: 760, pool: [1120, 1000, 420, 360],
+    shapes: '<polygon points="1122,338 636,1034 1608,1034"/><rect x="636" y="1062" width="1032" height="168"/>' +
+            '<rect x="1003" y="1116" width="250" height="280"/>' },
+  p14: { w: 1600, h: 1066, top: 120, span: 560, pool: [990, 560, 280, 240],
+    shapes: '<polygon points="1024,120 740,705 1225,705"/><rect x="944" y="600" width="112" height="144"/>' },
 };
 
-export async function lamps(img, glass = P37_GLASS, { strength = 0.92, color = [255, 152, 62], spill = 0.12 } = {}) {
+export async function lamps(img, glass = GLASS.p37, { strength = 0.92, color = [255, 152, 62], spill = 0.12 } = {}) {
   const { data, info } = await img.raw().toBuffer({ resolveWithObject: true });
   const { width: W, height: H } = info;
   const s = W / glass.w;
@@ -68,7 +76,8 @@ export async function lamps(img, glass = P37_GLASS, { strength = 0.92, color = [
 
   // Light map: how much of each pixel is lit glass (dark, cool) rather than warm wood.
   const light = Buffer.alloc(W * H);
-  const top = 618 * s, span = 460 * s;
+  const top = glass.top * s, span = glass.span * s;
+  const [pcx, pcy, prx, pry] = glass.pool.map(v => v * s);
   for (let p = 0, i = 0; p < W * H; p++, i += 3) {
     if (!mask[p]) continue;
     const r = data[i] / 255, g = data[i + 1] / 255, b = data[i + 2] / 255;
@@ -79,7 +88,7 @@ export async function lamps(img, glass = P37_GLASS, { strength = 0.92, color = [
     // toward the attic apex and the outer panes
     const y = Math.floor(p / W), x = p - y * W;
     const depth = 0.45 + 0.55 * Math.min(1, Math.max(0, (y - top) / span));
-    const dx = (x - 1180 * s) / (420 * s), dy = (y - 1010 * s) / (330 * s);
+    const dx = (x - pcx) / prx, dy = (y - pcy) / pry;
     const pool = Math.max(0.35, 1 - 0.65 * Math.min(1, Math.sqrt(dx * dx + dy * dy)));
     light[p] = Math.round(255 * (mask[p] / 255) * glassness * depth * pool);
   }
@@ -103,23 +112,36 @@ export async function lamps(img, glass = P37_GLASS, { strength = 0.92, color = [
   return sharp(out, { raw: { width: W, height: H, channels: 3 } });
 }
 
-/* CLI: node mist.mjs <source.jpg> <out-stem>
-   Writes <out-stem>.webp (2000w), <out-stem>-1000.webp, <out-stem>.jpg (fallback).
-   node mist.mjs <source> <out.webp> season   -> single graded webp at source size (season photos).
-   The hero uses the original 2048px p37 from the first commit:
-     git show da8ac85:images/p37.jpg > p37orig.jpg && node mist.mjs p37orig.jpg ../images/hero/cabin-mist */
+/* The misty surround outside the hero frame: the same photo, small, blurred and lifted
+   toward the fog colour. Tiny file; the browser scales it up, which only adds softness. */
+async function haze(buf, out) {
+  const small = await sharp(buf).resize(480).blur(9).modulate({ saturation: 0.55, brightness: 1.12 }).toBuffer();
+  const m = await sharp(small).metadata();
+  const fog = Buffer.from(`<svg width="${m.width}" height="${m.height}"><rect width="100%" height="100%" fill="#8fa9b0" fill-opacity="0.38"/></svg>`);
+  await sharp(small).composite([{ input: fog }]).webp({ quality: 70 }).toFile(out);
+}
+
+/* CLI
+   node mist.mjs <source> <out-stem> [photo-id]
+     hero grade (+ lamps when GLASS has the photo id) ->
+     <out-stem>.webp (2000w), <out-stem>-1000.webp, <out-stem>.jpg, <out-stem>-haze.webp
+   node mist.mjs <source> <out.webp> season   -> lighter grade, single webp (season photos)
+   Hero sources are the 2048px originals from the first commit, e.g.
+     git show da8ac85:images/p37.jpg > p37orig.jpg && node mist.mjs p37orig.jpg ../images/hero/p37 p37 */
 const PRESETS = {
   hero:   {},
   // lighter grade for supporting photos: cooler and quieter, but recognisably the same season
   season: { haze: 0.28, warmKeep: 0.85, exposure: 0.8, midHaze: 0.1, warmLift: 1.05, coolMix: 0.45 },
 };
 if (process.argv[2] && process.argv[3]) {
-  let img = await mist(process.argv[2], PRESETS[process.argv[4] || 'hero']);
-  if (!process.argv[4]) img = await lamps(img);   // the hero gets its evening lamps
+  const [src, stem, mode] = process.argv.slice(2);
+  let img = await mist(src, PRESETS[mode === 'season' ? 'season' : 'hero']);
+  if (mode && GLASS[mode]) img = await lamps(img, GLASS[mode]);
   const buf = await img.png().toBuffer();
-  const stem = process.argv[3];
-  if (process.argv[4] === 'season') { await sharp(buf).webp({ quality: 80 }).toFile(stem); process.exit(0); }
-  await sharp(buf).resize(2000).webp({ quality: 78 }).toFile(`${stem}.webp`);
+  if (mode === 'season') { await sharp(buf).webp({ quality: 80 }).toFile(stem); process.exit(0); }
+  const w = (await sharp(buf).metadata()).width;
+  await sharp(buf).resize(Math.min(2000, w)).webp({ quality: 78 }).toFile(`${stem}.webp`);
   await sharp(buf).resize(1000).webp({ quality: 76 }).toFile(`${stem}-1000.webp`);
-  await sharp(buf).resize(1600).jpeg({ quality: 80, mozjpeg: true }).toFile(`${stem}.jpg`);
+  await sharp(buf).resize(Math.min(1600, w)).jpeg({ quality: 80, mozjpeg: true }).toFile(`${stem}.jpg`);
+  await haze(buf, `${stem}-haze.webp`);
 }

@@ -166,6 +166,33 @@
   }, { passive: true });
   onScrollFrame();
 
+  /* -- Hero photo options (hero-options preview only; remove once a photo is chosen) -- */
+  (function heroOptions() {
+    var OPTIONS = ["p37", "p24", "p20", "p14", "p09"];
+    var onPreview = /hero-options|localhost/.test(location.hostname) || /[?&]hero=/.test(location.search);
+    if (!onPreview) return;
+    var img = document.getElementById("heroImg"), src = document.getElementById("heroSrc"), haze = document.getElementById("heroHaze");
+    function use(id) {
+      src.srcset = "images/hero/" + id + "-1000.webp 1000w, images/hero/" + id + ".webp 2000w";
+      img.src = "images/hero/" + id + ".jpg";
+      haze.style.backgroundImage = "url('images/hero/" + id + "-haze.webp')";
+      bar.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.textContent === id ? "true" : "false"); });
+      try { history.replaceState(null, "", "?hero=" + id + location.hash); } catch (e) {}
+    }
+    var bar = document.createElement("div");
+    bar.className = "hero-pick";
+    bar.innerHTML = "<span>Foto hero</span>";
+    OPTIONS.forEach(function (id) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = id;
+      b.addEventListener("click", function () { use(id); });
+      bar.appendChild(b);
+    });
+    document.body.appendChild(bar);
+    var m = location.search.match(/[?&]hero=(p\d+)/);
+    use(m && OPTIONS.indexOf(m[1]) >= 0 ? m[1] : "p37");
+  })();
+
   /* -- Burger menu ---------------------------------------------------------------------- */
   var burger = document.getElementById("navBurger");
   var navLinks = document.getElementById("navLinks");

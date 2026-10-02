@@ -37,11 +37,11 @@
 
   <!-- LCP: fetch the hero image early, right size per viewport -->
   <link rel="preload" as="image" type="image/webp"
-        href="images/hero/cabin-mist.webp"
-        imagesrcset="images/hero/cabin-mist-1000.webp 1000w, images/hero/cabin-mist.webp 2000w"
-        imagesizes="100vw" fetchpriority="high">
+        href="images/hero/p37.webp"
+        imagesrcset="images/hero/p37-1000.webp 1000w, images/hero/p37.webp 2000w"
+        imagesizes="90vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=34">
+  <link rel="stylesheet" href="styles.css?v=35">
 
   <!-- Structured data. TODO owner: add priceRange, exact streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed, and sameAs links
@@ -165,11 +165,12 @@
 
   <!-- HERO -->
   <header class="hero" id="hero">
-    <picture class="hero-photo">
-      <source type="image/webp" srcset="images/hero/cabin-mist-1000.webp 1000w, images/hero/cabin-mist.webp 2000w" sizes="100vw">
-      <img src="images/hero/cabin-mist.jpg" alt="Cabana A-Frame Green View Rarău, cu fațada de sticlă și lemn, sub dealurile împădurite ale Rarăului, la amurg" width="1600" height="1200" fetchpriority="high" decoding="async">
-    </picture>
+    <div class="hero-haze" id="heroHaze" aria-hidden="true" style="background-image:url('images/hero/p37-haze.webp')"></div>
     <div class="hero-frame">
+      <picture class="hero-photo">
+        <source id="heroSrc" type="image/webp" srcset="images/hero/p37-1000.webp 1000w, images/hero/p37.webp 2000w" sizes="90vw">
+        <img id="heroImg" src="images/hero/p37.jpg" alt="Cabana A-Frame Green View Rarău, cu fațada de sticlă și lemn, sub dealurile împădurite ale Rarăului, la amurg" width="1600" height="1200" fetchpriority="high" decoding="async">
+      </picture>
       <h1 class="hero-title" data-i18n="hero_title">O cabană <span class="nw">A-Frame</span><br><em>la poalele</em><br>Rarăului</h1>
 
       <div class="hero-foot">
@@ -702,6 +703,6 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="cabanagreenview.ro" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="app.js?v=29" defer></script>
+  <script src="app.js?v=30" defer></script>
 </body>
 </html>

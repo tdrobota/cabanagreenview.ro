@@ -2,11 +2,11 @@
 
 Cabin photos (`images/p*.jpg` / `.webp`, `images/og.jpg`) are the property owner's own.
 
-`images/hero/cabin-mist*` is the owner's photo `p37` (2048px original from the first
-commit, `da8ac85:images/p37.jpg`) colour-graded to a dusk/mist look by `tools/mist.mjs`
+`images/hero/<photo>*` (p09, p14, p20, p24, p37) are the owner's photos (originals from the first
+commit, e.g. `da8ac85:images/p37.jpg`) colour-graded to a dusk/mist look by `tools/mist.mjs`
 (cool slate-teal split-tone that keeps the wood warm, plus height-weighted haze), plus
-warm interior lamplight behind the glass gable (`lamps()` in the same file; added at the
-owner's request on 2026-10-02 for an evening look). No objects added or removed; regenerate with the command in that file's header.
+warm interior lamplight behind the glass gable (p14, p20, p24, p37) (`lamps()` in the same file; added at the
+owner's request on 2026-10-02 for an evening look). The `-haze.webp` files are tiny blurred copies used as the misty surround. No objects added or removed; regenerate with the command in that file's header.
 
 ## Surroundings section (`images/poi/`)
 
