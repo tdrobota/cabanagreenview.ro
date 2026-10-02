@@ -41,7 +41,7 @@
         imagesrcset="images/hero/cabin-mist-1000.webp 1000w, images/hero/cabin-mist.webp 2000w"
         imagesizes="100vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=26">
+  <link rel="stylesheet" href="styles.css?v=27">
 
   <!-- Structured data. TODO owner: add priceRange, exact streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed, and sameAs links
@@ -156,7 +156,7 @@
       <a href="#reviews"    data-i18n="nav_reviews">Recenzii</a>
       <button class="lang-toggle" id="langToggle" type="button" aria-label="Schimbă limba / Switch language">EN</button>
     </div>
-    <button class="btn btn-light nav-cta" type="button" data-modal-open data-i18n="nav_contact">Rezervă</button>
+    <button class="btn btn-light nav-cta" type="button" data-book data-i18n="nav_contact">Rezervă</button>
     <button class="nav-burger" id="navBurger" type="button" aria-label="Meniu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span>
     </button>
@@ -179,45 +179,84 @@
           <span class="hero-figure-l" data-i18n-ro="până la Pietrele Doamnei și vârful Rarău" data-i18n-en="to Pietrele Doamnei and Rarău peak">până la Pietrele Doamnei și vârful Rarău</span>
         </p>
 
-        <aside class="book-card" aria-labelledby="bookCardTitle">
+        <aside class="book-card" id="booking" aria-labelledby="bookCardTitle">
           <h2 class="book-card-title" id="bookCardTitle">
             <span>Green View Rarău</span>
             <span class="book-card-kind" data-i18n-ro="Cabană A-Frame · Rarău, Bucovina" data-i18n-en="A-Frame cabin · Rarău, Bucovina">Cabană A-Frame · Rarău, Bucovina</span>
           </h2>
+
           <div class="book-dates">
-            <button type="button" class="field" data-modal-open>
+            <button type="button" class="field" id="fieldIn" data-cal-open="in" aria-haspopup="dialog" aria-expanded="false" aria-controls="calPop">
               <svg class="field-ic" aria-hidden="true"><use href="#i-cal"/></svg>
               <span class="field-text">
-                <span class="field-k">Check-in</span>
+                <span class="field-k" data-i18n-ro="Sosire" data-i18n-en="Check-in">Sosire</span>
                 <span class="field-v" id="cardIn" data-i18n-ro="Alege data" data-i18n-en="Pick a date">Alege data</span>
               </span>
-              <svg class="field-chev" aria-hidden="true"><use href="#i-chev-d"/></svg>
             </button>
-            <button type="button" class="field" data-modal-open>
+            <button type="button" class="field" id="fieldOut" data-cal-open="out" aria-haspopup="dialog" aria-expanded="false" aria-controls="calPop">
               <svg class="field-ic" aria-hidden="true"><use href="#i-cal"/></svg>
               <span class="field-text">
-                <span class="field-k">Check-out</span>
+                <span class="field-k" data-i18n-ro="Plecare" data-i18n-en="Check-out">Plecare</span>
                 <span class="field-v" id="cardOut" data-i18n-ro="Alege data" data-i18n-en="Pick a date">Alege data</span>
               </span>
-              <svg class="field-chev" aria-hidden="true"><use href="#i-chev-d"/></svg>
             </button>
           </div>
-          <dl class="book-facts">
-            <div>
-              <dt data-i18n-ro="Sejur minim" data-i18n-en="Minimum stay">Sejur minim</dt>
-              <dd data-i18n-ro="2 nopți" data-i18n-en="2 nights">2 nopți</dd>
+
+          <!-- Stay summary: the rules before dates are chosen, the stay itself after -->
+          <div class="book-summary" id="bookSummary" aria-live="polite">
+            <dl class="sum-rules" id="sumRules">
+              <div>
+                <dt data-i18n-ro="Sejur minim" data-i18n-en="Minimum stay">Sejur minim</dt>
+                <dd data-i18n-ro="2 nopți" data-i18n-en="2 nights">2 nopți</dd>
+              </div>
+              <div>
+                <dt data-i18n-ro="Grup" data-i18n-en="Group">Grup</dt>
+                <dd data-i18n-ro="8–16 persoane" data-i18n-en="8–16 guests">8–16 persoane</dd>
+              </div>
+            </dl>
+            <div class="sum-stay" id="sumStay" hidden>
+              <p class="sum-nights" id="sumNights"></p>
+              <p class="sum-range" id="sumRange"></p>
+              <button type="button" class="sum-edit" data-cal-open="in" data-i18n-ro="Schimbă" data-i18n-en="Change">Schimbă</button>
             </div>
-            <div>
-              <dt data-i18n-ro="Grup" data-i18n-en="Group">Grup</dt>
-              <dd data-i18n-ro="8–16 persoane" data-i18n-en="8–16 guests">8–16 persoane</dd>
+          </div>
+
+          <div class="guest-row">
+            <label for="guestCount">
+              <span data-i18n-ro="Persoane" data-i18n-en="Guests">Persoane</span>
+              <span class="guest-hint" data-i18n-ro="între 8 și 16" data-i18n-en="8 to 16">între 8 și 16</span>
+            </label>
+            <div class="guest-stepper">
+              <button type="button" class="guest-btn" id="guestMinus" aria-label="Mai puține persoane"><svg aria-hidden="true"><use href="#i-minus"/></svg></button>
+              <input id="guestCount" type="number" min="8" max="16" value="8" inputmode="numeric">
+              <button type="button" class="guest-btn" id="guestPlus" aria-label="Mai multe persoane"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
             </div>
-          </dl>
-          <p class="book-meta">
-            <span class="meta-rooms" data-i18n-ro="6 dormitoare · 4 băi" data-i18n-en="6 bedrooms · 4 bathrooms">6 dormitoare · 4 băi</span>
-            <span class="meta-dist" data-i18n-ro="~9 km de Pietrele Doamnei" data-i18n-en="~9 km to Pietrele Doamnei">~9 km de Pietrele Doamnei</span>
-            <span class="meta-reply" data-i18n-ro="Răspuns în max. 2 ore" data-i18n-en="Reply within 2 hours">Răspuns în max. 2 ore</span>
+          </div>
+
+          <button class="btn btn-light btn-block" id="sendBtn" type="button">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg>
+            <span data-i18n="hero_cta">Verifică disponibilitatea</span>
+          </button>
+          <p class="book-note" id="bookNote" data-i18n-ro="Se deschide WhatsApp · răspundem în max. 2 ore" data-i18n-en="Opens WhatsApp · we reply within 2 hours">Se deschide WhatsApp · răspundem în max. 2 ore</p>
+          <p class="book-fallback" id="bookFallback" hidden>
+            <span data-i18n="modal_fallback">Dacă WhatsApp nu s-a deschis, trimite mesajul de aici:</span>
+            <a id="bookFallbackLink" href="https://wa.me/40756651582" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           </p>
-          <button class="btn btn-light btn-block" type="button" data-modal-open data-i18n="hero_cta">Verifică disponibilitatea</button>
+
+          <!-- Date picker: opens beside the card on desktop, as a bottom sheet on phones -->
+          <div class="cal-pop" id="calPop" role="dialog" aria-modal="false" aria-labelledby="calStep" hidden>
+            <div class="cal-pop-head">
+              <p class="cal-step" id="calStep"></p>
+              <button class="icon-btn cal-close" type="button" id="calClose" aria-label="Închide calendarul"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+            </div>
+            <div class="cal-nav">
+              <button class="icon-btn cal-arrow" id="calPrev" type="button" aria-label="Luna anterioară"><svg aria-hidden="true"><use href="#i-chev-l"/></svg></button>
+              <span class="cal-month-label" id="calMonthLabel" aria-live="polite"></span>
+              <button class="icon-btn cal-arrow" id="calNext" type="button" aria-label="Luna următoare"><svg aria-hidden="true"><use href="#i-chev-r"/></svg></button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <p class="cal-foot" data-i18n-ro="Minimum 2 nopți. Confirmăm disponibilitatea pe WhatsApp." data-i18n-en="Minimum 2 nights. We confirm availability on WhatsApp.">Minimum 2 nopți. Confirmăm disponibilitatea pe WhatsApp.</p>
+          </div>
         </aside>
       </div>
     </div>
@@ -551,7 +590,7 @@
             <span data-i18n="nav_contact">Rezervare</span>.
             <span class="mute" data-i18n="contact_p">Scrie-ne sau deschide calendarul ca să vezi datele libere. Răspundem în maximum 2 ore.</span>
           </h2>
-          <button class="btn btn-light" type="button" data-modal-open data-i18n="contact_cta">Verifică disponibilitatea</button>
+          <button class="btn btn-light" type="button" data-book data-i18n="contact_cta">Verifică disponibilitatea</button>
         </div>
         <div class="footer-cols">
           <div>
@@ -581,10 +620,10 @@
     </div>
   </footer>
 
-  <!-- FAB -->
-  <button class="fab" type="button" data-modal-open aria-label="Rezervare pe WhatsApp">
+  <!-- FAB: direct WhatsApp chat -->
+  <a class="fab" href="https://wa.me/40756651582" target="_blank" rel="noopener noreferrer" aria-label="Scrie-ne pe WhatsApp">
     <svg aria-hidden="true"><use href="#i-wa"/></svg>
-  </button>
+  </a>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Fotografie mărită">
@@ -595,38 +634,6 @@
     <p class="lb-caption" id="lbCaption"></p>
   </div>
 
-  <!-- MODAL -->
-  <div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display:none;opacity:0;">
-    <div class="modal glass">
-      <button class="icon-btn modal-close" type="button" data-modal-close aria-label="Închide"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
-      <h3 id="modalTitle" data-i18n="modal_title">Verifică disponibilitatea</h3>
-      <p class="modal-sub" data-i18n="modal_sub">Selectează datele dorite (minimum 2 nopți)</p>
-      <div class="cal-nav">
-        <button class="icon-btn cal-arrow" id="calPrev" type="button" aria-label="Luna anterioară"><svg aria-hidden="true"><use href="#i-chev-l"/></svg></button>
-        <span class="cal-month-label" id="calMonthLabel"></span>
-        <button class="icon-btn cal-arrow" id="calNext" type="button" aria-label="Luna următoare"><svg aria-hidden="true"><use href="#i-chev-r"/></svg></button>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div class="date-display" id="dateDisplay" aria-live="polite"></div>
-      <div class="guest-control">
-        <label for="guestCount" data-i18n="guest_label">Număr persoane</label>
-        <div class="guest-stepper">
-          <button type="button" class="guest-btn" id="guestMinus" aria-label="Mai puține persoane"><svg aria-hidden="true"><use href="#i-minus"/></svg></button>
-          <input id="guestCount" type="number" min="8" max="16" value="8" inputmode="numeric">
-          <button type="button" class="guest-btn" id="guestPlus" aria-label="Mai multe persoane"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
-        </div>
-        <p data-i18n="guest_hint">Minim 8, maxim 16 persoane</p>
-      </div>
-      <p class="modal-note" data-i18n="modal_note">Minim 2 nopți · confirmare în max. 2 ore</p>
-      <p class="modal-error" id="modalError" role="alert" hidden></p>
-      <button class="btn btn-light btn-block" id="sendBtn" type="button"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="modal_send">Trimite cererea</span></button>
-      <p class="modal-fallback" id="modalFallback" hidden>
-        <span data-i18n="modal_fallback">Dacă fereastra nu s-a deschis, trimite mesajul direct pe WhatsApp:</span>
-        <a id="modalFallbackLink" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </p>
-    </div>
-  </div>
-
   <!-- Analytics — enable after the Cloudflare Pages move. Uncomment one:
        Cloudflare Web Analytics (privacy-friendly, no cookie banner):
        <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
@@ -634,6 +641,6 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="cabanagreenview.ro" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="app.js?v=25" defer></script>
+  <script src="app.js?v=26" defer></script>
 </body>
 </html>

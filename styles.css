@@ -214,16 +214,19 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
   position: relative;
   border-radius: var(--r-frame);
   box-shadow: inset 0 0 0 var(--rim-w) var(--rim), 0 30px 80px -40px rgba(0, 0, 0, 0.45);
-  padding: clamp(100px, 14vh, 140px) clamp(20px, 3vw, 52px) clamp(20px, 3vw, 52px);
-  display: grid; gap: 1.5rem clamp(1.5rem, 3vw, 3rem);
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  padding: clamp(92px, 13vh, 132px) clamp(20px, 3vw, 52px) clamp(20px, 3vw, 44px);
+  display: grid; gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 400px);
   grid-template-rows: auto 1fr auto;
-  min-height: calc(100svh - 2 * var(--edge));
+  /* exactly one screen: the whole photo is visible without scrolling */
+  min-height: max(560px, calc(100svh - 2 * var(--edge)));
 }
 .hero-title {
   font-weight: 400;
-  grid-column: 1 / -1;
-  font-size: clamp(3.1rem, min(7.4vw, 13.2vh), 8.4rem);
+  grid-column: 1;
+  /* bounded by width, by screen height, and by the column left of the card
+     ("O cabană A-Frame" sets at ~8.3em) */
+  font-size: clamp(3rem, min(7.4vw, 11.5vh, calc((100vw - 600px) / 8.3)), 8.4rem);
   line-height: 0.93;
   letter-spacing: -0.045em;
   color: #fff;
@@ -236,7 +239,7 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .hero-foot { display: contents; }
 .hero-sub, .hero-figure { grid-row: 3; grid-column: 1; align-self: end; }
 .hero-figure { justify-self: end; margin-right: clamp(0px, 4vw, 72px); }
-.book-card { grid-column: 2; grid-row: 2 / 4; align-self: end; }
+.book-card { grid-column: 2; grid-row: 1 / -1; align-self: end; }
 .hero-sub {
   max-width: 25ch;
   font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.38;
@@ -251,48 +254,124 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .hero-figure-n svg { width: 26px; height: 26px; color: var(--amber); }
 .hero-figure-l { max-width: 20ch; font-size: 1.05rem; line-height: 1.35; color: rgba(242, 246, 246, 0.86); }
 
-/* Booking card */
+/* Booking card: dates -> stay summary -> guests -> WhatsApp */
 .book-card {
-  display: grid; gap: 14px;
-  padding: clamp(20px, 2vw, 30px);
+  position: relative;
+  display: grid; gap: 10px;
+  padding: clamp(18px, 1.7vw, 26px);
   border-radius: var(--r-card);
-  background: rgba(11, 22, 26, 0.6);
+  background: rgba(11, 22, 26, 0.62);
   -webkit-backdrop-filter: blur(22px) saturate(1.2);
   backdrop-filter: blur(22px) saturate(1.2);
   box-shadow: 0 0 0 1px rgba(242, 246, 246, 0.07), 0 24px 60px -30px rgba(0, 0, 0, 0.7);
 }
-.book-card-title { display: grid; gap: 4px; margin-bottom: 10px; font-weight: 400; }
-.book-card-title > span:first-child { font-size: clamp(1.6rem, 2vw, 2rem); line-height: 1.08; letter-spacing: -0.03em; }
-.book-card-kind { font-size: 0.95rem; color: var(--mist-2); }
-.book-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.book-card-title { display: grid; gap: 2px; margin-bottom: 6px; font-weight: 400; }
+.book-card-title > span:first-child { font-size: clamp(1.45rem, 1.8vw, 1.85rem); line-height: 1.08; letter-spacing: -0.03em; }
+.book-card-kind { font-size: 0.92rem; color: var(--mist-2); }
+.book-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .field {
   display: flex; align-items: center; gap: 10px;
-  min-height: 60px; padding: 8px 12px;
+  min-height: 58px; padding: 8px 12px;
   border-radius: var(--r-field);
   background: var(--well);
   text-align: left;
   transition: background-color 0.2s, box-shadow 0.2s;
 }
-.field:hover { background: rgba(4, 10, 12, 0.62); box-shadow: inset 0 0 0 1px rgba(242, 246, 246, 0.12); }
+.field:hover, .field[aria-expanded="true"] { background: rgba(4, 10, 12, 0.62); box-shadow: inset 0 0 0 1px rgba(242, 246, 246, 0.14); }
 .field-ic { width: 20px; height: 20px; color: var(--mist-2); }
-.field-chev { width: 18px; height: 18px; margin-left: auto; color: var(--mist-2); }
 .field-text { display: grid; min-width: 0; }
 .field-k { font-size: 0.78rem; color: var(--mist-2); }
 .field-v { font-size: 0.98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: rgba(242, 246, 246, 0.72); }
 .field-v.is-set { color: var(--snow); }
-.book-facts {
-  display: grid; grid-template-columns: 1fr 1fr;
-  border-radius: var(--r-field); background: var(--well);
+
+.book-summary { border-radius: var(--r-field); background: var(--well); }
+.sum-rules { display: grid; grid-template-columns: 1fr 1fr; }
+.sum-rules > div { padding: 10px 14px; }
+.sum-rules > div + div { border-left: 1px solid var(--line); }
+.sum-rules dt { font-size: 0.78rem; color: var(--mist-2); }
+.sum-rules dd { font-size: 1rem; }
+.sum-stay {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 12px;
+  padding: 10px 14px;
+  animation: rise 0.45s var(--ease-out) both;
 }
-.book-facts > div { padding: 12px 16px; }
-.book-facts > div + div { border-left: 1px solid var(--line); }
-.book-facts dt { font-size: 0.78rem; color: var(--mist-2); }
-.book-facts dd { font-size: 1.02rem; }
-.meta-dist { display: none; }
-.book-meta {
-  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  padding: 6px 2px 4px; font-size: 0.9rem; color: var(--mist-3);
+.sum-stay[hidden], .sum-rules[hidden] { display: none; }
+.sum-nights { font-size: 1.12rem; letter-spacing: -0.015em; }
+.sum-range { grid-row: 2; font-size: 0.88rem; color: var(--mist-3); }
+.sum-edit {
+  grid-row: 1 / 3; grid-column: 2;
+  min-height: 36px; padding: 0 12px; border-radius: 999px;
+  font-size: 0.85rem; color: var(--mist-3);
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: background-color 0.2s, color 0.2s;
 }
+.sum-edit:hover { background: var(--ink-3); color: var(--snow); }
+
+.guest-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 6px 6px 6px 14px; border-radius: var(--r-field); background: var(--well);
+}
+.guest-row label { display: grid; font-size: 0.98rem; line-height: 1.25; }
+.guest-hint { font-size: 0.78rem; color: var(--mist-2); }
+.guest-stepper { display: flex; align-items: center; gap: 2px; }
+.guest-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: var(--ink-3); transition: background-color 0.2s, opacity 0.2s; }
+.guest-btn:hover:not(:disabled) { background: #27434a; }
+.guest-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.guest-btn svg { width: 18px; height: 18px; }
+.guest-stepper input {
+  width: 44px; height: 44px; text-align: center; border: 0; border-radius: 10px;
+  background: transparent; color: var(--snow); font: inherit; font-size: 1.05rem; font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.guest-stepper input::-webkit-inner-spin-button, .guest-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.book-card .btn-block { margin-top: 4px; }
+.book-note { text-align: center; text-wrap: balance; font-size: 0.8rem; line-height: 1.35; color: var(--mist-2); }
+.book-fallback { font-size: 0.88rem; color: var(--mist-3); }
+.book-fallback a { color: var(--snow); text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Date picker: a glass panel that opens beside the card (bottom sheet on phones) */
+.cal-pop {
+  position: absolute; z-index: 20;
+  right: calc(100% + 12px); bottom: 0;
+  width: 340px;
+  padding: 18px;
+  border-radius: var(--r-card);
+  background: rgba(11, 22, 26, 0.88);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  backdrop-filter: blur(22px) saturate(1.2);
+  box-shadow: 0 0 0 1px rgba(242, 246, 246, 0.08), 0 30px 70px -30px rgba(0, 0, 0, 0.8);
+  opacity: 0; transform: translateX(10px);
+  transition: opacity 0.25s, transform 0.4s var(--ease-out);
+}
+.cal-pop[hidden] { display: none; }
+.cal-pop.open { opacity: 1; transform: none; }
+.cal-pop-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cal-step { font-size: 1.05rem; letter-spacing: -0.01em; }
+.cal-close { width: 40px; height: 40px; }
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin: 12px 0 8px; }
+.cal-arrow { width: 40px; height: 40px; }
+.cal-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+.cal-month-label { font-size: 0.98rem; font-weight: 500; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; }
+.day-label { text-align: center; font-size: 0.72rem; color: var(--mist-2); padding-bottom: 6px; }
+.cal-day {
+  position: relative; height: 40px; border-radius: 10px;
+  font-size: 0.92rem; font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s, color 0.15s;
+}
+button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
+.cal-day:disabled { color: rgba(147, 178, 184, 0.32); cursor: not-allowed; }
+.cal-day.today::after {
+  content: ""; position: absolute; left: 50%; bottom: 5px; width: 4px; height: 4px; margin-left: -2px;
+  border-radius: 50%; background: var(--mist-2);
+}
+.cal-day.in-range, .cal-day.preview { background: rgba(242, 246, 246, 0.1); border-radius: 0; }
+.cal-day.preview:hover { border-radius: 0 10px 10px 0; }
+.cal-day.selected-in, .cal-day.selected-out { background: var(--snow); color: var(--ink-1); font-weight: 500; }
+.cal-day.selected-in { border-radius: 10px 0 0 10px; }
+.cal-day.selected-out { border-radius: 0 10px 10px 0; }
+.cal-grid:not(:has(.in-range, .preview, .selected-out)) .selected-in { border-radius: 10px; }
+.cal-foot { margin-top: 10px; font-size: 0.8rem; color: var(--mist-2); }
 
 /* =====================================================================
    ABOUT
@@ -617,63 +696,18 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; }
 .lb-prev { left: 18px; } .lb-next { right: 18px; }
 
-/* MODAL */
-.scrim {
-  position: fixed; inset: 0; z-index: 250;
-  display: flex; align-items: center; justify-content: center; padding: 16px;
-  background: rgba(8, 18, 21, 0.6);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  transition: opacity 0.3s;
-}
-.modal {
-  position: relative; width: min(460px, 100%); max-height: calc(100svh - 32px); overflow-y: auto;
-  padding: clamp(22px, 3vw, 32px); border-radius: var(--r-card);
-  background: rgba(13, 26, 30, 0.86);
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
-  scrollbar-width: thin;
-}
-.modal h3 { font-size: 1.7rem; font-weight: 400; letter-spacing: -0.03em; line-height: 1.1; padding-right: 52px; }
-.modal-sub { margin-top: 6px; color: var(--mist-2); font-size: 0.95rem; }
-.modal-close { position: absolute; top: 18px; right: 18px; }
-.cal-nav { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 12px; }
-.cal-month-label { font-size: 1.05rem; font-weight: 500; }
-.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.day-label { text-align: center; font-size: 0.75rem; color: var(--mist-2); padding-bottom: 6px; }
-.cal-day {
-  aspect-ratio: 1; min-height: 40px; border-radius: 10px;
-  font-size: 0.95rem; font-variant-numeric: tabular-nums;
-  transition: background-color 0.15s, color 0.15s;
-}
-button.cal-day:hover { background: var(--ink-3); }
-.cal-day.past { color: rgba(147, 178, 184, 0.35); pointer-events: none; }
-.cal-day.in-range { background: rgba(242, 246, 246, 0.1); border-radius: 4px; }
-.cal-day.selected-in, .cal-day.selected-out { background: var(--snow); color: var(--ink-1); font-weight: 500; }
-.date-display { min-height: 1.5em; margin-top: 12px; font-size: 0.95rem; color: var(--mist-3); }
-.guest-control { margin-top: 18px; padding: 14px 16px; border-radius: 14px; background: var(--well); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 12px; }
-.guest-control label { font-size: 0.98rem; }
-.guest-control p { grid-column: 1 / -1; font-size: 0.82rem; color: var(--mist-2); }
-.guest-stepper { display: flex; align-items: center; gap: 4px; }
-.guest-btn { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--ink-3); transition: background-color 0.2s; }
-.guest-btn:hover { background: #27434a; }
-.guest-btn svg { width: 18px; height: 18px; }
-.guest-stepper input {
-  width: 48px; height: 40px; text-align: center; border: 0; border-radius: 10px;
-  background: transparent; color: var(--snow); font: inherit; font-size: 1.05rem; font-variant-numeric: tabular-nums;
-  -moz-appearance: textfield; appearance: textfield;
-}
-.guest-stepper input::-webkit-inner-spin-button, .guest-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.modal-note { margin: 16px 0 14px; font-size: 0.88rem; color: var(--mist-2); }
-.modal-error { margin-bottom: 12px; padding: 10px 14px; border-radius: 10px; background: rgba(233, 162, 59, 0.14); color: #f4c27a; font-size: 0.92rem; }
-.modal-fallback { margin-top: 12px; font-size: 0.9rem; color: var(--mist-3); }
-.modal-fallback a { color: var(--snow); text-decoration: underline; text-underline-offset: 0.2em; }
-
 /* =====================================================================
    RESPONSIVE
    ===================================================================== */
 @media (max-width: 1180px) {
   .hero-figure { display: none; }
-  .meta-dist { display: inline; }
-  .meta-rooms { display: none; }
+}
+
+/* Short laptop screens: trim the card so the hero still fits one screen */
+@media (min-width: 901px) and (max-height: 760px) {
+  .book-card-kind, .book-note { display: none; }
+  .book-card-title { margin-bottom: 0; }
+  .field { min-height: 52px; }
 }
 
 @media (max-width: 1024px) {
@@ -705,8 +739,22 @@ button.cal-day:hover { background: var(--ink-3); }
 
 @media (max-width: 900px) {
   .hero-frame { padding-top: 112px; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; }
+  .hero-title { font-size: clamp(2.6rem, 9vw, 5rem); }
   .hero-sub { grid-row: 3; }
   .book-card { grid-column: 1; grid-row: 4; }
+  /* the picker becomes a bottom sheet over a dimmed page */
+  .cal-pop {
+    position: fixed; z-index: 260; left: 0; right: 0; bottom: 0; top: auto;
+    width: auto; max-width: 520px; margin-inline: auto;
+    max-height: 88svh; overflow-y: auto;
+    padding: 20px 18px calc(18px + env(safe-area-inset-bottom));
+    border-radius: 24px 24px 0 0;
+    background: rgba(13, 26, 30, 0.97);
+    box-shadow: 0 0 0 100vmax rgba(8, 18, 21, 0.6), 0 -10px 40px -10px rgba(0, 0, 0, 0.6);
+    transform: translateY(24px);
+  }
+  .cal-day { height: 44px; }
+  html.cal-sheet-open, html.cal-sheet-open body { overflow: hidden; }
   .hero-sub { max-width: 32ch; }
   .about-grid, .fac-layout, .map-layout, .faq-layout, .footer-top { grid-template-columns: 1fr; }
   .about-photo img { aspect-ratio: 4 / 3; }
@@ -740,7 +788,7 @@ button.cal-day:hover { background: var(--ink-3); }
   .spanel-text { left: 20px; right: 20px; width: auto; bottom: 92px; font-size: 1rem; }
   .map-wrap { aspect-ratio: auto; }
   .map-canvas { height: 400px; }
-  .book-card-kind, .meta-reply { display: none; }
+  .book-card-kind { display: none; }
   .poi-feature { grid-template-columns: 96px minmax(0, 1fr); }
   .faq-item p { padding-right: 0; }
   .poi-item { margin-inline: 0; width: 100%; padding-inline: 12px; }

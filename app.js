@@ -48,13 +48,7 @@
       contact_cta:     "Verifică disponibilitatea",
       footer_nav_label: "Secțiuni",
       footer_copy:     "Cabană A-Frame, Rarău, Bucovina",
-      modal_title:     "Verifică disponibilitatea",
-      modal_sub:       "Selectează datele dorite (minimum 2 nopți)",
-      guest_label:     "Număr persoane",
-      guest_hint:      "Minim 8, maxim 16 persoane",
-      modal_note:      "Minim 2 nopți · confirmare în max. 2 ore",
-      modal_send:      "Trimite cererea",
-      modal_fallback:  "Dacă fereastra nu s-a deschis, trimite mesajul direct pe WhatsApp:"
+      modal_fallback:  "Dacă WhatsApp nu s-a deschis, trimite mesajul de aici:"
     },
     en: {
       nav_about:       "Cabin",
@@ -96,13 +90,7 @@
       contact_cta:     "Check availability",
       footer_nav_label: "Sections",
       footer_copy:     "A-Frame cabin, Rarău, Bucovina",
-      modal_title:     "Check availability",
-      modal_sub:       "Select your dates (minimum 2 nights)",
-      guest_label:     "Number of guests",
-      guest_hint:      "Minimum 8, maximum 16 guests",
-      modal_note:      "Min. 2 nights · confirmation within 2 hours",
-      modal_send:      "Send request",
-      modal_fallback:  "If the window didn't open, send the message straight to WhatsApp:"
+      modal_fallback:  "If WhatsApp didn't open, send the message from here:"
     }
   };
 
@@ -576,7 +564,7 @@
     if (e.key === "ArrowRight")  moveLightbox(1);
   });
 
-  /* -- Focus trap (shared by modal + lightbox) ---------------------------------------------------------------------- */
+  /* -- Focus trap (lightbox) ---------------------------------------------------------------------- */
   var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),' +
     'select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
@@ -611,201 +599,305 @@
     return release;
   }
 
-  /* -- Modal ---------------------------------------------------------------------- */
-  var scrimEl = document.getElementById("scrim");
-  var modalError = document.getElementById("modalError");
-  var modalFallback = document.getElementById("modalFallback");
-  var modalReleaseFocus = null;
-  var modalOpen = false;
+  /* -- Booking card: date picker, stay summary, WhatsApp hand-off ------------------------
+     The card is the whole booking flow: pick arrival + departure in the picker, read the
+     stay back in the summary, and the button opens WhatsApp with the request filled in. */
+  var calPop       = document.getElementById("calPop");
+  var calGrid      = document.getElementById("calGrid");
+  var sendBtn      = document.getElementById("sendBtn");
+  var bookFallback = document.getElementById("bookFallback");
+  var bookFallbackLink = document.getElementById("bookFallbackLink");
+  var calTriggers  = Array.prototype.slice.call(document.querySelectorAll("[data-cal-open]"));
 
-  function clearModalMessages() {
-    if (modalError) { modalError.hidden = true; modalError.textContent = ""; }
-    if (modalFallback) modalFallback.hidden = true;
-  }
+  var MS = 86400000, MIN_NIGHTS = 2, MIN_GUESTS = 8, MAX_GUESTS = 16;
+  var checkIn = null, checkOut = null, guests = MIN_GUESTS;
+  var calYear, calMonth, calOpen = false, calReturnFocus = null;
 
-  function openModal() {
-    if (modalOpen) return;
-    modalOpen = true;
-    clearModalMessages();
-    scrimEl.style.display = "flex";
-    scrimEl.setAttribute("aria-hidden", "false");
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () { scrimEl.style.opacity = "1"; });
-    });
-    modalReleaseFocus = trapFocus(scrimEl.querySelector(".modal"), { onEscape: closeModal });
-    track("modal_open");
-  }
-
-  function closeModal() {
-    if (!modalOpen) return;
-    modalOpen = false;
-    scrimEl.style.opacity = "0";
-    scrimEl.setAttribute("aria-hidden", "true");
-    setTimeout(function () { scrimEl.style.display = "none"; }, 300);
-    if (modalReleaseFocus) { modalReleaseFocus(); modalReleaseFocus = null; }
-  }
-
-  document.querySelectorAll("[data-modal-open]").forEach(function (btn) {
-    btn.addEventListener("click", openModal);
-  });
-  document.querySelectorAll("[data-modal-close]").forEach(function (btn) {
-    btn.addEventListener("click", closeModal);
-  });
-  scrimEl.addEventListener("click", function (e) {
-    if (e.target === this) closeModal();
-  });
-
-  /* -- Calendar ---------------------------------------------------------------------- */
-  var calYear  = new Date().getFullYear();
-  var calMonth = new Date().getMonth();
-  var checkIn  = null;
-  var checkOut = null;
-  var MS       = 86400000;
-  var guests   = 8;
-
-  var MONTHS_RO = ["Ianuarie","Februarie","Martie","Aprilie","Mai","Iunie","Iulie","August","Septembrie","Octombrie","Noiembrie","Decembrie"];
+  var MONTHS_RO = ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"];
   var MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  var DAYS_RO   = ["Lu","Ma","Mi","Jo","Vi","Sa","Du"];
+  var MON_RO    = ["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sept.","oct.","nov.","dec."];
+  var MON_EN    = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var DAYS_RO   = ["Lu","Ma","Mi","Jo","Vi","Sâ","Du"];
   var DAYS_EN   = ["Mo","Tu","We","Th","Fr","Sa","Su"];
+  var WD_RO     = ["dum.","lun.","mar.","mie.","joi","vin.","sâm."];
+  var WD_EN     = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+  function en() { return LANG === "en"; }
+  function today0() { var d = new Date(); d.setHours(0, 0, 0, 0); return d; }
+  function addDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  function nightsBetween(a, b) { return Math.round((b - a) / MS); }
+  function sameDay(a, b) { return !!a && !!b && a.getTime() === b.getTime(); }
+
+  // "joi, 10 nov." / "Thu, 10 Nov"; the year only when it isn't this year
+  function fmtShort(d) {
+    var y = d.getFullYear() !== new Date().getFullYear() ? " " + d.getFullYear() : "";
+    return en()
+      ? WD_EN[d.getDay()] + ", " + d.getDate() + " " + MON_EN[d.getMonth()] + y
+      : WD_RO[d.getDay()] + ", " + d.getDate() + " " + MON_RO[d.getMonth()] + y;
+  }
+  // "10 noiembrie 2026": the WhatsApp message and the day buttons' labels
+  function fmtLong(d) {
+    return en()
+      ? d.getDate() + " " + MONTHS_EN[d.getMonth()] + " " + d.getFullYear()
+      : d.getDate() + " " + MONTHS_RO[d.getMonth()] + " " + d.getFullYear();
+  }
+  // Romanian counts of 20+ (unless the last two digits are 1–19) take "de"
+  function roDe(n) { var r = n % 100; return n >= 20 && (r === 0 || r >= 20) ? " de " : " "; }
+  function nightsLabel(n) { return en() ? n + (n === 1 ? " night" : " nights") : n + roDe(n) + "nopți"; }
+  function guestsLabel(n) { return en() ? n + " guests" : n + roDe(n) + "persoane"; }
 
   function renderCal() {
-    var grid  = document.getElementById("calGrid");
-    var label = document.getElementById("calMonthLabel");
-    if (!grid) return;
-    grid.innerHTML = "";
-    label.textContent = (LANG === "en" ? MONTHS_EN : MONTHS_RO)[calMonth] + " " + calYear;
-    var days = LANG === "en" ? DAYS_EN : DAYS_RO;
-    days.forEach(function(d) {
-      var span = document.createElement("span");
-      span.className = "day-label";
-      span.textContent = d;
-      grid.appendChild(span);
+    if (!calGrid) return;
+    var t0 = today0();
+    var choosingOut = !!checkIn && !checkOut;
+    document.getElementById("calStep").textContent = choosingOut
+      ? (en() ? "Now pick your departure date" : "Acum alege data plecării")
+      : (en() ? "Pick your arrival date" : "Alege data sosirii");
+    var monthName = (en() ? MONTHS_EN : MONTHS_RO)[calMonth];
+    document.getElementById("calMonthLabel").textContent =
+      monthName.charAt(0).toUpperCase() + monthName.slice(1) + " " + calYear;
+    document.getElementById("calPrev").disabled =
+      calYear < t0.getFullYear() || (calYear === t0.getFullYear() && calMonth <= t0.getMonth());
+
+    calGrid.innerHTML = "";
+    (en() ? DAYS_EN : DAYS_RO).forEach(function (d) {
+      var s = document.createElement("span");
+      s.className = "day-label"; s.textContent = d; s.setAttribute("aria-hidden", "true");
+      calGrid.appendChild(s);
     });
-    var first = new Date(calYear, calMonth, 1).getDay();
-    var offset = (first + 6) % 7;
+    var offset = (new Date(calYear, calMonth, 1).getDay() + 6) % 7;
     for (var i = 0; i < offset; i++) {
-      var empty = document.createElement("div");
+      var empty = document.createElement("span");
       empty.className = "cal-day empty";
-      grid.appendChild(empty);
+      calGrid.appendChild(empty);
     }
     var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-    var today = new Date(); today.setHours(0, 0, 0, 0);
     for (var d = 1; d <= daysInMonth; d++) {
       var dt = new Date(calYear, calMonth, d);
       var btn = document.createElement("button");
+      btn.type = "button";
       btn.className = "cal-day";
       btn.textContent = d;
-      if (dt < today) btn.classList.add("past");
-      if (checkIn  && dt.getTime() === checkIn.getTime())  btn.classList.add("selected-in");
-      if (checkOut && dt.getTime() === checkOut.getTime()) btn.classList.add("selected-out");
+      btn.setAttribute("data-t", dt.getTime());
+      btn.tabIndex = -1;
+      var label = fmtLong(dt);
+      var tooShort = choosingOut && dt > checkIn && nightsBetween(checkIn, dt) < MIN_NIGHTS;
+      if (dt < t0 || tooShort) {
+        btn.disabled = true;
+        btn.classList.add(dt < t0 ? "past" : "too-short");
+      }
+      if (sameDay(dt, t0)) btn.classList.add("today");
+      if (sameDay(dt, checkIn))  { btn.classList.add("selected-in");  label += en() ? ", arrival" : ", sosire"; }
+      if (sameDay(dt, checkOut)) { btn.classList.add("selected-out"); label += en() ? ", departure" : ", plecare"; }
       if (checkIn && checkOut && dt > checkIn && dt < checkOut) btn.classList.add("in-range");
-      (function(date) {
-        btn.addEventListener("click", function() { pickDay(date); });
-      }(dt));
-      grid.appendChild(btn);
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("aria-pressed", sameDay(dt, checkIn) || sameDay(dt, checkOut) ? "true" : "false");
+      calGrid.appendChild(btn);
     }
-    updateDateDisplay();
+    // Roving tabindex: one day sits in the tab order (the next sensible pick)
+    var days = Array.prototype.slice.call(calGrid.querySelectorAll("button.cal-day:not([disabled])"));
+    var rover = choosingOut
+      ? days.filter(function (b) { return +b.getAttribute("data-t") > checkIn.getTime(); })[0]
+      : (calGrid.querySelector(".selected-in:not([disabled])") || calGrid.querySelector(".today:not([disabled])"));
+    rover = rover || days[0];
+    if (rover) rover.tabIndex = 0;
+    updateSummary();
   }
 
+  function focusDay(time) {
+    var b = calGrid.querySelector('[data-t="' + time + '"]');
+    if (!b || b.disabled) return false;
+    calGrid.querySelectorAll("button.cal-day").forEach(function (x) { x.tabIndex = -1; });
+    b.tabIndex = 0;
+    b.focus();
+    return true;
+  }
+  function focusRover() {
+    var b = calGrid.querySelector('button.cal-day[tabindex="0"]');
+    if (b) b.focus();
+  }
+  function showMonthOf(d) { calYear = d.getFullYear(); calMonth = d.getMonth(); }
+
   function pickDay(dt) {
-    var today = new Date(); today.setHours(0, 0, 0, 0);
-    if (dt < today) return;
-    if (!checkIn || (checkIn && checkOut)) {
+    if (dt < today0()) return;
+    if (!checkIn || checkOut || dt <= checkIn) {
       checkIn = dt; checkOut = null;
-    } else if (dt.getTime() === checkIn.getTime()) {
-      checkIn = null;
-    } else if (dt < checkIn) {
-      checkIn = dt; checkOut = null;
-    } else if (dt.getTime() - checkIn.getTime() >= 2 * MS) {
+    } else if (nightsBetween(checkIn, dt) >= MIN_NIGHTS) {
       checkOut = dt;
     } else {
-      checkIn = dt; checkOut = null;
+      return;
     }
-    if (typeof clearModalMessages === "function") clearModalMessages();
+    if (bookFallback) bookFallback.hidden = true;
     renderCal();
+    if (checkOut) {
+      track("dates_selected", { nights: nightsBetween(checkIn, checkOut) });
+      // Let the range paint for a beat, then hand over to the summary and the button.
+      setTimeout(function () { closeCal(false); sendBtn.focus(); }, PREFERS_REDUCED ? 0 : 320);
+    } else {
+      focusRover();
+    }
+  }
+
+  // Range preview while the departure date is being chosen
+  function previewTo(time) {
+    calGrid.querySelectorAll(".cal-day.preview").forEach(function (b) { b.classList.remove("preview"); });
+    if (!checkIn || checkOut || !time) return;
+    calGrid.querySelectorAll("button.cal-day").forEach(function (b) {
+      var t = +b.getAttribute("data-t");
+      if (t > checkIn.getTime() && t <= time) b.classList.add("preview");
+    });
+  }
+
+  function isSheet() { return window.matchMedia("(max-width: 900px)").matches; }
+
+  function openCal(which) {
+    showMonthOf(which === "out" && checkOut ? checkOut : (checkIn || today0()));
+    calReturnFocus = document.activeElement;
+    calPop.hidden = false;
+    calOpen = true;
+    document.documentElement.classList.toggle("cal-sheet-open", isSheet());
+    calTriggers.forEach(function (b) { if (b.hasAttribute("aria-expanded")) b.setAttribute("aria-expanded", "true"); });
+    renderCal();
+    requestAnimationFrame(function () {
+      calPop.classList.add("open");
+      focusRover();
+    });
+    track("calendar_open");
+  }
+
+  function closeCal(restoreFocus) {
+    if (!calOpen) return;
+    calOpen = false;
+    calPop.classList.remove("open");
+    calPop.hidden = true;
+    previewTo(null);
+    document.documentElement.classList.remove("cal-sheet-open");
+    calTriggers.forEach(function (b) { if (b.hasAttribute("aria-expanded")) b.setAttribute("aria-expanded", "false"); });
+    if (restoreFocus && calReturnFocus && calReturnFocus.focus) calReturnFocus.focus();
   }
 
   function syncCardField(id, date) {
     var el = document.getElementById(id);
     if (!el) return;
-    el.textContent = date ? fmt(date) : (el.getAttribute(LANG === "en" ? "data-i18n-en" : "data-i18n-ro") || "");
+    el.textContent = date ? fmtShort(date) : (el.getAttribute(en() ? "data-i18n-en" : "data-i18n-ro") || "");
     el.classList.toggle("is-set", !!date);
   }
 
-  function updateDateDisplay() {
+  function updateSummary() {
     syncCardField("cardIn", checkIn);
     syncCardField("cardOut", checkOut);
-    var el = document.getElementById("dateDisplay");
-    if (!el) return;
-    if (checkIn && checkOut) {
-      var nights = Math.round((checkOut - checkIn) / MS);
-      el.textContent = fmt(checkIn) + " – " + fmt(checkOut) + " (" + nights + (LANG === "en" ? " nights" : " nopți") + ")";
-    } else if (checkIn) {
-      el.textContent = fmt(checkIn) + (LANG === "en" ? " – select check-out" : " – selectează check-out");
-    } else {
-      el.textContent = "";
+    var done = !!(checkIn && checkOut);
+    document.getElementById("sumRules").hidden = done;
+    document.getElementById("sumStay").hidden = !done;
+    document.getElementById("bookSummary").classList.toggle("is-set", done);
+    if (done) {
+      document.getElementById("sumNights").textContent =
+        nightsLabel(nightsBetween(checkIn, checkOut)) + " · " + guestsLabel(guests);
+      document.getElementById("sumRange").textContent = fmtShort(checkIn) + " → " + fmtShort(checkOut);
     }
-  }
-
-  function fmt(d) {
-    return d.getDate() + " " + (LANG === "en" ? MONTHS_EN : MONTHS_RO)[d.getMonth()].slice(0, 3) + " " + d.getFullYear();
   }
 
   function setGuests(value) {
-    guests = Math.max(8, Math.min(16, parseInt(value, 10) || 8));
-    var input = document.getElementById("guestCount");
-    if (input) input.value = guests;
+    guests = Math.max(MIN_GUESTS, Math.min(MAX_GUESTS, parseInt(value, 10) || MIN_GUESTS));
+    document.getElementById("guestCount").value = guests;
+    document.getElementById("guestMinus").disabled = guests <= MIN_GUESTS;
+    document.getElementById("guestPlus").disabled = guests >= MAX_GUESTS;
+    updateSummary();
   }
 
-  document.getElementById("calPrev").addEventListener("click", function() {
+  // Triggers, month navigation, day picks, keyboard
+  calTriggers.forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (calOpen) closeCal(false);
+      else openCal(b.getAttribute("data-cal-open"));
+    });
+  });
+  document.getElementById("calClose").addEventListener("click", function () { closeCal(true); });
+  document.getElementById("calPrev").addEventListener("click", function () {
     calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal();
   });
-  document.getElementById("calNext").addEventListener("click", function() {
+  document.getElementById("calNext").addEventListener("click", function () {
     calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal();
   });
-  document.getElementById("guestMinus").addEventListener("click", function() {
-    setGuests(guests - 1);
+  calGrid.addEventListener("click", function (e) {
+    var b = e.target.closest("button.cal-day");
+    if (b && !b.disabled) pickDay(new Date(+b.getAttribute("data-t")));
   });
-  document.getElementById("guestPlus").addEventListener("click", function() {
-    setGuests(guests + 1);
+  calGrid.addEventListener("mouseover", function (e) {
+    var b = e.target.closest("button.cal-day");
+    previewTo(b && !b.disabled ? +b.getAttribute("data-t") : null);
   });
-  document.getElementById("guestCount").addEventListener("change", function(e) {
-    setGuests(e.target.value);
+  calGrid.addEventListener("mouseleave", function () { previewTo(null); });
+  calGrid.addEventListener("keydown", function (e) {
+    var b = e.target.closest("button.cal-day");
+    if (!b) return;
+    var cur = new Date(+b.getAttribute("data-t"));
+    var dow = (cur.getDay() + 6) % 7;
+    var step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7, Home: -dow, End: 6 - dow }[e.key];
+    if (step === undefined) return;
+    e.preventDefault();
+    var target = addDays(cur, step);
+    if (target < today0()) return;
+    if (target.getMonth() !== calMonth || target.getFullYear() !== calYear) { showMonthOf(target); renderCal(); }
+    focusDay(target.getTime());
+    previewTo(target.getTime());
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && calOpen) { e.preventDefault(); closeCal(true); }
+  });
+  document.addEventListener("pointerdown", function (e) {
+    if (calOpen && !calPop.contains(e.target) && !e.target.closest("[data-cal-open]")) closeCal(false);
+  });
+  calPop.addEventListener("focusout", function (e) {
+    var to = e.relatedTarget;
+    if (calOpen && to && !calPop.contains(to) && !to.closest("[data-cal-open]")) closeCal(false);
+  });
+  window.addEventListener("resize", function () {
+    if (calOpen) document.documentElement.classList.toggle("cal-sheet-open", isSheet());
+  }, { passive: true });
+
+  document.getElementById("guestMinus").addEventListener("click", function () { setGuests(guests - 1); });
+  document.getElementById("guestPlus").addEventListener("click", function () { setGuests(guests + 1); });
+  document.getElementById("guestCount").addEventListener("change", function (e) { setGuests(e.target.value); });
+
+  // The other "book" buttons (nav, footer) bring the card into view and open the picker
+  var bookCard = document.getElementById("booking");
+  document.querySelectorAll("[data-book]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var r = bookCard.getBoundingClientRect();
+      var inView = r.top >= 0 && r.bottom <= window.innerHeight;
+      if (!inView) bookCard.scrollIntoView({ behavior: PREFERS_REDUCED ? "auto" : "smooth", block: "center" });
+      setTimeout(function () { openCal("in"); }, inView || PREFERS_REDUCED ? 0 : 550);
+    });
   });
 
-  /* -- Send request via WhatsApp ---------------------------------------------------------------------- */
+  /* -- Send the request via WhatsApp ---------------------------------------------------- */
   var WA_NUMBER = "40756651582";
-  var modalFallbackLink = document.getElementById("modalFallbackLink");
-
-  function showModalError(msg) {
-    if (!modalError) return;
-    modalError.textContent = msg;
-    modalError.hidden = false;
-  }
 
   function sendRequest() {
-    clearModalMessages();
-    if (!checkIn || !checkOut) {
-      showModalError(LANG === "en"
-        ? "Please pick check-in and check-out dates (minimum 2 nights)."
-        : "Alege datele de check-in și check-out (minimum 2 nopți).");
+    if (!checkIn || !checkOut) {   // no dates yet: the button leads into the picker
+      openCal(checkIn ? "out" : "in");
       return;
     }
-    var msg = LANG === "en"
-      ? "Hello! I would like to book the Green View Rarău cabin.\n\nCheck-in: " + fmt(checkIn) + "\nCheck-out: " + fmt(checkOut) + "\nGuests: " + guests + "\n\nThank you!"
-      : "Bună ziua! Aș dori să rezerv cabana Green View Rarău.\n\nCheck-in: " + fmt(checkIn) + "\nCheck-out: " + fmt(checkOut) + "\nPersoane: " + guests + "\n\nVă mulțumesc!";
+    var n = nightsBetween(checkIn, checkOut);
+    var msg = en()
+      ? "Hello! I'd like to book Green View Rarău.\n\nCheck-in: " + fmtLong(checkIn) + "\nCheck-out: " + fmtLong(checkOut) +
+        " (" + nightsLabel(n) + ")\nGuests: " + guests + "\n\nIs the cabin available? Thank you!"
+      : "Bună ziua! Aș dori să rezerv cabana Green View Rarău.\n\nSosire: " + fmtLong(checkIn) + "\nPlecare: " + fmtLong(checkOut) +
+        " (" + nightsLabel(n) + ")\nPersoane: " + guests + "\n\nEste disponibilă? Vă mulțumesc!";
     var url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
-
-    if (modalFallbackLink) modalFallbackLink.href = url;
-    track("booking_request", { guests: guests, lang: LANG });
-    var win = window.open(url, "_blank", "noopener");
-    if (!win || win.closed || typeof win.closed === "undefined") {
-      // Popup blocked - surface the link so the request isn't lost.
-      if (modalFallback) modalFallback.hidden = false;
-    }
+    if (bookFallbackLink) bookFallbackLink.href = url;
+    track("booking_request", { guests: guests, nights: n, lang: LANG });
+    // No "noopener" feature string: with it window.open always returns null, which made
+    // every request look blocked. Cut the opener link by hand instead.
+    var win = window.open(url, "_blank");
+    if (win) { try { win.opener = null; } catch (err) {} }
+    else if (bookFallback) bookFallback.hidden = false;   // popup blocked: keep the request one tap away
   }
 
-  document.getElementById("sendBtn").addEventListener("click", sendRequest);
+  sendBtn.addEventListener("click", sendRequest);
+  setGuests(MIN_GUESTS);
+  showMonthOf(today0());
 
   /* -- Init ---------------------------------------------------------------------- */
   applyLang();
