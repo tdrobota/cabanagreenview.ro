@@ -590,7 +590,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 }
 .poi-feature[hidden] { display: none; }
 .poi-close {
-  position: absolute; top: 8px; right: 8px; z-index: 1;
+  position: absolute; top: 8px; left: 8px; z-index: 1;   /* over the photo, so the text keeps the full width */
   width: 36px; height: 36px;
   background: rgba(8, 18, 21, 0.55);
 }
@@ -600,7 +600,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 .poi-feature.at-tr { left: auto; right: 16px; bottom: auto; top: 16px; }
 .poi-feature.at-br { left: auto; right: 16px; }
 .pimg { background-size: cover; background-position: center; min-height: 100%; }
-.poi-feature-body { padding: 14px 44px 14px 16px; display: grid; gap: 4px; align-content: start; }
+.poi-feature-body { padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
 .poi-meta { font-size: 0.8rem; color: var(--mist-2); }
 .poi-feature h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
 .pdesc { font-size: 0.9rem; line-height: 1.4; color: var(--mist-3); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
@@ -818,6 +818,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   .map-wrap { min-height: 0; aspect-ratio: auto; }
   .seasons-tabs { align-self: stretch; display: grid; grid-template-columns: repeat(4, 1fr); }
   .spanel-text { left: clamp(20px, 3vw, 52px); right: clamp(20px, 3vw, 52px); width: auto; bottom: calc(clamp(24px, 3.4vw, 56px) + 72px); }
+  .pdesc { display: block; -webkit-line-clamp: unset; overflow: visible; }   /* below the map there is room for the full text */
   .poi-feature, .poi-feature.at-tl, .poi-feature.at-tr, .poi-feature.at-br { position: relative; left: auto; right: auto; top: auto; bottom: auto; width: auto; }
   .map-layout .map-wrap { display: flex; flex-direction: column; }
   .map-wrap { height: auto; }
