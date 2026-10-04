@@ -36,22 +36,15 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
    - **Soluție A (recomandată):** înregistrezi domeniul și îl conectezi la Worker ca Custom Domain.
    - **Soluție B (imediată):** până atunci, toate aceste referințe trec pe URL-ul workers.dev.
 
-2. **Emailul publicat nu funcționează.**
-   - `contact@greenviewrarau.ro` e pe un domeniu care nu există, deci mesajele trimise acolo se pierd. Adresa apare pe pagină, în schema Organization și în llms.txt.
-   - **Soluție:** fie o adresă de email care funcționează, fie scoaterea emailului și păstrarea doar a WhatsApp-ului și a telefonului.
+2. **Emailul publicat nu funcționează.** *(Rezolvat 2026-10-02: emailul a fost scos. Decizia proprietarului: contactul se face doar prin telefon/WhatsApp și Facebook.)*
 
 3. **Sursele externe se contrazic** (verificat live). AI-urile preiau orice versiune găsesc.
-   - Un mini-site eatbu.com, generat automat din profilul Google, arată:
-     - o adresă în **Suceava (Alee Dumbravii 22)**
-     - un **email Yahoo personal**
-     - mențiunea „pet-friendly”
-     - un program 9–21
    - **Distanțe:** Turistinfo spune „la 700 m sub pârtia Rarău”, dar site-ul spune „~12 km”. Pe site, textul de prezentare spune „vârful Rarău la câteva minute”, iar FAQ-ul spune „circa 9 km”.
-   - **Soluție:** stabilești un singur set de date (adresă, email, distanțe, politica pentru animale) și îl aplici pe Google Business Profile, Turistinfo, eatbu (preiei controlul sau ceri ștergerea), site și llms.txt.
+   - **Soluție:** stabilești un singur set de date (adresă, distanțe, politica pentru animale) și îl aplici pe Google Business Profile, Turistinfo, Facebook, site și llms.txt.
 
 ## Prioritate mare
 
-4. **Site-ul nu apare la căutarea propriului nume** (verificat live). La „Green View Rarău” apar Facebook, Turistinfo și eatbu, dar nu site-ul.
+4. **Site-ul nu apare la căutarea propriului nume** (verificat live). La „Green View Rarău” apar Facebook și Turistinfo, dar nu site-ul.
    - **Soluție:** adaugi URL-ul site-ului în Google Business Profile, pe pagina de Facebook și în anunțul Turistinfo, apoi trimiți site-ul în Google Search Console și Bing Webmaster Tools.
 
 5. **Headerul HTTP `Content-Type: text/html` nu are charset** (verificat live).
@@ -123,9 +116,8 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
   - Google Maps „GreenViewRarau”: 4,9 din 22 de recenzii, după datele proprietarului. Nu am putut verifica live din cauza ecranului de consimțământ.
   - Turistinfo: 10/10 din 13 recenzii.
   - pagina de Facebook GreenViewRarau
-  - eatbu.com, cu date greșite
   - categoria de cabane A-frame din Suceava pe Turistinfo
-- **Negăsite:** Booking.com, Airbnb, Reddit, YouTube, bloguri de călătorie, Wikipedia (există doar articolul despre Masivul Rarău). Mini-site-ul eatbu pomenește conturi de Instagram și TikTok, dar nu le-am găsit.
+- **Negăsite:** Booking.com, Airbnb, Reddit, YouTube, bloguri de călătorie, Wikipedia (există doar articolul despre Masivul Rarău).
 
 ### Conținut E-E-A-T (58/100)
 | Componentă | Scor | Ce contează |
@@ -167,7 +159,7 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
 | Google AI Overviews | 30 | structura e bună, dar canonicalul e invalid |
 | ChatGPT | 30 | nu există entitate Wikipedia/Wikidata, iar Bing nu indexează site-ul |
 | Perplexity | 35 | va cita Turistinfo și Facebook, nu site-ul |
-| Gemini | 35 | profilul Google e punctul cel mai puternic, dar datele de pe eatbu îl contrazic |
+| Gemini | 35 | profilul Google e punctul cel mai puternic |
 | Bing Copilot | 25 | fără IndexNow și fără verificare |
 
 ---
@@ -188,7 +180,7 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
 - [ ] Site-ul trimis în Google Search Console și Bing Webmaster Tools, cu sitemap
 
 ### Săptămâna 2: Date consecvente peste tot
-- [ ] Un singur set de fapte (adresă, email, distanțe, animale), aplicat pe Google Business Profile, Turistinfo, Facebook, eatbu, site și llms.txt
+- [ ] Un singur set de fapte (adresă, distanțe, animale), aplicat pe Google Business Profile, Turistinfo, Facebook, site și llms.txt
 - [ ] Recenziile fără sursă atribuite sau scoase
 - [ ] Schema corectată (un singur nod de business, `sameAs`, facilități, `containsPlace`, `ReserveAction`)
 
@@ -208,7 +200,6 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
 ## Ce trebuie să furnizeze proprietarul (nu se inventează)
 
 - **Domeniul:** pe care îl folosiți și când îl înregistrați
-- **Email:** o adresă care funcționează
 - **Adresa** reală sau indicații de acces
 - **Ore de check-in și check-out**, politica de anulare și avansul
 - **Animale de companie** acceptate sau nu, plus regulile casei
