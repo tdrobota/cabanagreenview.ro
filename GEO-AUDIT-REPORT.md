@@ -39,7 +39,7 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
 2. **Emailul publicat nu funcționează.** *(Rezolvat 2026-10-02: emailul a fost scos. Decizia proprietarului: contactul se face doar prin telefon/WhatsApp și Facebook.)*
 
 3. **Sursele externe se contrazic** (verificat live). AI-urile preiau orice versiune găsesc.
-   - **Distanțe:** Turistinfo spune „la 700 m sub pârtia Rarău”, dar site-ul spune „~12 km”. Pe site, textul de prezentare spune „vârful Rarău la câteva minute”, iar FAQ-ul spune „circa 9 km”.
+   - **Distanțe:** Turistinfo spune „la 700 m sub pârtia Rarău”, dar site-ul spunea „~12 km”. *(Rezolvat 2026-10-04: proprietarul a confirmat 900 m; site-ul și llms.txt au fost corectate.)* Pe site, textul de prezentare spune „vârful Rarău la câteva minute”, iar FAQ-ul spune „circa 9 km”.
    - **Soluție:** stabilești un singur set de date (adresă, distanțe, politica pentru animale) și îl aplici pe Google Business Profile, Turistinfo, Facebook, site și llms.txt.
 
 ## Prioritate mare
@@ -204,7 +204,6 @@ Pagina în sine e bine construită. Conținutul e randat pe server (1.274 de cuv
 - **Ore de check-in și check-out**, politica de anulare și avansul
 - **Animale de companie** acceptate sau nu, plus regulile casei
 - **Accesul iarna:** starea drumului (asfalt sau drum forestier, lanțuri, 4×4)
-- **Distanțele corecte:** spre pârtie și spre vârful Rarău
 - **Gazdele:** prenume, o fotografie, povestea pe scurt
 - **Cele 5 recenzii fără sursă:** de unde provin
 - **Prețul:** proprietarul a decis să *nu* fie afișat pe site. Turistinfo afișează totuși „de la 1.800 RON/noapte”, deci AI-urile vor cita acea cifră.

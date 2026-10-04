@@ -461,6 +461,7 @@
       var px = +item.getAttribute("data-x");
       if (px > 70) el.className += " edge-r";      // labels near the frame edges open inward
       else if (px < 25) el.className += " edge-l";
+      if (item.getAttribute("data-label") === "below") el.className += " label-below";   // crowded spot: label under the pin
       el.style.left = item.getAttribute("data-x") + "%";
       el.style.top = item.getAttribute("data-y") + "%";
       el.setAttribute("data-i", i);

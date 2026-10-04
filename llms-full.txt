@@ -84,9 +84,9 @@ RO: Șemineu pe lemne cu lemne incluse, bucătărie complet utilată, Wi-Fi, cen
 ### How close are the local attractions?
 (RO: Cât de aproape sunt reperele din zonă?)
 
-Rarău peak and Pietrele Doamnei are about 9 km away, the village of Pojorâta about 6 km, and Câmpulung Moldovenesc about 18 km.
+The Rarău ski slope is about 900 m from the cabin. Rarău peak and Pietrele Doamnei are about 9 km away, the village of Pojorâta about 6 km, and Câmpulung Moldovenesc about 18 km.
 
-RO: Vârful Rarău și Pietrele Doamnei sunt la circa 9 km, satul Pojorâta la circa 6 km, iar Câmpulung Moldovenesc la circa 18 km.
+RO: Pârtia de schi Rarău e la circa 900 m de cabană. Vârful Rarău și Pietrele Doamnei sunt la circa 9 km, satul Pojorâta la circa 6 km, iar Câmpulung Moldovenesc la circa 18 km.
 
 ## Nearby places
 
@@ -97,7 +97,7 @@ Distances are approximate, by road, from the Pojorâta / Câmpulung Moldovenesc 
 - **Moara Dracului Gorge** (Gorge), ~ 18 km · 35 min: A short, dramatic geological reserve with vertical walls and a cool forest trail.
 - **Slătioara Old-Growth Forest** (UNESCO), ~ 22 km · 45 min: A UNESCO-listed old-growth forest known for ancient trees and rare mountain ecosystems.
 - **Wood Art Museum** (Museum), ~ 18 km · 25 min: A museum dedicated to wood culture and traditional craft from the Câmpulung Moldovenesc area.
-- **Rarău Ski Slope** (Winter), ~ 12 km · 28 min: An easy-to-medium slope running through the forested northern side of Rarău.
+- **Rarău Ski Slope** (Winter), ~ 900 m: An easy-to-medium slope running through the forested northern side of Rarău.
 - **Pojorâta** (Village), ~ 6 km · 12 min: The nearest village, useful for quick supplies and access to local trails.
 - **Moldovița Narrow-Gauge Train** (Experience), ~ 42 km · 60 min: A narrow-gauge tourist train, ideal for a half-day outing through Bucovina scenery.
 
