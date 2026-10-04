@@ -578,7 +578,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 .poi.edge-r:hover .plabel, .poi.edge-r.active .plabel, .poi.edge-r:focus-visible .plabel { transform: translate(14px, 0); }
 .poi.edge-l .plabel { left: 50%; transform: translate(-14px, 4px); }
 .poi.edge-l:hover .plabel, .poi.edge-l.active .plabel, .poi.edge-l:focus-visible .plabel { transform: translate(-14px, 0); }
-.poi.home .plabel { bottom: auto; top: calc(100% - 4px); transform: translate(-50%, -4px); }
+.poi.home .plabel, .poi.label-below .plabel { bottom: auto; top: calc(100% - 4px); transform: translate(-50%, -4px); }
 .poi:hover .plabel, .poi.active .plabel, .poi:focus-visible .plabel { opacity: 1; transform: translate(-50%, 0); }
 
 .poi-feature {
