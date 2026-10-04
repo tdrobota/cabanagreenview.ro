@@ -14,5 +14,8 @@
   "optionalDependencies": {
     "esbuild": "^0.28.2",
     "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
   }
 }

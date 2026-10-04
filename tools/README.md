@@ -29,3 +29,14 @@ node set-domain.mjs https://your-domain.ro
 ```
 
 then add it as a Custom Domain on the Worker, deploy, and submit the sitemap in Google Search Console / Bing Webmaster Tools.
+
+## English page and llms-full.txt
+
+`index.html` (Romanian) is the only page edited by hand. After changing it (or the English strings in `app.js`):
+
+```
+node build-pages.mjs
+```
+
+This regenerates `/en/index.html` (its own URL, hreflang pair with `/`) and `/llms-full.txt`.
+The script stops with an error if any visible text has no English version.

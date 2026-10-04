@@ -28,6 +28,12 @@
   Content-Type: text/html; charset=utf-8
 /404.html
   Content-Type: text/html; charset=utf-8
+/en/
+  Content-Type: text/html; charset=utf-8
+/en/index.html
+  Content-Type: text/html; charset=utf-8
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 /robots.txt

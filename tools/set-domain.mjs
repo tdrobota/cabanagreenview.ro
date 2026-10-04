@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
 const MARKER = join(HERE, 'site-origin.txt');
-const FILES = ['index.html', 'robots.txt', 'sitemap.xml', 'llms.txt'];
+const FILES = ['index.html', 'en/index.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt'];
 
 const next = (process.argv[2] || '').replace(/\/+$/, '');
 if (!/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}$/i.test(next)) {

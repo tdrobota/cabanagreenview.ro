@@ -6,7 +6,8 @@
   "use strict";
 
   /* -- i18n ---------------------------------------------------------------------- */
-  var LANG = "ro";
+  // Each language has its own page: / (Romanian, default) and /en/. The page says which.
+  var LANG = document.documentElement.lang === "en" ? "en" : "ro";
   var T = {
     ro: {
       nav_about:       "Cabana",
@@ -116,21 +117,20 @@
     });
     document.getElementById("langToggle").textContent = LANG === "ro" ? "EN" : "RO";
     document.documentElement.lang = LANG;
-    try { localStorage.setItem(LANG_KEY, LANG); } catch (e) {}
     renderCal();
     updateMapLang();
   }
 
-  // Romanian is the default for everyone (owner decision); English only after the
-  // visitor picks it with the toggle, which is remembered.
+  // Romanian is the default for everyone (owner decision). A visitor who explicitly picked
+  // English with the toggle is taken to /en/ on later visits; crawlers never are.
   try {
-    var stored = localStorage.getItem(LANG_KEY);
-    if (stored === "ro" || stored === "en") LANG = stored;
+    if (LANG === "ro" && localStorage.getItem(LANG_KEY) === "en") location.replace("/en/" + location.hash);
   } catch (e) {}
 
   document.getElementById("langToggle").addEventListener("click", function() {
-    LANG = LANG === "ro" ? "en" : "ro";
-    applyLang();
+    var next = LANG === "ro" ? "en" : "ro";
+    try { localStorage.setItem(LANG_KEY, next); } catch (e) {}
+    location.href = (next === "en" ? "/en/" : "/") + location.hash;
   });
 
   // Footer year
