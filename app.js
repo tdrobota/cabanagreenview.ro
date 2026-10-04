@@ -24,7 +24,7 @@
       hero_cta:        "Verifică disponibilitatea",
       lab_about:       "01 · Cabana",
       about_title:     "O casă în pădure",
-      about_p1:        "Green View Rarău este o cabană A-Frame modernă, construită cu materiale naturale. Pădurea e la câțiva pași, iar vârful Rarău la circa 9 km.",
+      about_p1:        "Green View Rarău este o cabană A-Frame modernă, construită cu materiale naturale. Pădurea e la câțiva pași, iar vârful Rarău la circa 10 km.",
       about_h2:        "Interiorul",
       about_p2:        "Forma triunghiulară, fereastra panoramică de la mansardă, mult lemn la interior. Stilul e între minimalism scandinav și rustic montan românesc.",
       about_h3:        "Liniște",
@@ -42,7 +42,7 @@
       map_title:       "Ce e prin apropiere",
       map_sub:         "Repere din zonă, la câțiva kilometri de cabană.",
       map_legend:      "Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.",
-      map_phint:       "Distanțele sunt aproximative, pe șosea, din zona Pojorâta / Câmpulung Moldovenesc.",
+      map_phint:       "Distanțe și timpi aproximativi, cu mașina, de la cabană.",
       lab_reviews:     "06 · Recenzii",
       rev_title:       "Ce spun oaspeții",
       contact_p:       "Scrie-ne sau deschide calendarul ca să vezi datele libere. Răspundem în maximum 2 ore.",
@@ -66,7 +66,7 @@
       hero_cta:        "Check availability",
       lab_about:       "01 · Cabin",
       about_title:     "A house in the forest",
-      about_p1:        "Green View Rarău is a modern A-Frame cabin, built with natural materials. The forest is a few steps away; Rarău peak is about 9 km away.",
+      about_p1:        "Green View Rarău is a modern A-Frame cabin, built with natural materials. The forest is a few steps away; Rarău peak is about 10 km away.",
       about_h2:        "Inside",
       about_p2:        "The triangular shape, the panoramic skylight, a lot of wood inside. The style sits between Scandinavian minimalism and Romanian mountain rustic.",
       about_h3:        "Quiet",
@@ -84,7 +84,7 @@
       map_title:       "What's nearby",
       map_sub:         "Local landmarks, a few kilometres from the cabin.",
       map_legend:      "The cabin is the white marker. Nearby landmarks are marked in gold.",
-      map_phint:       "Distances are approximate, by road, from the Pojorâta / Câmpulung Moldovenesc area.",
+      map_phint:       "Approximate distances and times, by car, from the cabin.",
       lab_reviews:     "06 · Reviews",
       rev_title:       "What guests say",
       contact_p:       "Write to us, or open the calendar to see which dates are free. We reply within 2 hours.",
@@ -439,21 +439,64 @@
         }
       }
     }
+    placeFeature(i);
   }
+
+  /* Desktop: the place card floats over the map. Park it in the corner that hides the fewest
+     other pins and never the selected one (phones show it below the map instead). */
+  var CORNERS = ["bl", "tr", "br", "tl"];
+  function placeFeature(i) {
+    var canvas = document.getElementById("mapCanvas");
+    if (!canvas || poiFeature.hidden || getComputedStyle(poiFeature).position !== "absolute") return;
+    var W = canvas.offsetWidth, H = canvas.offsetHeight;
+    var cw = (poiFeature.offsetWidth + 16) / W * 100, ch = (poiFeature.offsetHeight + 16) / H * 100;
+    var pad = 3;   // pin radius plus breathing room, in % of the map
+    var best = null;
+    CORNERS.forEach(function (c) {
+      var x0 = c[1] === "l" ? 0 : 100 - cw, y0 = c[0] === "t" ? 0 : 100 - ch;
+      function covers(el) {
+        var x = +el.getAttribute("data-x"), y = +el.getAttribute("data-y");
+        return x > x0 - pad && x < x0 + cw + pad && y > y0 - pad && y < y0 + ch + pad;
+      }
+      if (covers(poiItems[i])) return;
+      var n = poiItems.filter(function (el, k) { return k !== i && covers(el); }).length;
+      if (!best || n < best.n) best = { c: c, n: n };
+    });
+    CORNERS.forEach(function (c) { poiFeature.classList.toggle("at-" + c, !!best && best.c === c); });
+  }
+  window.addEventListener("resize", function () { placeFeature(activePoi); }, { passive: true });
+  /* The map is drawn in the same 0–100 % space as the pins (north up, real positions around
+     the cabin; see the data-x / data-y notes in index.html). */
+  var HOME = poiItems.filter(function (el) { return el.hasAttribute("data-home"); })[0];
+  var HX = HOME ? +HOME.getAttribute("data-x") * 10 : 500, HY = HOME ? +HOME.getAttribute("data-y") * 7 : 350;
   function contours() {
-    var rings = ["m -60 0 a 60 50 0 1 0 120 0 a 60 50 0 1 0 -120 0","m -120 0 a 120 95 0 1 0 240 0 a 120 95 0 1 0 -240 0","m -190 0 a 190 150 0 1 0 380 0 a 190 150 0 1 0 -380 0","m -270 0 a 270 210 0 1 0 540 0 a 270 210 0 1 0 -540 0"];
-    return rings.map(function(d,i){ return '<path d="M500 392 '+d+'" fill="none" stroke="#8fb0b7" stroke-width="1" opacity="'+(0.34-i*0.06)+'"/>'; }).join("");
+    return [60, 125, 200, 290].map(function (r, i) {
+      return '<ellipse cx="' + HX + '" cy="' + HY + '" rx="' + r + '" ry="' + Math.round(r * 0.8) + '" fill="none" stroke="#8fb0b7" stroke-width="1" vector-effect="non-scaling-stroke" opacity="' + (0.34 - i * 0.06) + '"/>';
+    }).join("");
   }
   function trees() {
-    var s="", seed=7;
-    function rnd(){ seed=(seed*9301+49297)%233280; return seed/233280; }
-    for(var i=0;i<92;i++){ var x=rnd()*1000,y=rnd()*700; if(Math.hypot(x-500,y-392)<92) continue; var op=(0.10+rnd()*0.16).toFixed(2); s+='<path d="M'+x.toFixed(0)+' '+y.toFixed(0)+' l-3 6 h6 z" fill="#8fb0b7" opacity="'+op+'"/>'; }
+    var s = "", seed = 7;
+    function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    for (var i = 0; i < 92; i++) {
+      var x = rnd() * 1000, y = rnd() * 700;
+      if (Math.hypot(x - HX, y - HY) < 92) continue;
+      s += '<path d="M' + x.toFixed(0) + ' ' + y.toFixed(0) + ' l-3 6 h6 z" fill="#8fb0b7" opacity="' + (0.10 + rnd() * 0.16).toFixed(2) + '"/>';
+    }
     return s;
   }
   function buildMap() {
     var c = document.getElementById("mapCanvas");
     if (!c || !poiItems.length) return;
-    c.innerHTML = '<svg viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="mg" cx="50%" cy="46%" r="72%"><stop offset="0%" stop-color="#2a434a"/><stop offset="62%" stop-color="#172a30"/><stop offset="100%" stop-color="#0d1a1e"/></radialGradient></defs><rect width="1000" height="700" fill="url(#mg)"/>' + contours() + '<path d="M-20 470 C 180 430, 300 520, 460 470 S 760 400, 1020 450" fill="none" stroke="#5f838c" stroke-width="5" opacity="0.4"/><path d="M120 700 C 260 560, 360 560, 500 392 S 760 240, 900 90" fill="none" stroke="#e9a23b" stroke-width="2.2" stroke-dasharray="2 7" opacity="0.62" stroke-linecap="round"/><path d="M0 560 C 250 540, 420 470, 500 392" fill="none" stroke="#e9a23b" stroke-width="1.8" stroke-dasharray="2 7" opacity="0.36" stroke-linecap="round"/>' + trees() + '</svg>';
+    c.innerHTML = '<svg viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">' +
+      '<defs><radialGradient id="mg" cx="55%" cy="50%" r="72%"><stop offset="0%" stop-color="#2a434a"/><stop offset="62%" stop-color="#172a30"/><stop offset="100%" stop-color="#0d1a1e"/></radialGradient></defs>' +
+      '<rect width="1000" height="700" fill="url(#mg)"/>' + contours() +
+      // the Moldova river, west to east through Pojorâta and Câmpulung Moldovenesc (north of the cabin)
+      '<path d="M-10 172 C 80 166, 120 160, 156 158 S 330 136, 506 127 S 820 118, 1010 110" fill="none" stroke="#5f838c" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.45"/>' +
+      trees() +
+      // north marker
+      '<g opacity="0.7"><path d="M27 52 l9 -24 l9 24 l-9 -6 z" fill="#c9d8da"/></g>' +
+      '</svg>' +
+      '<span class="map-north" aria-hidden="true">N</span>';
     poiItems.forEach(function (item, i) {
       var el = document.createElement("button");
       el.type = "button";

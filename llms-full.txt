@@ -8,7 +8,7 @@ Generated from the live page content by tools/build-pages.mjs.
 
 ## Key facts
 
-- Area: Rarău – Pojorâta, Bucovina (Suceava county)
+- Area: Câmpulung Moldovenesc, on the road up to Rarău (Suceava county)
 - Capacity: groups of 8–16 guests
 - Bedrooms: 6 bedrooms · 4 bathrooms
 - Minimum stay: 2 nights
@@ -16,7 +16,7 @@ Generated from the live page content by tools/build-pages.mjs.
 
 ## About the cabin
 
-A house in the forest. Green View Rarău is a modern A-Frame cabin, built with natural materials. The forest is a few steps away; Rarău peak is about 9 km away.
+A house in the forest. Green View Rarău is a modern A-Frame cabin, built with natural materials. The forest is a few steps away; Rarău peak is about 10 km away.
 
 **Inside.** The triangular shape, the panoramic skylight, a lot of wood inside. The style sits between Scandinavian minimalism and Romanian mountain rustic.
 
@@ -84,22 +84,22 @@ RO: Șemineu pe lemne cu lemne incluse, bucătărie complet utilată, Wi-Fi, cen
 ### How close are the local attractions?
 (RO: Cât de aproape sunt reperele din zonă?)
 
-The Rarău ski slope is about 900 m from the cabin. Rarău peak and Pietrele Doamnei are about 9 km away, the village of Pojorâta about 6 km, and Câmpulung Moldovenesc about 18 km.
+The Rarău ski slope is about 900 m from the cabin. The centre of Câmpulung Moldovenesc, with shops and restaurants, is about 7 km away (15 minutes by car), and Rarău peak and Pietrele Doamnei about 10 km.
 
-RO: Pârtia de schi Rarău e la circa 900 m de cabană. Vârful Rarău și Pietrele Doamnei sunt la circa 9 km, satul Pojorâta la circa 6 km, iar Câmpulung Moldovenesc la circa 18 km.
+RO: Pârtia de schi Rarău e la circa 900 m de cabană. Centrul orașului Câmpulung Moldovenesc, cu magazine și restaurante, e la circa 7 km (15 minute cu mașina), iar vârful Rarău și Pietrele Doamnei la circa 10 km.
 
 ## Nearby places
 
 Distances are approximate, by road, from the Pojorâta / Câmpulung Moldovenesc area.
 
-- **Pietrele Doamnei** (Landmark), ~ 9 km · 25 min: The emblematic rock towers of the Rarău massif, with short trails and wide Bucovina views.
-- **Transrarău Road** (Scenic road), ~ 12 km · 30 min: One of Bucovina's most scenic mountain drives, ideal for viewpoints and photo stops.
-- **Moara Dracului Gorge** (Gorge), ~ 18 km · 35 min: A short, dramatic geological reserve with vertical walls and a cool forest trail.
-- **Slătioara Old-Growth Forest** (UNESCO), ~ 22 km · 45 min: A UNESCO-listed old-growth forest known for ancient trees and rare mountain ecosystems.
-- **Wood Art Museum** (Museum), ~ 18 km · 25 min: A museum dedicated to wood culture and traditional craft from the Câmpulung Moldovenesc area.
+- **Pietrele Doamnei** (Landmark), ~ 10 km · 20 min: The emblematic rock towers of the Rarău massif, with short trails and wide Bucovina views.
+- **Transrarău Road** (Scenic road), ~ 12 km · 20 min: One of Bucovina's most scenic mountain drives, ideal for viewpoints and photo stops.
+- **Moara Dracului Gorge** (Gorge), ~ 11 km: A short, dramatic geological reserve with vertical walls and a cool forest trail.
+- **Slătioara Old-Growth Forest** (UNESCO), ~ 20 km: A UNESCO-listed old-growth forest known for ancient trees and rare mountain ecosystems.
+- **Wood Art Museum** (Museum), ~ 8 km · 15 min: A museum dedicated to wood culture and traditional craft from the Câmpulung Moldovenesc area.
 - **Rarău Ski Slope** (Winter), ~ 900 m: An easy-to-medium slope running through the forested northern side of Rarău.
-- **Pojorâta** (Village), ~ 6 km · 12 min: The nearest village, useful for quick supplies and access to local trails.
-- **Moldovița Narrow-Gauge Train** (Experience), ~ 42 km · 60 min: A narrow-gauge tourist train, ideal for a half-day outing through Bucovina scenery.
+- **Pojorâta** (Village), ~ 15 km · 25 min: A Bucovina village in the Moldova valley, west of Câmpulung Moldovenesc.
+- **Moldovița Narrow-Gauge Train** (Experience), ~ 38 km · 50 min: A narrow-gauge tourist train, ideal for a half-day outing through Bucovina scenery.
 
 ## Seasons
 

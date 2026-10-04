@@ -1,8 +1,8 @@
 # Product
 
 **Green View Rarău** is a single, privately run A-frame cabin for rent at the foot of
-Rarău mountain, near Pojorâta / Câmpulung Moldovenesc in Bucovina (Suceava county,
-Romania). The website, cabanagreenview.ro, is its only direct booking channel.
+Rarău mountain, in Câmpulung Moldovenesc (Izvorul Alb area, on the road up to Rarău), Bucovina
+(Suceava county, Romania). The website, cabanagreenview.ro, is its only direct booking channel.
 
 ## The offer (facts; do not embellish)
 
@@ -10,8 +10,8 @@ Romania). The website, cabanagreenview.ro, is its only direct booking channel.
 - 6 bedrooms, 4 bathrooms, for groups of 8–16 guests. Minimum stay 2 nights.
 - Fully equipped kitchen, Wi-Fi, central heating, firewood included, espresso machine
   and teas, panoramic terrace, garden hammock, private parking, direct forest access.
-- Nearby: Pietrele Doamnei / Rarău peak ~9 km, Transrarău ~12 km, Pojorâta ~6 km,
-  Câmpulung Moldovenesc ~18 km, Slătioara UNESCO forest ~22 km.
+- Nearby (by car, OSRM routes from the cabin, 2026-10-04): ski slope ~900 m (owner), Câmpulung centre ~7 km,
+  Pietrele Doamnei ~10 km, Transrarău ~12 km, Moara Dracului ~11 km, Pojorâta ~15 km, Slătioara ~20 km, Mocănița ~38 km.
 - Booking: pick dates in the on-site calendar, request goes over WhatsApp
   (+40 756 651 582); the owners confirm within 2 hours. No working email yet (contact@greenviewrarau.ro is on an unregistered domain and was removed 2026-10-02).
 - Public profiles: Google Maps "GreenViewRarau" (4.9/22), Turistinfo (10/10, 13), Facebook facebook.com/GreenViewRarau.

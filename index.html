@@ -44,7 +44,7 @@
         imagesrcset="images/hero/p24-1000.webp 1000w, images/hero/p24.webp 2000w"
         imagesizes="90vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=41">
+  <link rel="stylesheet" href="styles.css?v=44">
 
   <!-- Structured data. Owner inputs still missing (never invent): priceRange, streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed. No email on purpose: contact is phone/WhatsApp + Facebook.
@@ -71,7 +71,7 @@
         ],
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "Pojorâta",
+          "addressLocality": "Câmpulung Moldovenesc",
           "addressRegion": "Suceava",
           "addressCountry": "RO"
         },
@@ -216,7 +216,7 @@
             "name": "Cât de aproape sunt reperele din zonă?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Pârtia de schi Rarău e la circa 900 m de cabană. Vârful Rarău și Pietrele Doamnei sunt la circa 9 km, satul Pojorâta la circa 6 km, iar Câmpulung Moldovenesc la circa 18 km."
+              "text": "Pârtia de schi Rarău e la circa 900 m de cabană. Centrul orașului Câmpulung Moldovenesc, cu magazine și restaurante, e la circa 7 km (15 minute cu mașina), iar vârful Rarău și Pietrele Doamnei la circa 10 km."
             }
           }
         ]
@@ -376,7 +376,7 @@
     <div class="wrap">
       <h2 class="statement" id="aboutTitle">
         <span data-i18n="about_title">O casă în pădure</span>.
-        <span class="mute" data-i18n="about_p1">Green View Rarău este o cabană A-Frame modernă, construită cu materiale naturale. Pădurea e la câțiva pași, iar vârful Rarău la circa 9 km.</span>
+        <span class="mute" data-i18n="about_p1">Green View Rarău este o cabană A-Frame modernă, construită cu materiale naturale. Pădurea e la câțiva pași, iar vârful Rarău la circa 10 km.</span>
       </h2>
 
       <div class="about-grid">
@@ -401,7 +401,7 @@
             <div>
               <dt data-i18n-ro="Zonă" data-i18n-en="Area">Zonă</dt>
               <dd>
-                <span data-i18n-ro="Rarău – Pojorâta, Bucovina (jud. Suceava)" data-i18n-en="Rarău – Pojorâta, Bucovina (Suceava county)">Rarău – Pojorâta, Bucovina (jud. Suceava)</span>
+                <span data-i18n-ro="Câmpulung Moldovenesc, pe drumul spre Rarău (jud. Suceava)" data-i18n-en="Câmpulung Moldovenesc, on the road up to Rarău (Suceava county)">Câmpulung Moldovenesc, pe drumul spre Rarău (jud. Suceava)</span>
                 <a class="text-link" href="https://www.google.com/maps/place/GreenViewRarau/@47.488578,25.5687858,17z/data=!3m1!4b1!4m6!3m5!1s0x4735bd71f4dce8dd:0xb381ff0f2d04f9cc!8m2!3d47.4885744!4d25.5713607!16s%2Fg%2F11rn5j_07f" target="_blank" rel="noopener noreferrer" data-i18n-ro="vezi pe hartă" data-i18n-en="see on map">vezi pe hartă</a>
               </dd>
             </div>
@@ -620,7 +620,6 @@
       <div class="map-layout">
         <div class="map-wrap framed">
           <div class="map-canvas" id="mapCanvas" role="img" aria-label="Hartă stilizată a zonei Rarău cu reperele din jurul cabanei"></div>
-          <p class="map-legend" data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</p>
           <article class="poi-feature glass" id="poiFeature" aria-live="polite">
             <button class="icon-btn poi-close" type="button" id="poiClose" aria-label="Închide detaliile locului"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
             <div class="pimg has" id="pImg" style="background-image:url('images/p24.webp')"></div>
@@ -632,61 +631,61 @@
             </div>
           </article>
         </div>
-        <p class="phint" data-i18n="map_phint">Distanțele sunt aproximative, pe șosea, din zona Pojorâta / Câmpulung Moldovenesc.</p>
+        <p class="phint"><span data-i18n="map_legend">Cabana este punctul alb. Reperele din jur sunt marcate cu auriu.</span> <span data-i18n="map_phint">Distanțe și timpi aproximativi, cu mașina, de la cabană.</span></p>
         <div class="poi-side">
           <ul class="poi-list" id="poiList">
-        <li><button type="button" class="poi-item active" data-i="0" data-home data-x="50" data-y="56" data-img="images/p24.webp">
+        <li><button type="button" class="poi-item active" data-i="0" data-home data-x="55" data-y="50" data-img="images/p24.webp">
           <span class="poi-item-cat" data-i18n-ro="Cazarea ta" data-i18n-en="Your stay">Cazarea ta</span>
           <strong class="poi-item-name" data-i18n-ro="Green View Rarău" data-i18n-en="Green View Rarău">Green View Rarău</strong>
           <span class="poi-item-dist" data-i18n-ro="Ești aici" data-i18n-en="You are here">Ești aici</span>
           <span class="poi-item-desc" data-i18n-ro="Cabana A-Frame cu fațadă de sticlă, punctul de plecare pentru toate traseele din zonă." data-i18n-en="The glass-fronted A-Frame cabin, your starting point for every trail nearby.">Cabana A-Frame cu fațadă de sticlă, punctul de plecare pentru toate traseele din zonă.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="1" data-x="64" data-y="30" data-img="images/poi/pietrele-doamnei.webp" data-credit="Foto: Țetcu Mircea Rareș · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:RO_SV_Pietrele_Doamnei_(2).JPG">
+        <li><button type="button" class="poi-item" data-i="1" data-x="51.6" data-y="82" data-img="images/poi/pietrele-doamnei.webp" data-credit="Foto: Țetcu Mircea Rareș · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:RO_SV_Pietrele_Doamnei_(2).JPG">
           <span class="poi-item-cat" data-i18n-ro="Reper natural" data-i18n-en="Landmark">Reper natural</span>
           <strong class="poi-item-name" data-i18n-ro="Pietrele Doamnei" data-i18n-en="Pietrele Doamnei">Pietrele Doamnei</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 9 km · 25 min" data-i18n-en="~ 9 km · 25 min">~ 9 km · 25 min</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 10 km · 20 min" data-i18n-en="~ 10 km · 20 min">~ 10 km · 20 min</span>
           <span class="poi-item-desc" data-i18n-ro="Stâncile emblematice ale masivului Rarău, cu trasee scurte și panorame largi peste Bucovina." data-i18n-en="The emblematic rock towers of the Rarău massif, with short trails and wide Bucovina views.">Stâncile emblematice ale masivului Rarău, cu trasee scurte și panorame largi peste Bucovina.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="2" data-x="75" data-y="38" data-img="images/poi/transrarau.webp" data-credit="Foto: Țetcu Mircea Rareș · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:RO_SV_Transrarau_(9).JPG">
+        <li><button type="button" class="poi-item" data-i="2" data-x="39" data-y="72.8" data-img="images/poi/transrarau.webp" data-credit="Foto: Țetcu Mircea Rareș · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:RO_SV_Transrarau_(9).JPG">
           <span class="poi-item-cat" data-i18n-ro="Drum panoramic" data-i18n-en="Scenic road">Drum panoramic</span>
           <strong class="poi-item-name" data-i18n-ro="Transrarău" data-i18n-en="Transrarău Road">Transrarău</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 12 km · 30 min" data-i18n-en="~ 12 km · 30 min">~ 12 km · 30 min</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 12 km · 20 min" data-i18n-en="~ 12 km · 20 min">~ 12 km · 20 min</span>
           <span class="poi-item-desc" data-i18n-ro="Una dintre cele mai spectaculoase urcări din Bucovina, potrivită pentru belvedere și plimbări foto." data-i18n-en="One of Bucovina's most scenic mountain drives, ideal for viewpoints and photo stops.">Una dintre cele mai spectaculoase urcări din Bucovina, potrivită pentru belvedere și plimbări foto.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="3" data-x="58" data-y="50" data-img="images/poi/cheile-moara-dracului.webp" data-credit="Foto: Munții Rarău · Gikü · CC0" data-credit-url="https://commons.wikimedia.org/wiki/File:RO.SV.C%C3%A2mpulung_Moldovenesc_-_Mun%C8%9Bii_Rar%C4%83u,_vedere_de_pe_Transrar%C4%83u_-_may_2026_-_01.jpg">
+        <li><button type="button" class="poi-item" data-i="3" data-x="69.8" data-y="60.8" data-img="images/poi/cheile-moara-dracului.webp" data-credit="Foto: Munții Rarău · Gikü · CC0" data-credit-url="https://commons.wikimedia.org/wiki/File:RO.SV.C%C3%A2mpulung_Moldovenesc_-_Mun%C8%9Bii_Rar%C4%83u,_vedere_de_pe_Transrar%C4%83u_-_may_2026_-_01.jpg">
           <span class="poi-item-cat" data-i18n-ro="Chei" data-i18n-en="Gorge">Chei</span>
           <strong class="poi-item-name" data-i18n-ro="Cheile Moara Dracului" data-i18n-en="Moara Dracului Gorge">Cheile Moara Dracului</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 18 km · 35 min" data-i18n-en="~ 18 km · 35 min">~ 18 km · 35 min</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 11 km" data-i18n-en="~ 11 km">~ 11 km</span>
           <span class="poi-item-desc" data-i18n-ro="Rezervație geologică scurtă și spectaculoasă, cu pereți verticali și potecă răcoroasă." data-i18n-en="A short, dramatic geological reserve with vertical walls and a cool forest trail.">Rezervație geologică scurtă și spectaculoasă, cu pereți verticali și potecă răcoroasă.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="4" data-x="34" data-y="36" data-img="images/poi/slatioara.webp" data-credit="Foto: GerritR · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Karpatenlandschaft_bei_Slatioara.JPG">
+        <li><button type="button" class="poi-item" data-i="4" data-x="76.8" data-y="82.6" data-img="images/poi/slatioara.webp" data-credit="Foto: GerritR · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Karpatenlandschaft_bei_Slatioara.JPG">
           <span class="poi-item-cat" data-i18n-ro="UNESCO" data-i18n-en="UNESCO">UNESCO</span>
           <strong class="poi-item-name" data-i18n-ro="Codrul Secular Slătioara" data-i18n-en="Slătioara Old-Growth Forest">Codrul Secular Slătioara</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 22 km · 45 min" data-i18n-en="~ 22 km · 45 min">~ 22 km · 45 min</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 20 km" data-i18n-en="~ 20 km">~ 20 km</span>
           <span class="poi-item-desc" data-i18n-ro="Pădure seculară inclusă în patrimoniul UNESCO, cunoscută pentru arbori multiseculari și ecosisteme rare." data-i18n-en="A UNESCO-listed old-growth forest known for ancient trees and rare mountain ecosystems.">Pădure seculară inclusă în patrimoniul UNESCO, cunoscută pentru arbori multiseculari și ecosisteme rare.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="5" data-x="32" data-y="78" data-img="images/poi/muzeul-arta-lemnului.webp" data-credit="Foto: Tud0011 · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Muzeul_Arta_Lemnului_C%C3%A2mpulung_Moldovenesc_2022.jpg">
+        <li><button type="button" class="poi-item" data-i="5" data-x="48.4" data-y="17" data-img="images/poi/muzeul-arta-lemnului.webp" data-credit="Foto: Tud0011 · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Muzeul_Arta_Lemnului_C%C3%A2mpulung_Moldovenesc_2022.jpg">
           <span class="poi-item-cat" data-i18n-ro="Muzeu" data-i18n-en="Museum">Muzeu</span>
           <strong class="poi-item-name" data-i18n-ro="Muzeul Arta Lemnului" data-i18n-en="Wood Art Museum">Muzeul Arta Lemnului</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 18 km · 25 min" data-i18n-en="~ 18 km · 25 min">~ 18 km · 25 min</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 8 km · 15 min" data-i18n-en="~ 8 km · 15 min">~ 8 km · 15 min</span>
           <span class="poi-item-desc" data-i18n-ro="Muzeu dedicat civilizației lemnului și meșteșugurilor din zona Câmpulungului Moldovenesc." data-i18n-en="A museum dedicated to wood culture and traditional craft from the Câmpulung Moldovenesc area.">Muzeu dedicat civilizației lemnului și meșteșugurilor din zona Câmpulungului Moldovenesc.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="6" data-x="38" data-y="52" data-label="below" data-img="images/poi/partia-rarau.webp" data-credit="Foto: Liviu Mihai Șeiciuc · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Rar%C4%83u_massif_in_winter.jpg">
+        <li><button type="button" class="poi-item" data-i="6" data-x="51" data-y="62" data-label="below" data-img="images/poi/partia-rarau.webp" data-credit="Foto: Liviu Mihai Șeiciuc · CC BY-SA 4.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Rar%C4%83u_massif_in_winter.jpg">
           <span class="poi-item-cat" data-i18n-ro="Iarna" data-i18n-en="Winter">Iarna</span>
           <strong class="poi-item-name" data-i18n-ro="Pârtia Rarău" data-i18n-en="Rarău Ski Slope">Pârtia Rarău</strong>
           <span class="poi-item-dist" data-i18n-ro="~ 900 m" data-i18n-en="~ 900 m">~ 900 m</span>
           <span class="poi-item-desc" data-i18n-ro="Pârtie ușoară spre medie, cu traseu lung prin zona împădurită de pe versantul nordic al Rarăului." data-i18n-en="An easy-to-medium slope running through the forested northern side of Rarău.">Pârtie ușoară spre medie, cu traseu lung prin zona împădurită de pe versantul nordic al Rarăului.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="7" data-x="23" data-y="72" data-img="images/poi/pojorata.webp" data-credit="Foto: Mihai Burlacu · CC BY-SA 3.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Comuna_Pojor%C3%A2ta,_Romania_-_panoramio_(1).jpg">
+        <li><button type="button" class="poi-item" data-i="7" data-x="15.6" data-y="22.5" data-img="images/poi/pojorata.webp" data-credit="Foto: Mihai Burlacu · CC BY-SA 3.0" data-credit-url="https://commons.wikimedia.org/wiki/File:Comuna_Pojor%C3%A2ta,_Romania_-_panoramio_(1).jpg">
           <span class="poi-item-cat" data-i18n-ro="Sat" data-i18n-en="Village">Sat</span>
           <strong class="poi-item-name" data-i18n-ro="Pojorâta" data-i18n-en="Pojorâta">Pojorâta</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 6 km · 12 min" data-i18n-en="~ 6 km · 12 min">~ 6 km · 12 min</span>
-          <span class="poi-item-desc" data-i18n-ro="Satul cel mai apropiat, bun pentru provizii rapide și acces spre traseele locale." data-i18n-en="The nearest village, useful for quick supplies and access to local trails.">Satul cel mai apropiat, bun pentru provizii rapide și acces spre traseele locale.</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 15 km · 25 min" data-i18n-en="~ 15 km · 25 min">~ 15 km · 25 min</span>
+          <span class="poi-item-desc" data-i18n-ro="Sat bucovinean pe valea Moldovei, la vest de Câmpulung Moldovenesc." data-i18n-en="A Bucovina village in the Moldova valley, west of Câmpulung Moldovenesc.">Sat bucovinean pe valea Moldovei, la vest de Câmpulung Moldovenesc.</span>
         </button></li>
-        <li><button type="button" class="poi-item" data-i="8" data-x="86" data-y="26" data-img="images/poi/mocanita-moldovita.webp" data-credit="Foto: Jan Pešula · CC0" data-credit-url="https://commons.wikimedia.org/wiki/File:Mocanita_Hutulca_tourist_train.jpg">
+        <li><button type="button" class="poi-item" data-i="8" data-x="36" data-y="6" data-label="below" data-img="images/poi/mocanita-moldovita.webp" data-credit="Foto: Jan Pešula · CC0" data-credit-url="https://commons.wikimedia.org/wiki/File:Mocanita_Hutulca_tourist_train.jpg">
           <span class="poi-item-cat" data-i18n-ro="Experiență" data-i18n-en="Experience">Experiență</span>
           <strong class="poi-item-name" data-i18n-ro="Mocănița Moldovița" data-i18n-en="Moldovița Narrow-Gauge Train">Mocănița Moldovița</strong>
-          <span class="poi-item-dist" data-i18n-ro="~ 42 km · 60 min" data-i18n-en="~ 42 km · 60 min">~ 42 km · 60 min</span>
+          <span class="poi-item-dist" data-i18n-ro="~ 38 km · 50 min" data-i18n-en="~ 38 km · 50 min">~ 38 km · 50 min</span>
           <span class="poi-item-desc" data-i18n-ro="Tren turistic cu ecartament îngust, o ieșire bună de jumătate de zi prin peisaje bucovinene." data-i18n-en="A narrow-gauge tourist train, ideal for a half-day outing through Bucovina scenery.">Tren turistic cu ecartament îngust, o ieșire bună de jumătate de zi prin peisaje bucovinene.</span>
         </button></li>
           </ul>
@@ -856,7 +855,7 @@
         </details>
         <details class="faq-item">
           <summary data-i18n-ro="Cât de aproape sunt reperele din zonă?" data-i18n-en="How close are the local attractions?">Cât de aproape sunt reperele din zonă?</summary>
-          <p data-i18n-ro="Pârtia de schi Rarău e la circa 900 m de cabană. Vârful Rarău și Pietrele Doamnei sunt la circa 9 km, satul Pojorâta la circa 6 km, iar Câmpulung Moldovenesc la circa 18 km." data-i18n-en="The Rarău ski slope is about 900 m from the cabin. Rarău peak and Pietrele Doamnei are about 9 km away, the village of Pojorâta about 6 km, and Câmpulung Moldovenesc about 18 km.">Pârtia de schi Rarău e la circa 900 m de cabană. Vârful Rarău și Pietrele Doamnei sunt la circa 9 km, satul Pojorâta la circa 6 km, iar Câmpulung Moldovenesc la circa 18 km.</p>
+          <p data-i18n-ro="Pârtia de schi Rarău e la circa 900 m de cabană. Centrul orașului Câmpulung Moldovenesc, cu magazine și restaurante, e la circa 7 km (15 minute cu mașina), iar vârful Rarău și Pietrele Doamnei la circa 10 km." data-i18n-en="The Rarău ski slope is about 900 m from the cabin. The centre of Câmpulung Moldovenesc, with shops and restaurants, is about 7 km away (15 minutes by car), and Rarău peak and Pietrele Doamnei about 10 km.">Pârtia de schi Rarău e la circa 900 m de cabană. Centrul orașului Câmpulung Moldovenesc, cu magazine și restaurante, e la circa 7 km (15 minute cu mașina), iar vârful Rarău și Pietrele Doamnei la circa 10 km.</p>
         </details>
       </div>
       </div>
@@ -881,7 +880,7 @@
             <ul class="contact-links">
               <li><a href="https://wa.me/40756651582" target="_blank" rel="noopener noreferrer" class="contact-link"><svg aria-hidden="true"><use href="#i-wa"/></svg>+40 756 651 582</a></li>
               <li><a href="https://www.facebook.com/GreenViewRarau/" target="_blank" rel="noopener noreferrer" class="contact-link"><svg aria-hidden="true"><use href="#i-fb"/></svg>Facebook</a></li>
-              <li><a href="https://www.google.com/maps/place/GreenViewRarau/@47.488578,25.5687858,17z/data=!3m1!4b1!4m6!3m5!1s0x4735bd71f4dce8dd:0xb381ff0f2d04f9cc!8m2!3d47.4885744!4d25.5713607!16s%2Fg%2F11rn5j_07f" target="_blank" rel="noopener noreferrer" class="contact-link"><svg aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n-ro="Rarău – Pojorâta, Bucovina" data-i18n-en="Rarău – Pojorâta, Bucovina">Rarău – Pojorâta, Bucovina</span></a></li>
+              <li><a href="https://www.google.com/maps/place/GreenViewRarau/@47.488578,25.5687858,17z/data=!3m1!4b1!4m6!3m5!1s0x4735bd71f4dce8dd:0xb381ff0f2d04f9cc!8m2!3d47.4885744!4d25.5713607!16s%2Fg%2F11rn5j_07f" target="_blank" rel="noopener noreferrer" class="contact-link"><svg aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n-ro="Câmpulung Moldovenesc, Bucovina" data-i18n-en="Câmpulung Moldovenesc, Bucovina">Câmpulung Moldovenesc, Bucovina</span></a></li>
             </ul>
           </div>
           <nav aria-label="Secțiuni site">
@@ -933,6 +932,6 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="YOUR_DOMAIN" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="app.js?v=38" defer></script>
+  <script src="app.js?v=41" defer></script>
 </body>
 </html>
