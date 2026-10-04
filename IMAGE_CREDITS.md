@@ -22,6 +22,7 @@ credited in the page itself (the "Foto:" line in the map panel links to the sour
 | `muzeul-arta-lemnului.webp` | Wood Art Museum, Câmpulung Moldovenesc | Tud0011 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Muzeul_Arta_Lemnului_C%C3%A2mpulung_Moldovenesc_2022.jpg |
 | `partia-rarau.webp` | Rarău massif in winter | Liviu Mihai Șeiciuc | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rar%C4%83u_massif_in_winter.jpg |
 | `pojorata.webp` | Pojorâta village | Mihai Burlacu | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Comuna_Pojor%C3%A2ta,_Romania_-_panoramio_(1).jpg |
+| `sihastria-rarului.webp` | Mănăstirea Sihăstria Rarăului (2024) | Flori & Nicu Farcaș | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:RO_SV_M%C4%83n%C4%83stirea_Sih%C4%83stria_Rar%C4%83ului.JPG |
 | `mocanita-moldovita.webp` | Mocănița Huțulca tourist train | Jan Pešula | CC0 | https://commons.wikimedia.org/wiki/File:Mocanita_Hutulca_tourist_train.jpg |
 
 CC BY-SA licences: https://creativecommons.org/licenses/by-sa/4.0/ · https://creativecommons.org/licenses/by-sa/3.0/
