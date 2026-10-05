@@ -157,9 +157,78 @@
   var nav = document.getElementById("nav");
   var scrollTicking = false;
 
+  /* -- Hero scene: the name sits in the sky behind the cabin -------------------------------
+     The photo and the cabin cutout share one object-fit / object-position, so a point of the
+     source photo maps to the same spot in both. The name is sized to span the frame and its
+     baseline is pinned a little below the wing's ridge, so the roof always hides its foot. */
+  var scene = document.getElementById("heroScene");
+  var word = document.getElementById("heroWord");
+  var heroFg = document.getElementById("heroFg");
+  var heroPhoto = document.getElementById("heroImg");
+  var SRC_W = 2048, SRC_H = 1536;   // the photo's source frame, where the outline was traced
+  var WORD_BASE = 760;              // baseline, in source pixels (wing ridge 724, apex 540)
+  var WORD_BASE_STACKED = 640;      // two lines on phones: "Rarău" sits higher, around the apex
+  var SIDE_CARD = window.matchMedia("(min-width: 901px)");
+  var heroH = 0;
+
+  function layoutWord() {
+    if (!scene || !word) return;
+    heroH = scene.clientHeight;
+    var W = heroPhoto.clientWidth, H = heroPhoto.clientHeight;   // on phones the photo is shorter than the frame
+    var pos = getComputedStyle(heroPhoto).objectPosition.split(" ");
+    var py = (parseFloat(pos[1]) || 0) / 100;
+    var s = Math.max(W / SRC_W, H / SRC_H);
+    var oy = (H - SRC_H * s) * py;
+    // narrow frames: two lines ("Green View" / "Rarău"); otherwise one line edge to edge
+    var stack = W < 640;
+    word.classList.toggle("stacked", stack);
+    word.style.fontSize = "100px";
+    var spans = word.children, widest = 0;
+    for (var i = 0; i < spans.length; i++) widest = Math.max(widest, spans[i].getBoundingClientRect().width);
+    if (!stack) widest = spans[spans.length - 1].getBoundingClientRect().right - spans[0].getBoundingClientRect().left;
+    var fs = 100 * W * (stack ? 0.88 : 0.95) / widest;
+    word.style.fontSize = fs.toFixed(2) + "px";
+    word.style.top = "0px";
+    var b = word.querySelector(".hero-word-b").getBoundingClientRect().top - word.getBoundingClientRect().top;
+    var base = oy + (stack ? WORD_BASE_STACKED : WORD_BASE) * s;
+    // one line runs across the frame: keep "Rarău" clear of the booking card on short screens
+    var card = document.getElementById("booking");
+    if (SIDE_CARD.matches && card && scene.parentNode.contains(card)) {
+      base = Math.min(base, card.getBoundingClientRect().top - scene.getBoundingClientRect().top - fs * 0.08);
+    }
+    word.style.top = (base - b).toFixed(1) + "px";
+  }
+  function revealWord() {
+    if (!scene) return;
+    layoutWord();
+    if (heroFg.complete && heroFg.naturalWidth) scene.classList.add("ready");
+  }
+  if (scene) {
+    heroFg.addEventListener("load", revealWord);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(revealWord);
+    window.addEventListener("load", revealWord);
+    var resizeTick = false;
+    var queueLayout = function () {
+      if (resizeTick) return;
+      resizeTick = true;
+      requestAnimationFrame(function () { resizeTick = false; layoutWord(); });
+    };
+    window.addEventListener("resize", queueLayout);
+    // the display face can swap in after every event above, changing the line widths:
+    // refit whenever a line's box changes (a refit to the same size settles at once)
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(queueLayout);
+      for (var wi = 0; wi < word.children.length; wi++) ro.observe(word.children[wi]);
+    }
+    revealWord();
+  }
+
   function onScrollFrame() {
     scrollTicking = false;
-    nav.classList.toggle("scrolled", window.scrollY > 40);
+    var y = window.scrollY;
+    nav.classList.toggle("scrolled", y > 40);
+    // depth on scroll, only while the hero is on screen
+    if (scene && !PREFERS_REDUCED && y <= heroH + 200) scene.style.setProperty("--hs", Math.max(0, y).toFixed(1));
   }
   window.addEventListener("scroll", function () {
     if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScrollFrame); }
