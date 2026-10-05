@@ -21,8 +21,8 @@ npm run dev          # serve the site at http://localhost:8080
 
 ## Domain
 
-The site's identity (canonical, Open Graph, JSON-LD, robots.txt, sitemap.xml, llms.txt) currently uses
-`https://cabanagreenview.teodro11.workers.dev` (see `site-origin.txt`). When the domain is bought:
+The site's identity (canonical, Open Graph, JSON-LD, robots.txt, sitemap.xml, llms.txt) uses
+`https://www.cabanagreenviewrarau.ro` (see `site-origin.txt`); `worker.js` redirects every other host and http there. To move to another domain:
 
 ```
 node set-domain.mjs https://your-domain.ro

@@ -1,4 +1,4 @@
-# Green View Rarău — https://cabanagreenview.teodro11.workers.dev
+# Green View Rarău — https://www.cabanagreenviewrarau.ro
 
 User-agent: *
 Allow: /
@@ -38,4 +38,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://cabanagreenview.teodro11.workers.dev/sitemap.xml
+Sitemap: https://www.cabanagreenviewrarau.ro/sitemap.xml

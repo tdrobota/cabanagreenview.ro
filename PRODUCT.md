@@ -31,7 +31,8 @@ beautiful and right for their group, then open the calendar and send a WhatsApp 
 
 ## Constraints
 
-- Static HTML/CSS/vanilla JS, no build step; the repo root deploys to Cloudflare Workers.
+- Static HTML/CSS/vanilla JS, no build step; the repo root deploys to Cloudflare Workers. Domain:
+  https://www.cabanagreenviewrarau.ro (live 2026-10-05); worker.js 301-redirects the bare domain, http and workers.dev to it.
 - Bilingual RO/EN via `data-i18n-ro` / `data-i18n-en`; all content stays in static HTML
   for crawlers. JSON-LD, sitemap, llms.txt must stay in sync with visible facts.
 - Strict CSP: self-hosted fonts and images only, no third-party scripts.

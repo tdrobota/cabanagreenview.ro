@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cabanagreenview.teodro11.workers.dev/</loc>
-    <xhtml:link rel="alternate" hreflang="ro" href="https://cabanagreenview.teodro11.workers.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cabanagreenview.teodro11.workers.dev/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cabanagreenview.teodro11.workers.dev/"/>
+    <loc>https://www.cabanagreenviewrarau.ro/</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.cabanagreenviewrarau.ro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cabanagreenviewrarau.ro/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cabanagreenviewrarau.ro/"/>
     <lastmod>2026-10-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://cabanagreenview.teodro11.workers.dev/en/</loc>
-    <xhtml:link rel="alternate" hreflang="ro" href="https://cabanagreenview.teodro11.workers.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://cabanagreenview.teodro11.workers.dev/en/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cabanagreenview.teodro11.workers.dev/"/>
+    <loc>https://www.cabanagreenviewrarau.ro/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.cabanagreenviewrarau.ro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.cabanagreenviewrarau.ro/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.cabanagreenviewrarau.ro/"/>
     <lastmod>2026-10-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -4,12 +4,21 @@
   "compatibility_date": "2026-06-02",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
+  // worker.js runs first: it 301-redirects every non-canonical host / http to https://www.cabanagreenviewrarau.ro
+  "main": "worker.js",
   "assets": {
     "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": true,
     // unknown paths get the designed 404 page (with a 404 status), not an empty body
     "not_found_handling": "404-page"
   },
-  // One public link only: the production workers.dev URL.
+  // The domain (both hosts attached to this Worker). worker.js redirects the bare domain to www.
+  "routes": [
+    { "pattern": "www.cabanagreenviewrarau.ro", "custom_domain": true },
+    { "pattern": "cabanagreenviewrarau.ro", "custom_domain": true }
+  ],
+  // workers.dev stays enabled but only redirects to the domain (one public link).
   "workers_dev": true,
   // Version / branch preview links (e.g. <branch>-cabanagreenview.<account>.workers.dev) are
   // disabled at the owner's request (2026-10-02). Set to true to get branch previews back.
