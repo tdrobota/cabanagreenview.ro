@@ -40,11 +40,11 @@
 
   <!-- LCP: fetch the hero image early, right size per viewport -->
   <link rel="preload" as="image" type="image/webp"
-        href="images/hero/p37.webp"
-        imagesrcset="images/hero/p37-1000.webp 1000w, images/hero/p37.webp 2000w"
+        href="images/hero/p24.webp"
+        imagesrcset="images/hero/p24-1000.webp 1000w, images/hero/p24.webp 2000w"
         imagesizes="90vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="styles.css?v=49">
+  <link rel="stylesheet" href="styles.css?v=47">
 
   <!-- Structured data. Owner inputs still missing (never invent): priceRange, streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed. No email on purpose: contact is phone/WhatsApp + Facebook.
@@ -64,7 +64,7 @@
         "telephone": "+40756651582",
         "logo": "https://www.cabanagreenviewrarau.ro/icon-512.png",
         "image": [
-          "https://www.cabanagreenviewrarau.ro/images/hero/p37.jpg",
+          "https://www.cabanagreenviewrarau.ro/images/hero/p24.jpg",
           "https://www.cabanagreenviewrarau.ro/images/og.jpg",
           "https://www.cabanagreenviewrarau.ro/images/p30.jpg",
           "https://www.cabanagreenviewrarau.ro/images/p03.jpg"
@@ -270,17 +270,12 @@
 
   <!-- HERO -->
   <header class="hero" id="hero">
-    <div class="hero-haze" id="heroHaze" aria-hidden="true" style="background-image:url('images/hero/p37-haze.webp')"></div>
+    <div class="hero-haze" id="heroHaze" aria-hidden="true" style="background-image:url('images/hero/p24-haze.webp')"></div>
     <div class="hero-frame">
-      <!-- three planes: the photo, the name behind the cabin, the cabin cut out in front of it -->
-      <div class="hero-scene" id="heroScene">
-        <picture class="hero-photo">
-          <source id="heroSrc" type="image/webp" srcset="images/hero/p37-1000.webp 1000w, images/hero/p37.webp 2000w" sizes="90vw">
-          <img id="heroImg" src="images/hero/p37.jpg" alt="Cabana A-Frame Green View Rarău, cu fațada de sticlă și lemn luminată cald, sub dealurile împădurite ale Rarăului, la amurg" width="1600" height="1200" fetchpriority="high">
-        </picture>
-        <p class="hero-word" id="heroWord" aria-hidden="true"><span>Green View</span> <span>Rarău<i class="hero-word-b"></i></span></p>
-        <img class="hero-fg" id="heroFg" src="images/hero/p37-fg-1000.webp" srcset="images/hero/p37-fg-1000.webp 1000w, images/hero/p37-fg.webp 2000w" sizes="90vw" alt="" width="2000" height="1500" fetchpriority="high">
-      </div>
+      <picture class="hero-photo">
+        <source id="heroSrc" type="image/webp" srcset="images/hero/p24-1000.webp 1000w, images/hero/p24.webp 2000w" sizes="90vw">
+        <img id="heroImg" src="images/hero/p24.jpg" alt="Cabana A-Frame Green View Rarău la amurg, cu lumină caldă în fațada de sticlă, între brazi și grădina cu pietre" width="1600" height="1066" fetchpriority="high">
+      </picture>
       <h1 class="hero-title" data-i18n="hero_title">O cabană <span class="nw">A-Frame</span><br><em>la poalele</em><br>Rarăului</h1>
 
       <div class="hero-foot">
@@ -943,6 +938,6 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="YOUR_DOMAIN" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="app.js?v=44" defer></script>
+  <script src="app.js?v=42" defer></script>
 </body>
 </html>

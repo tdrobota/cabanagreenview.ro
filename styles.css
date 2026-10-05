@@ -219,40 +219,15 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
     radial-gradient(120% 90% at 50% 45%, rgba(170, 192, 197, 0.18), rgba(170, 192, 197, 0) 60%),
     linear-gradient(180deg, rgba(196, 212, 215, 0.34), rgba(120, 146, 152, 0.22) 55%, rgba(40, 60, 66, 0.4));
 }
-/* The scene: photo at the back, the name in the sky, the cabin (a cutout of the same photo,
-   same fit and position, so it lands pixel for pixel) in front of the name. On scroll the
-   name sinks behind the roof faster than the photo moves: a little depth, nothing more. */
-.hero-scene {
-  position: absolute; inset: 0; z-index: -1;
-  border-radius: inherit; overflow: hidden;
-  --hero-pos: 50% 100%;
-}
-.hero-photo, .hero-photo img, .hero-fg {
+.hero-photo, .hero-photo img {
   position: absolute; inset: 0; width: 100%; height: 100%;
 }
-.hero-photo img, .hero-fg { object-fit: cover; object-position: var(--hero-pos); }
-.hero-photo, .hero-fg { transform: translate3d(0, calc(var(--hs, 0) * 0.12px), 0); }
-.hero-scene::after {   /* soft fall-off so the frame's lower half always reads */
+.hero-photo { z-index: -1; border-radius: inherit; overflow: hidden; }
+.hero-photo img { object-fit: cover; object-position: 50% 45%; }
+.hero-photo::after {   /* soft fall-off so the frame's lower half always reads */
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(8, 18, 21, 0) 50%, rgba(8, 18, 21, 0.5) 100%);
+  background: linear-gradient(180deg, rgba(8, 18, 21, 0) 55%, rgba(8, 18, 21, 0.4) 100%);
 }
-.hero-scene { background: #0e1b1f; }
-.hero-word {
-  position: absolute; left: 0; right: 0; top: 0;
-  margin: 0; text-align: center; white-space: nowrap;
-  font-size: 160px;   /* fitted to the frame width by app.js */
-  font-weight: 500; line-height: 0.86; letter-spacing: -0.055em;
-  color: rgba(244, 248, 248, 0.94);
-  opacity: 0;
-  transform: translate3d(0, calc(var(--hs, 0) * 0.34px), 0);
-  transition: opacity 0.9s var(--ease-out);
-}
-.hero-scene.ready .hero-word { opacity: 1; }
-.hero-word-b { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
-/* measured right after each refit: the reduced-motion rule's 0.01ms "all" transition would
-   hand back the previous size */
-.hero-word span { display: inline-block; transition: none !important; }
-.hero-word.stacked span { display: block; width: max-content; margin-inline: auto; }
 .hero-frame::after {   /* the translucent rim sits above the photo */
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0;
   box-shadow: inset 0 0 0 var(--rim-w) var(--rim);
@@ -272,10 +247,11 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .hero-title {
   font-weight: 400;
   grid-column: 1;
-  /* the name above carries the scale; the headline sits small at the bottom-left */
-  font-size: clamp(2rem, min(3.3vw, 5.4vh), 3.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  /* bounded by width, by screen height, and by the column left of the card
+     ("O cabană A-Frame" sets at ~8.3em) */
+  font-size: clamp(3rem, min(7.4vw, 11vh, calc((100vw - 2 * var(--hero-x) - 560px) / 8.3)), 8.4rem);
+  line-height: 0.93;
+  letter-spacing: -0.045em;
   color: #fff;
   text-shadow: 0 2px 30px rgba(8, 18, 21, 0.18);
 }
@@ -284,13 +260,16 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 /* The foot dissolves into the frame grid: copy bottom-left, card bottom-right
    (rising into the row beside the headline's last line, as in the reference). */
 .hero-foot { display: contents; }
-.hero-title { grid-row: 2; align-self: end; }
-/* the scene says both now (the name is the wordmark): the lines stay for screen readers
-   and search, off screen, and the card is short enough to sit below the roofline */
-.hero-sub, .hero .book-card-title { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.hero-figure { grid-row: 2; grid-column: 1; align-self: end; }
+.hero-title { grid-row: 1; align-self: center; }
+.hero-sub, .hero-figure { grid-row: 2; grid-column: 1; align-self: end; }
 .hero-figure { justify-self: end; margin-right: clamp(0px, 4vw, 72px); }
 .book-card { grid-column: 2; grid-row: 1 / -1; align-self: end; }
+.hero-sub {
+  max-width: 25ch;
+  font-size: clamp(1.05rem, 1.35vw, 1.3rem); line-height: 1.38;
+  color: rgba(242, 246, 246, 0.92);
+  text-wrap: pretty;
+}
 .hero-figure { display: grid; gap: 0.35rem; padding-bottom: 0.25rem; border-radius: 12px; transition: opacity 0.2s; }
 .hero-figure:hover .hero-figure-l { text-decoration: underline; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
 .hero-figure-n {
@@ -813,18 +792,10 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 }
 
 @media (max-width: 900px) {
-  /* the photo keeps a landscape height at the top of the frame, so the cabin and the name stay
-     large; below it the frame turns to ink behind the booking card. The headline row starts
-     just under the roofline (the name's baseline is ~0.5 of the photo height). */
-  .hero-frame {
-    --ph: min(calc((100vw - 2 * var(--hero-x)) * var(--ph-k, 1)), var(--ph-max, 56svh));
-    padding-top: 112px; gap: 1.25rem; grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(calc(var(--ph) * 0.56 - 112px - 1.25rem), 1fr) auto auto;
-  }
-  .hero-photo, .hero-photo img, .hero-fg { bottom: auto; height: var(--ph); }
-  .hero-scene::after { background: linear-gradient(180deg, rgba(14, 27, 31, 0) calc(var(--ph) * 0.6), #0e1b1f calc(var(--ph) - 2px)); }
-  .hero-title { font-size: clamp(2.2rem, 6vw, 3.4rem); grid-row: 2; align-self: end; }
-  .book-card { grid-column: 1; grid-row: 3; }
+  .hero-frame { padding-top: 112px; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; }
+  .hero-title { font-size: clamp(2.6rem, 9vw, 5rem); grid-row: 1; align-self: start; }
+  .hero-sub { grid-row: 3; }
+  .book-card { grid-column: 1; grid-row: 4; }
   /* the picker becomes a bottom sheet over a dimmed page */
   .cal-pop {
     position: fixed; z-index: 260; left: 0; right: 0; bottom: 0; top: auto;
@@ -840,6 +811,7 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   /* backdrop-filter would make the card the containing block of the fixed sheet */
   .book-card { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(11, 22, 26, 0.86); }
   html.cal-sheet-open, html.cal-sheet-open body { overflow: hidden; }
+  .hero-sub { max-width: 32ch; }
   .about-grid, .fac-layout, .map-layout, .faq-layout, .footer-top { grid-template-columns: 1fr; }
   .about-photo img { aspect-ratio: 4 / 3; }
   .fac-layout .h2, .faq .h2 { position: static; max-width: none; }
@@ -865,11 +837,11 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
   /* past the hero the card is out of sight: the bar offers booking again */
   .nav.scrolled .nav-cta { display: inline-flex; min-height: 40px; padding: 0 14px; font-size: 0.92rem; }
   .hero-frame { padding: 84px 16px 16px; gap: 14px; min-height: calc(100svh - 2 * var(--hero-y)); }
+  .book-card-title { display: none; }
   .book-card { gap: 8px; }
-  .hero-title { font-size: clamp(1.9rem, min(9vw, 4.6svh), 2.6rem); }
-  /* phones: a taller photo band (the name stacks on two lines); its baseline is ~0.42 of it */
-  .hero-scene { --hero-pos: 57% 100%; }
-  .hero-frame { --ph-k: 1.5; --ph-max: 64svh; grid-template-rows: minmax(calc(var(--ph) * 0.45 - 84px - 14px), 1fr) auto auto; }
+  .hero-sub { font-size: 1rem; }
+  .hero-title { font-size: clamp(2.3rem, min(12.4vw, 6.4svh), 3.6rem); }
+  .hero-photo img { object-position: 57% 46%; }
   .book-card { padding: 18px; }
   .book-dates { grid-template-columns: 1fr 1fr; gap: 8px; }
   .field { padding: 8px 10px; gap: 8px; }
