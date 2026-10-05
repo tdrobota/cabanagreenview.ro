@@ -28,8 +28,8 @@ const T = new Function('return ' + appJs.slice(tStart + 'var T = '.length, tEnd 
 
 // Attribute text that has no data-i18n-en counterpart (alt / aria-label / titles)
 const EN_ATTR = {
-  'Cabana A-Frame Green View Rarău la amurg, cu lumină caldă în fațada de sticlă, între brazi și grădina cu pietre':
-    'Green View Rarău A-Frame cabin at dusk, warm light in the glass gable, among fir trees and a rock garden',
+  'Cabana A-Frame Green View Rarău, cu fațada de sticlă și lemn luminată cald, sub dealurile împădurite ale Rarăului, la amurg':
+    'Green View Rarău A-Frame cabin, its glass and timber front lit warm, under the forested hills of Rarău at dusk',
   'Interiorul cabanei A-Frame Green View Rarău: lemn cald și fereastră panoramică':
     'Inside the Green View Rarău A-Frame cabin: warm wood and a panoramic window',
   'Cabana A-Frame iarna, cu zăpadă pe acoperiș': 'The A-Frame cabin in winter, snow on the roof',
