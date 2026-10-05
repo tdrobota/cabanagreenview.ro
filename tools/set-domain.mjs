@@ -8,9 +8,9 @@
  * and llms.txt. The current origin lives in tools/site-origin.txt, so running this
  * script again later (e.g. a second domain change) works the same way.
  *
- * After running it: connect the domain to the Worker (Cloudflare dashboard → Workers →
- * cabanagreenview → Settings → Domains & Routes → Custom Domain), deploy, then submit
- * the new sitemap in Google Search Console and Bing Webmaster Tools.
+ * After running it: update the "routes" custom domains in wrangler.jsonc (they also have to exist
+ * in the Cloudflare account), deploy, then submit the new sitemap in Google Search Console and
+ * Bing Webmaster Tools. worker.js redirects every other host to the new origin.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..');
 const MARKER = join(HERE, 'site-origin.txt');
-const FILES = ['index.html', 'en/index.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt'];
+const FILES = ['index.html', 'en/index.html', 'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'worker.js'];
 
 const next = (process.argv[2] || '').replace(/\/+$/, '');
 if (!/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}$/i.test(next)) {

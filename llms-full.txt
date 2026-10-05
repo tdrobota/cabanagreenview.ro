@@ -3,7 +3,7 @@
 > A modern A-frame holiday cabin rented whole at the foot of Rarău mountain, near Pojorâta and
 > Câmpulung Moldovenesc, Bucovina, Suceava county, Romania. For groups of 8–16 guests.
 
-Romanian page: https://cabanagreenview.teodro11.workers.dev/  ·  English page: https://cabanagreenview.teodro11.workers.dev/en/  ·  Short version: https://cabanagreenview.teodro11.workers.dev/llms.txt
+Romanian page: https://www.cabanagreenviewrarau.ro/  ·  English page: https://www.cabanagreenviewrarau.ro/en/  ·  Short version: https://www.cabanagreenviewrarau.ro/llms.txt
 Generated from the live page content by tools/build-pages.mjs.
 
 ## Key facts

@@ -36,9 +36,9 @@
 
 ## Contact
 
-- Website (Romanian): https://cabanagreenview.teodro11.workers.dev/
-- English version: https://cabanagreenview.teodro11.workers.dev/en/
-- Full content for AI systems: https://cabanagreenview.teodro11.workers.dev/llms-full.txt
+- Website (Romanian): https://www.cabanagreenviewrarau.ro/
+- English version: https://www.cabanagreenviewrarau.ro/en/
+- Full content for AI systems: https://www.cabanagreenviewrarau.ro/llms-full.txt
 - WhatsApp / phone: +40 756 651 582
 - Facebook: https://www.facebook.com/GreenViewRarau/
 - Turistinfo listing: https://www.turistinfo.ro/campulung_moldovenesc/cazare-campulung_moldovenesc/casa_de_vacanta_green_view_rarau-c119345.html
