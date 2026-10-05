@@ -40,16 +40,3 @@ node build-pages.mjs
 
 This regenerates `/en/index.html` (its own URL, hreflang pair with `/`) and `/llms-full.txt`.
 The script stops with an error if any visible text has no English version.
-
-## Hero photo
-
-The hero is three planes: the graded photo, the name ("Green View Rarău"), and the cabin cut
-out of the same photo in front of the name. To regenerate (from the original `p37` photo):
-
-```
-node mist.mjs <original p37.jpg> ../images/hero/p37 p37   # dusk grade + lamps + haze
-node hero-cutout.mjs                                     # p37-fg.webp / p37-fg-1000.webp
-```
-
-The cutout outline is traced in `hero-cutout.mjs` on the 2048 x 1536 source; `app.js` pins the
-name's baseline to the same source coordinates (`WORD_BASE`), so a different photo needs both.
