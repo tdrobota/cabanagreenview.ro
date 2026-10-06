@@ -643,8 +643,8 @@
   var bookFallbackLink = document.getElementById("bookFallbackLink");
   var calTriggers  = Array.prototype.slice.call(document.querySelectorAll("[data-cal-open]"));
 
-  var MS = 86400000, MIN_NIGHTS = 2, MIN_GUESTS = 8, MAX_GUESTS = 16;
-  var checkIn = null, checkOut = null, guests = MIN_GUESTS;
+  var MS = 86400000, MIN_NIGHTS = 2;
+  var checkIn = null, checkOut = null;
   var calYear, calMonth, calOpen = false, calReturnFocus = null;
   var inModal = false;   // the card is shown inside the booking modal (calendar always open)
 
@@ -679,7 +679,6 @@
   // Romanian counts of 20+ (unless the last two digits are 1–19) take "de"
   function roDe(n) { var r = n % 100; return n >= 20 && (r === 0 || r >= 20) ? " de " : " "; }
   function nightsLabel(n) { return en() ? n + (n === 1 ? " night" : " nights") : n + roDe(n) + "nopți"; }
-  function guestsLabel(n) { return en() ? n + " guests" : n + roDe(n) + "persoane"; }
 
   function renderCal() {
     if (!calGrid) return;
@@ -827,18 +826,9 @@
     document.getElementById("sumStay").hidden = !done;
     document.getElementById("bookSummary").classList.toggle("is-set", done);
     if (done) {
-      document.getElementById("sumNights").textContent =
-        nightsLabel(nightsBetween(checkIn, checkOut)) + " · " + guestsLabel(guests);
+      document.getElementById("sumNights").textContent = nightsLabel(nightsBetween(checkIn, checkOut));
       document.getElementById("sumRange").textContent = fmtShort(checkIn) + " → " + fmtShort(checkOut);
     }
-  }
-
-  function setGuests(value) {
-    guests = Math.max(MIN_GUESTS, Math.min(MAX_GUESTS, parseInt(value, 10) || MIN_GUESTS));
-    document.getElementById("guestCount").value = guests;
-    document.getElementById("guestMinus").disabled = guests <= MIN_GUESTS;
-    document.getElementById("guestPlus").disabled = guests >= MAX_GUESTS;
-    updateSummary();
   }
 
   // Triggers, month navigation, day picks, keyboard
@@ -893,13 +883,9 @@
     if (calOpen && !inModal) document.documentElement.classList.toggle("cal-sheet-open", isSheet());
   }, { passive: true });
 
-  document.getElementById("guestMinus").addEventListener("click", function () { setGuests(guests - 1); });
-  document.getElementById("guestPlus").addEventListener("click", function () { setGuests(guests + 1); });
-  document.getElementById("guestCount").addEventListener("change", function (e) { setGuests(e.target.value); });
-
   /* Booking modal: once the visitor is past the hero, the "book" buttons (nav, footer)
      open the same card in a dialog, calendar shown inline. The card is moved, not copied,
-     so dates, guests and every handler stay the one booking state. */
+     so dates and every handler stay the one booking state. */
   var bookCard  = document.getElementById("booking");
   var bookModal = document.getElementById("bookModal");
   var bookBody  = document.getElementById("bookModalBody");
@@ -970,12 +956,12 @@
     var n = nightsBetween(checkIn, checkOut);
     var msg = en()
       ? "Hello! I'd like to book Green View Rarău.\n\nCheck-in: " + fmtLong(checkIn) + "\nCheck-out: " + fmtLong(checkOut) +
-        " (" + nightsLabel(n) + ")\nGuests: " + guests + "\n\nIs the cabin available? Thank you!"
+        " (" + nightsLabel(n) + ")\n\nIs the cabin available? Thank you!"
       : "Bună ziua! Aș dori să rezerv cabana Green View Rarău.\n\nSosire: " + fmtLong(checkIn) + "\nPlecare: " + fmtLong(checkOut) +
-        " (" + nightsLabel(n) + ")\nPersoane: " + guests + "\n\nEste disponibilă? Vă mulțumesc!";
+        " (" + nightsLabel(n) + ")\n\nEste disponibilă? Vă mulțumesc!";
     var url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
     if (bookFallbackLink) bookFallbackLink.href = url;
-    track("booking_request", { guests: guests, nights: n, lang: LANG });
+    track("booking_request", { nights: n, lang: LANG });
     // No "noopener" feature string: with it window.open always returns null, which made
     // every request look blocked. Cut the opener link by hand instead.
     var win = window.open(url, "_blank");
@@ -984,7 +970,7 @@
   }
 
   sendBtn.addEventListener("click", sendRequest);
-  setGuests(MIN_GUESTS);
+  updateSummary();
   showMonthOf(today0());
 
   /* -- Init ---------------------------------------------------------------------- */

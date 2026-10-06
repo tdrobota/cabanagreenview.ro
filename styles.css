@@ -279,7 +279,7 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 .hero-figure-n svg { width: 30px; height: 30px; color: var(--amber); }
 .hero-figure-l { white-space: nowrap; font-size: 1.05rem; line-height: 1.35; color: rgba(242, 246, 246, 0.86); }
 
-/* Booking card: dates -> stay summary -> guests -> WhatsApp */
+/* Booking card: dates -> stay summary -> WhatsApp */
 .book-card {
   position: relative;
   display: grid; gap: 10px;
@@ -335,23 +335,6 @@ html { scrollbar-color: var(--mist-1) var(--ink-1); scrollbar-width: thin; }
 }
 .sum-edit:hover { background: var(--ink-3); color: var(--snow); }
 
-.guest-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 6px 6px 6px 14px; border-radius: var(--r-field); background: var(--well);
-}
-.guest-row label { display: grid; font-size: 0.98rem; line-height: 1.25; }
-.guest-hint { font-size: 0.78rem; color: var(--mist-2); }
-.guest-stepper { display: flex; align-items: center; gap: 2px; }
-.guest-btn { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: var(--ink-3); transition: background-color 0.2s, opacity 0.2s; }
-.guest-btn:hover:not(:disabled) { background: #27434a; }
-.guest-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.guest-btn svg { width: 18px; height: 18px; }
-.guest-stepper input {
-  width: 44px; height: 44px; text-align: center; border: 0; border-radius: 10px;
-  background: transparent; color: var(--snow); font: inherit; font-size: 1.05rem; font-variant-numeric: tabular-nums;
-  -moz-appearance: textfield; appearance: textfield;
-}
-.guest-stepper input::-webkit-inner-spin-button, .guest-stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .book-card .btn-block { margin-top: 4px; }
 .book-note { text-align: center; text-wrap: balance; font-size: 0.8rem; line-height: 1.35; color: var(--mist-2); }
 .book-fallback { font-size: 0.88rem; color: var(--mist-3); }
@@ -867,7 +850,6 @@ button.cal-day:hover:not(:disabled) { background: var(--ink-3); }
 
 @media (max-width: 360px) {
   .nav.scrolled .brand span { display: none; }
-  .guest-hint { display: none; }
   .sum-rules dd { font-size: 0.92rem; }
   .book-card .btn { padding-inline: 1rem; font-size: 0.95rem; }
   .book-card .btn svg { display: none; }

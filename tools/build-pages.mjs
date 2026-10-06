@@ -56,8 +56,6 @@ const EN_ATTR = {
   'English version': 'Versiunea în română',
   'Principal': 'Main',
   'Meniu': 'Menu',
-  'Mai puține persoane': 'Fewer guests',
-  'Mai multe persoane': 'More guests',
   'Luna următoare': 'Next month',
   'Luna anterioară': 'Previous month',
   'Hartă stilizată a zonei Rarău cu reperele din jurul cabanei': 'Stylised map of the Rarău area with landmarks around the cabin',
@@ -171,8 +169,8 @@ ro('.fac-item .fac-label').each((_, l) => P(`- ${en(l)} (${textOf(l)})`));
 P('');
 
 P('## Booking', '',
-  '- Pick check-in and check-out dates in the calendar on the site (minimum 2 nights) and the number of guests (8–16).',
-  '- The request opens in WhatsApp, pre-filled with the dates, nights and guests, to +40 756 651 582.',
+  '- Pick check-in and check-out dates in the calendar on the site (minimum 2 nights).',
+  '- The request opens in WhatsApp, pre-filled with the dates and nights, to +40 756 651 582.',
   '- The hosts confirm availability within about 2 hours.',
   '- The nightly price is not published on the site; ask in the WhatsApp request.', '');
 
