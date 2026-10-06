@@ -40,7 +40,7 @@
   <!-- LCP: fetch the hero image early, right size per viewport -->
   <link rel="preload" as="image" type="image/webp" href="/images/hero/p24.webp" imagesrcset="/images/hero/p24-1000.webp 1000w, /images/hero/p24.webp 2000w" imagesizes="90vw" fetchpriority="high">
 
-  <link rel="stylesheet" href="/styles.css?v=47">
+  <link rel="stylesheet" href="/styles.css?v=48">
 
   <!-- Structured data. Owner inputs still missing (never invent): priceRange, streetAddress + postalCode,
        checkinTime / checkoutTime, petsAllowed. No email on purpose: contact is phone/WhatsApp + Facebook.
@@ -233,8 +233,6 @@
     <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
     <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></symbol>
-    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"></path><circle cx="12" cy="10" r="2.3"></circle></g></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></symbol>
     <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.117 1.535 5.845L.057 23.57a.5.5 0 00.614.601l5.898-1.545A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.028-1.384l-.36-.214-3.733.979.997-3.645-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"></path></symbol>
@@ -323,18 +321,6 @@
               <p class="sum-nights" id="sumNights"></p>
               <p class="sum-range" id="sumRange"></p>
               <button type="button" class="sum-edit" data-cal-open="in" data-i18n-ro="Schimbă" data-i18n-en="Change">Change</button>
-            </div>
-          </div>
-
-          <div class="guest-row">
-            <label for="guestCount">
-              <span data-i18n-ro="Persoane" data-i18n-en="Guests">Guests</span>
-              <span class="guest-hint" data-i18n-ro="între 8 și 16" data-i18n-en="8 to 16">8 to 16</span>
-            </label>
-            <div class="guest-stepper">
-              <button type="button" class="guest-btn" id="guestMinus" aria-label="Fewer guests"><svg aria-hidden="true"><use href="#i-minus"></use></svg></button>
-              <input id="guestCount" type="number" min="8" max="16" value="8" inputmode="numeric">
-              <button type="button" class="guest-btn" id="guestPlus" aria-label="More guests"><svg aria-hidden="true"><use href="#i-plus"></use></svg></button>
             </div>
           </div>
 
@@ -935,7 +921,7 @@
        Plausible (self-host or plausible.io) — also feeds the track() events in app.js:
        <script defer data-domain="YOUR_DOMAIN" src="https://plausible.io/js/script.js"></script>
   -->
-  <script src="/app.js?v=42" defer=""></script>
+  <script src="/app.js?v=43" defer=""></script>
 
 
 </body></html>

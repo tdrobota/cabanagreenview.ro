@@ -106,7 +106,7 @@ A cool, low-chroma slate-teal ramp with one warm wood accent.
 - **Night Gable** (ink-0): deepest well, lightbox backdrop.
 - **Dusk Slate** (ink-1): the page ground and footer frame.
 - **Raised Slate** (ink-2): spec tiles, icon tiles, map ground, hover rows.
-- **Field Slate** (ink-3): active list rows, calendar hover, stepper buttons.
+- **Field Slate** (ink-3): active list rows, calendar hover.
 - **Haze** (mist-1): decorative lines, map contours, scrollbar thumb. Not for text.
 - **Mist** (mist-2): secondary text on dark (≈7:1 on Dusk Slate); continuation clauses in headings.
 - **Pale Mist** (mist-3): muted display text, wordmark, nav-adjacent text.
@@ -180,10 +180,10 @@ Generous, soft rectangles in four sizes: frames (24–52px) for photographic sta
 **Hero (floating pane):** the sharp photo (p24, dusk grade with soft lamplight) shows only inside the rounded frame, which sits inside a misty margin (`--hero-x` up to 128px, `--hero-y` up to 72px; thin on phones). Around it is a tiny blurred copy of the same photo, lifted toward fog. The frame carries the translucent rim and a two-part shadow, so it floats like a pane of glass. **Seasons stage:** a full-bleed photo with the frame and rim inset over it. The footer repeats the rounded shape on the dark ground.
 
 ### Booking Card (signature)
-The whole booking flow lives in the hero card. From top to bottom: arrival and departure fields; a summary well that shows the rules (minimum 2 nights, 8–16 guests) before dates are picked and the stay itself after ("3 nopți · 8 persoane", the weekday range, and a "Schimbă" pill); a guest stepper with 44px buttons; and the white WhatsApp button with a one-line note under it. With no dates, the button opens the picker instead of sending. Other booking buttons on the page scroll to this card and open the picker.
+The whole booking flow lives in the hero card. From top to bottom: arrival and departure fields; a summary well that shows the rules (minimum 2 nights, 8–16 guests) before dates are picked and the stay itself after ("3 nopți", the weekday range, and a "Schimbă" pill); and the white WhatsApp button with a one-line note under it. With no dates, the button opens the picker instead of sending. Other booking buttons on the page scroll to this card and open the picker.
 
 ### Booking Modal
-Once the visitor is past the hero, the booking buttons (in the nav and the footer) open a dialog holding the same booking card, moved into it rather than copied, so dates and guests stay in sync. On desktop the calendar is always open on the left and the stay sits on the right; under 720px the panel rises from the bottom with the calendar first. Escape, the close button or a click on the backdrop return the card to the hero. On phones the nav shows "Rezervare" only after the hero.
+Once the visitor is past the hero, the booking buttons (in the nav and the footer) open a dialog holding the same booking card, moved into it rather than copied, so the dates stay in sync. On desktop the calendar is always open on the left and the stay sits on the right; under 720px the panel rises from the bottom with the calendar first. Escape, the close button or a click on the backdrop return the card to the hero. On phones the nav shows "Rezervare" only after the hero.
 
 ### Date Picker
 A glass panel, 340px wide on desktop, that opens to the left of the booking card. On phones (≤900px) it is a bottom sheet over a dimmed page. One month per view. Past days and departure days under the 2-night minimum are disabled. The chosen range is a snow-filled pill from arrival to departure, with a lighter band in between that previews the range on hover. A small mist dot marks today. Arrow keys, Home and End move between days, and Escape closes the picker. It closes on its own once the departure date is picked and hands focus to the WhatsApp button.
